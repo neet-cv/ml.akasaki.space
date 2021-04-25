@@ -106,6 +106,8 @@ $$
 
 - **特征缩放**（feature scaling）
 
+  正在施工
+
 - **前馈神经网络** ( feedforward neural network , FNN )
 
   前馈神经网络（[英文](https://zh.wikipedia.org/wiki/英文)：Feedforward Neural Network），为[人工智能](https://zh.wikipedia.org/wiki/人工智能)領域中，最早发明的简单[人工神经网络](https://zh.wikipedia.org/wiki/人工神经网络)类型。在它内部，参数从输入层向输出层单向传播。有异于[循环神经网络](https://zh.wikipedia.org/wiki/循环神经网络)和[递归神经网络](https://zh.wikipedia.org/wiki/递归神经网络)，它的内部不会构成[有向环](https://zh.wikipedia.org/wiki/環_(圖論))。FNN由一个输入层、一个（浅层网络）或多个（深层网络，因此叫作深度学习）隐藏层，和一个输出层构成。每个层（除输出层以外）与下一层连接。这种连接是 FNN 架构的关键，具有两个主要特征：加权平均值和激活函数。

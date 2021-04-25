@@ -40,3 +40,85 @@ LeNet-5：输入-（1.卷积-2.下采样-3.卷积-4.下采样-5.卷积）-全连
 
 ## 使用代码实现
 
+### 导入数据集
+
+首先我们导入手写数字识别的数据集，并且给一些初始化的流程。
+
+```python
+import tensorflow as tf
+from tensorflow.keras import datasets, layers, initializers
+
+# 导入fashion-mnist数据集
+(training_x, training_y), (testing_x, testing_y) = datasets.fashion_mnist.load_data()
+batch_size = 256
+shuffling = 1000
+
+# 定义前处理过程
+def preprocess(x, y):
+    return tf.cast(x, dtype=tf.float32) / 255., tf.cast(y, dtype=tf.int32)
+
+# 前处理标准化、指定batch大小、打乱
+training_dataset = tf.data.Dataset.from_tensor_slices((training_x, training_y))
+training_dataset.map(preprocess).batch(batch_size).shuffle(shuffling)
+testing_dataset = tf.data.Dataset.from_tensor_slices((testing_x, testing_y))
+testing_dataset.map(preprocess).batch(batch_size)
+```
+
+上面这段你应该会对它越来越熟悉，因为它将被经常使用。整个过程的详细解释请参考[常见代码块](../appendix/similar-codeblocks.md)中有关数据集的部分。
+
+### 定义模型
+
+接下来我们定义LeNet5的往网络模型。在tensorflow的模型中我们往往不定义输入层，所以除去输入层`Lenet5`的模型应该有七层：
+
+```python
+class LeNetModel(tf.keras.Model):
+    def __init__(self):
+        super(LeNetModel, self).__init__()
+        # 1.第一个卷积层
+        self.conv1 = layers.Conv2D(filters=32, kernel_size=(5, 5), padding='SAME', activation=tf.nn.relu, use_bias=True, bias_initializer=initializers.Zeros)
+        # 2.最大池化
+        self.maxpool1 = layers.MaxPool2D(pool_size=(2, 2), strides=(2, 2), padding='SAME')
+        # 3.第二个卷积层
+        self.conv2 = layers.Conv2D(filters=64, kernel_size=(5, 5), padding='SAME', activation=tf.nn.relu, use_bias=True, bias_initializer=initializers.Zeros)
+        # 4.最大池化
+        self.maxpool2 = self.maxpool1 = layers.MaxPool2D(pool_size=(2, 2), strides=(2, 2), padding='SAME')
+        # 5.打平以便进入全连接
+        self.flatten = layers.Flatten()
+        # 6.第一个全连接层
+        self.fc1 = layers.Dense(units=512, activation=tf.nn.relu, use_bias=True, bias_initializer=initializers.Zeros)
+        # 7.第一个全连接层
+        self.fc2 = layers.Dense(units=10, activation=tf.nn.relu, use_bias=True, bias_initializer=initializers.Zeros)
+
+    # 定义前向传播的方法
+    def call(self, inputs, training=None, mask=None):
+        result = self.conv1(inputs)
+        result = self.maxpool1(result)
+        result = self.conv2(result)
+        result = self.maxpool2(result)
+        result = self.flatten(result)
+        result = self.fc1(result)
+        result = self.fc2(result)
+        return result
+# 创建一个模型实例
+model = LeNetModel()
+```
+
+### 定义损失函数和准确性计算方式
+
+```python
+# 损失函数
+loss_fun = tf.losses.SparseCategoricalCrossentropy(name='loss_fun')
+# 表示训练和测试损失
+train_loss = tf.metrics.Mean(name='train_loss')
+test_loss = tf.metrics.Mean(name='train_loss')
+# 表示训练和测试准确性
+train_acc = tf.metrics.SparseCategoricalAccuracy(name='train_acc')
+test_acc = tf.metrics.SparseCategoricalAccuracy(name='train_acc')
+```
+
+### 定义优化器
+
+```python
+optimizer = tf.optimizers.Adam()
+```
+

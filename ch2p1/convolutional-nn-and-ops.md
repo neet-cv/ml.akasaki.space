@@ -27,7 +27,7 @@ $$
 $$
 \int_{-\infty}^{+\infty} f(\tau)f(\tau )g(x-\tau ) d\tau
 $$
-可以证明，关于几乎所有的$x\in (-\infty ,\infty )$，上述积分是[存在](https://zh.wikipedia.org/wiki/存在)的。这样，随着$x$的不同取值，这个积分就定义了一个新函数$h(x)$，称为函数$f$与$g$的卷积，$h(x)=(f*g)(x)$。我们可以轻易验证：$(f*g)(x)=(g*f)(x)$，并且$(f*g)(x)$仍为可积函数。卷积与[傅里叶变换](https://zh.wikipedia.org/wiki/傅里叶变换)有着密切的关系。例如两函数的傅里叶变换的乘积等于它们卷积后的傅里叶变换，利用此一性质，能简化傅里叶分析中的许多问题。
+可以证明，关于几乎所有的$x\in (-\infty ,\infty )$，上述积分是存在的。这样，随着$x$的不同取值，这个积分就定义了一个新函数$h(x)$，称为函数$f$与$g$的卷积，$h(x)=(f*g)(x)$。我们可以轻易验证：$(f*g)(x)=(g*f)(x)$，并且$(f*g)(x)$仍为可积函数。卷积与[傅里叶变换](https://zh.wikipedia.org/wiki/傅里叶变换)有着密切的关系。例如两函数的傅里叶变换的乘积等于它们卷积后的傅里叶变换，利用此一性质，能简化傅里叶分析中的许多问题。
 
 卷积的概念还可以推广到[数列](https://zh.wikipedia.org/wiki/数列)、[测度](https://zh.wikipedia.org/wiki/测度)以及[广义函数](https://zh.wikipedia.org/wiki/广义函数)上去。
 

@@ -25,10 +25,10 @@ Akasaki很菜，所以慢慢地学着，并在记事簿上写下笔记。Akasaki
 
 ### 第零章：在开始之前
 
-- [ ] [毁灭网友的人工智能]()
-- [ ] [选框架比陪你女朋友逛超市还难的朋友可以点进来看看](./ch0/nn-and-frameworks.md)
+- [x] [毁灭网友的人工智能](./ch0/ai-that-destroying-netizens.md)
+- [x] [选框架比陪你女朋友逛超市还难的朋友可以点进来看看](./ch0/nn-and-frameworks.md)
 - [x] [骗麻麻给你买一块显卡的理由（可不阅读）](./ch0/configure-gpu.md)
-- [ ] [安装轮子和管理环境](./ch0/create-new-environment-using-conda.md)
+- [x] [安装轮子和管理环境](./ch0/create-new-environment-using-conda.md)
 
 ### 第一章：聊一些基础基础小知识
 
@@ -53,7 +53,7 @@ Akasaki很菜，所以慢慢地学着，并在记事簿上写下笔记。Akasaki
 
 ### 第二章下：经典卷积神经网络
 
-- [ ] [第一个卷积神经网络(LeNet)]()、相应[论文](./ch2p2/lecun-01a.pdf)以及[代码]()
+- [x] [第一个卷积神经网络(LeNet)](./ch2p2/LeNet.md)、相应[论文](./ch2p2/lecun-01a.pdf)以及[代码](./ch2p2/LeNet-code.md)
 - [ ] [更深的卷积的神经网络(AlexNet)]()、相应[论文](./ch2p2/NIPS-2012-imagenet-classification-with-deep-convolutional-neural-networks-Paper.pdf)以及[代码]()
 - [ ] [可复用的的网络单元(VGG)]()、相应[论文](./ch2p2/1409.1556VGG.pdf)以及[代码]()
 - [ ] [带有残差的网络(ResNet)]()、相应[论文](./ch2p2/1512.03385ResNet.pdf)以及[代码]()
