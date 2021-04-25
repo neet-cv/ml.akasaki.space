@@ -48,20 +48,17 @@ LeNet-5：输入-（1.卷积-2.下采样-3.卷积-4.下采样-5.卷积）-全连
 import tensorflow as tf
 from tensorflow.keras import datasets, layers, initializers
 
-# 导入fashion-mnist数据集
 (training_x, training_y), (testing_x, testing_y) = datasets.fashion_mnist.load_data()
-batch_size = 256
-shuffling = 1000
+training_x = (training_x.astype('float32') / 255.)
+training_x = tf.expand_dims(training_x,axis=1)
+testing_x = (testing_x.astype('float32') / 255.)
+testing_x = tf.expand_dims(testing_x,axis=1)
+batch_size = 100
 
-# 定义前处理过程
-def preprocess(x, y):
-    return tf.cast(x, dtype=tf.float32) / 255., tf.cast(y, dtype=tf.int32)
-
-# 前处理标准化、指定batch大小、打乱
 training_dataset = tf.data.Dataset.from_tensor_slices((training_x, training_y))
-training_dataset.map(preprocess).batch(batch_size).shuffle(shuffling)
+training_dataset = training_dataset.batch(batch_size)
 testing_dataset = tf.data.Dataset.from_tensor_slices((testing_x, testing_y))
-testing_dataset.map(preprocess).batch(batch_size)
+testing_dataset = testing_dataset.batch(batch_size)
 ```
 
 上面这段你应该会对它越来越熟悉，因为它将被经常使用。整个过程的详细解释请参考[常见代码块](../appendix/similar-codeblocks.md)中有关数据集的部分。
@@ -103,7 +100,7 @@ class LeNetModel(tf.keras.Model):
 model = LeNetModel()
 ```
 
-### 定义损失函数和准确性计算方式
+### 定义损失函数和优化器
 
 ```python
 # 损失函数
@@ -114,11 +111,49 @@ test_loss = tf.metrics.Mean(name='train_loss')
 # 表示训练和测试准确性
 train_acc = tf.metrics.SparseCategoricalAccuracy(name='train_acc')
 test_acc = tf.metrics.SparseCategoricalAccuracy(name='train_acc')
+# 使用Adam优化器
+optimizer = tf.optimizers.Adam()
 ```
 
-### 定义优化器
+### 定义训练步骤
 
 ```python
-optimizer = tf.optimizers.Adam()
+@tf.function
+def training_step(images, labels):
+    with tf.GradientTape() as tape:
+        pred = model(images)
+        loss = loss_fun(labels, pred)
+        gradients = tape.gradient(loss, model.trainable_variables)
+        optimizer.apply_gradients(zip(gradients, model.trainable_variables))
+        train_loss(loss)
+        train_acc(labels, pred)
+```
+
+### 定义测试步骤
+
+```python
+@tf.function
+def verify_on_test(images, labels):
+    pred = model(images)
+    loss = loss_fun(labels, pred)
+    test_loss(loss)
+    test_acc(labels, pred)
+```
+
+### 开始训练和测试
+
+```python
+epochs = 40
+for ep in range(epochs):
+    for images, labels in training_dataset:
+        training_step(images, labels)
+    for images, labels in testing_dataset:
+        verify_on_test(images, labels)
+    template = 'Epoch{}, loss:{}, Acc:{}%, test_loss:{}, test_acc:{}%'
+    print(template.format(ep + 1,
+                          train_loss.result(),
+                          train_acc.result() * 100.,
+                          test_loss.result(),
+                          test_acc.result() * 100.))
 ```
 

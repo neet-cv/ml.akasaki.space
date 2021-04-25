@@ -51,38 +51,27 @@ testing_dataset = tf.data.Dataset.from_tensor_slices((testing_x, testing_y))
 
 #### 1.1.3 标准化和前处理
 
-如果你不知道什么是标准化，请参考[附录-常见名词](../appendix/similar-vocabularies.md)中有关标准化、去量纲的词条。
+如果你不知道什么是标准化，请参考[附录-常见名词](../appendix/similar-vocabularies.md)中有关标准化、去量纲的词条。``
 
 在训练图像数据时，特征图一般是float32的，并且要标准化。而对应的标签一般是整数（索引）。所以，我们一般对x和y做以下前处理：
 
 ```python
-training_x, training_y = tf.cast(training_x, dtype=tf.float32) / 255., tf.cast(training_y, dtype=tf.int32)
-testing_x, testing_y = tf.cast(testing_x, dtype=tf.float32) / 255., tf.cast(testing_y, dtype=tf.int32)
+training_x = (training_x.astype('float32') / 255.)
+testing_x = (testing_x.astype('float32') / 255.)
 ```
-
-上面这个过程可以使用`tensorflow.data.Dataset.map()`方法完成：
-
-```python
-def preprocess(x, y):
-    return tf.cast(x, dtype=tf.float32) / 255., tf.cast(y, dtype=tf.int32)
-training_dataset.map(preprocess)
-testing_dataset.map(preprocess)
-```
-
-当前处理过程很冗长复杂的时候，使用`map()`方法显得尤为方便。
 
 #### 1.1.4 指定batch大小以及将数据集打乱
 
 在你经常看到各种SGD（参阅[附录-常见名词](../appendix/similar-vocabularies.md)中关于随机梯度下降的词条）方法中，需要批量取用数据集，也就是我们经常指定的batch。tensorflow也提供了指定`Dataset`对象batch size的方法：
 
 ```python
-training_dataset.batch(256)
+training_dataset = training_dataset.batch(128)
 ```
 
 在这之后，往往我们将数据集打乱：
 
 ```python
-training_dataset.shuffle(1000)
+training_dataset = training_dataset.shuffle(100)
 ```
 
 testing_x和testing_y是否有必要打乱请自行根据需求决定。
@@ -93,23 +82,17 @@ testing_x和testing_y是否有必要打乱请自行根据需求决定。
 
 ```python
 import tensorflow as tf
-from tensorflow.keras import datasets
+from tensorflow.keras import datasets, layers, initializers
 
-# 导入fashion-mnist数据集
 (training_x, training_y), (testing_x, testing_y) = datasets.fashion_mnist.load_data()
-batch_size = 256
-shuffling = 1000
+training_x = (training_x.astype('float32') / 255.)
+testing_x = (testing_x.astype('float32') / 255.)
+batch_size = 128
 
-# 定义前处理过程
-def preprocess(x, y):
-    return tf.cast(x, dtype=tf.float32) / 255., tf.cast(y, dtype=tf.int32)
-
-# 前处理标准化、指定batch大小、打乱
 training_dataset = tf.data.Dataset.from_tensor_slices((training_x, training_y))
-training_dataset.map(preprocess).batch(batch_size).shuffle(shuffling)
+training_dataset = training_dataset.batch(batch_size)
 testing_dataset = tf.data.Dataset.from_tensor_slices((testing_x, testing_y))
-testing_dataset.map(preprocess).batch(batch_size)
-
+testing_dataset = testing_dataset.batch(batch_size)
 ```
 
 于是你的到了一份可以直接投入训练和测试的数据集。
