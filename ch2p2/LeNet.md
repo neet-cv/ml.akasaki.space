@@ -50,9 +50,9 @@ from tensorflow.keras import datasets, layers, initializers
 
 (training_x, training_y), (testing_x, testing_y) = datasets.fashion_mnist.load_data()
 training_x = (training_x.astype('float32') / 255.)
-training_x = tf.expand_dims(training_x,axis=1)
 testing_x = (testing_x.astype('float32') / 255.)
-testing_x = tf.expand_dims(testing_x,axis=1)
+training_x = tf.reshape(training_x, (training_x.shape[0], training_x.shape[1], training_x.shape[2], 1))
+testing_x = tf.reshape(testing_x, (testing_x.shape[0], testing_x.shape[1], testing_x.shape[2], 1))
 batch_size = 100
 
 training_dataset = tf.data.Dataset.from_tensor_slices((training_x, training_y))
@@ -72,19 +72,19 @@ class LeNetModel(tf.keras.Model):
     def __init__(self):
         super(LeNetModel, self).__init__()
         # 1.第一个卷积层
-        self.conv1 = layers.Conv2D(filters=32, kernel_size=(5, 5), padding='SAME', activation=tf.nn.relu, use_bias=True, bias_initializer=initializers.Zeros)
+        self.conv1 = layers.Conv2D(filters=32, kernel_size=(5, 5), padding='SAME', activation=tf.nn.sigmoid, use_bias=True, bias_initializer=initializers.Zeros)
         # 2.最大池化
         self.maxpool1 = layers.MaxPool2D(pool_size=(2, 2), strides=(2, 2), padding='SAME')
         # 3.第二个卷积层
-        self.conv2 = layers.Conv2D(filters=64, kernel_size=(5, 5), padding='SAME', activation=tf.nn.relu, use_bias=True, bias_initializer=initializers.Zeros)
+        self.conv2 = layers.Conv2D(filters=64, kernel_size=(5, 5), padding='SAME', activation=tf.nn.sigmoid, use_bias=True, bias_initializer=initializers.Zeros)
         # 4.最大池化
         self.maxpool2 = self.maxpool1 = layers.MaxPool2D(pool_size=(2, 2), strides=(2, 2), padding='SAME')
         # 5.打平以便进入全连接
         self.flatten = layers.Flatten()
         # 6.第一个全连接层
-        self.fc1 = layers.Dense(units=512, activation=tf.nn.relu, use_bias=True, bias_initializer=initializers.Zeros)
+        self.fc1 = layers.Dense(units=512, activation=tf.nn.sigmoid, use_bias=True, bias_initializer=initializers.Zeros)
         # 7.第一个全连接层
-        self.fc2 = layers.Dense(units=10, activation=tf.nn.relu, use_bias=True, bias_initializer=initializers.Zeros)
+        self.fc2 = layers.Dense(units=10, activation=tf.nn.sigmoid, use_bias=True, bias_initializer=initializers.Zeros)
 
     # 定义前向传播的方法
     def call(self, inputs, training=None, mask=None):
@@ -99,6 +99,31 @@ class LeNetModel(tf.keras.Model):
 # 创建一个模型实例
 model = LeNetModel()
 ```
+
+实际上这段代码是一个面向对象的写法，或者说，“更专业的写法”。**上面整段代码可以用`Sequential API`简写**为：
+
+```python
+model = tf.keras.models.Sequential([
+    # 1.第一个卷积层
+    tf.keras.layers.Conv2D(filters=32,kernel_size=5,activation='sigmoid',input_shape=(28,28,1)),
+    # 2.最大池化
+    tf.keras.layers.MaxPool2D(pool_size=2, strides=2),
+    # 3.第二个卷积层
+    tf.keras.layers.Conv2D(filters=64,kernel_size=5,activation='sigmoid'),
+    # 4.最大池化
+    tf.keras.layers.MaxPool2D(pool_size=2, strides=2),
+    # 5.打平以便进入全连接
+    tf.keras.layers.Flatten(),
+    # 6.第一个全连接层
+    tf.keras.layers.Dense(512,activation='sigmoid'),
+    # 7.第一个全连接层
+    tf.keras.layers.Dense(10,activation='sigmoid')
+])
+```
+
+这两段代码具有相同效果。在构建简单地模型或仅做研究时，我更推荐使用`Sequential API`。但是遇到工程化和模型部署时，请使用面向对象的写法，继承`tf.keras.Model`。
+
+**你可以在[LeNet代码实现](./LeNet-code.md)中参考到使用`Kears API`的高级而简洁的写法**。
 
 ### 定义损失函数和优化器
 
@@ -157,3 +182,78 @@ for ep in range(epochs):
                           test_acc.result() * 100.))
 ```
 
+### 输出的内容
+
+如果没出意外的话，你会看到这样的输出：
+
+```
+Epoch2, loss:0.9688271284103394, Acc:62.639163970947266%, test_loss:0.6105723977088928, test_acc:77.08499908447266%
+Epoch3, loss:0.8081108331680298, Acc:69.06055450439453%, test_loss:0.5714872479438782, test_acc:78.66999816894531%
+Epoch4, loss:0.7139682769775391, Acc:72.83250427246094%, test_loss:0.5420641303062439, test_acc:79.82250213623047%
+Epoch5, loss:0.6498335599899292, Acc:75.36933135986328%, test_loss:0.5176074504852295, test_acc:80.76799774169922%
+Epoch6, loss:0.6025559902191162, Acc:77.22111511230469%, test_loss:0.49699920415878296, test_acc:81.56999969482422%
+Epoch7, loss:0.5658233165740967, Acc:78.66047668457031%, test_loss:0.4798130989074707, test_acc:82.21856689453125%
+Epoch8, loss:0.536135196685791, Acc:79.81104278564453%, test_loss:0.4651854634284973, test_acc:82.7612533569336%
+Epoch9, loss:0.5114337801933289, Acc:80.76740264892578%, test_loss:0.45251351594924927, test_acc:83.24555969238281%
+Epoch10, loss:0.4904395043849945, Acc:81.57350158691406%, test_loss:0.441430926322937, test_acc:83.65899658203125%
+......
+```
+
+可以看出，识别的准确率在不断提高。随着Epoch继续增加，准确率会达到90%以上。
+
+### 尝试修改网络模型
+
+为了方便展示和修改，我们将使用那段`Sequential API`的写法进行修改和展示：
+
+```python
+# 这是原来的代码
+model = tf.keras.models.Sequential([
+    tf.keras.layers.Conv2D(filters=32,kernel_size=5,activation='sigmoid',input_shape=(28,28,1)),
+    tf.keras.layers.MaxPool2D(pool_size=2, strides=2),
+    tf.keras.layers.Conv2D(filters=64,kernel_size=5,activation='sigmoid'),
+    tf.keras.layers.MaxPool2D(pool_size=2, strides=2),
+    tf.keras.layers.Flatten(),
+    tf.keras.layers.Dense(512,activation='sigmoid'),
+    tf.keras.layers.Dense(10,activation='sigmoid')
+])
+```
+
+自习想想，仅识别包含所有英文字母和数字在内的手写数字似乎并不需要提取太多阶段的特征，所以我们可以试着把卷积层的卷积核深度改小一点，然后再把全连接层的节点数目弄小一点：
+
+```python
+model = tf.keras.models.Sequential([
+    # 将第一个卷积层卷积核的深度从32改为6
+    tf.keras.layers.Conv2D(filters=6,kernel_size=5,activation='sigmoid',input_shape=(28,28,1)),
+    tf.keras.layers.MaxPool2D(pool_size=2, strides=2),
+    # 将第二个卷积层卷积核的深度从64改为16
+    tf.keras.layers.Conv2D(filters=16,kernel_size=5,activation='sigmoid'),
+    tf.keras.layers.MaxPool2D(pool_size=2, strides=2),
+    tf.keras.layers.Flatten(),
+    # 将第一个卷积层卷积核的深度从512改为128
+    tf.keras.layers.Dense(128,activation='sigmoid'),
+    tf.keras.layers.Dense(10,activation='sigmoid')
+])
+```
+
+替换到原来的代码中，训练时输出：
+
+```
+Epoch1, loss:1.2487170696258545, Acc:54.69499969482422%, test_loss:0.7663143873214722, test_acc:70.70999908447266%
+Epoch2, loss:0.9594010710716248, Acc:64.52333068847656%, test_loss:0.7062411308288574, test_acc:72.83499908447266%
+Epoch3, loss:0.8352198600769043, Acc:68.83721923828125%, test_loss:0.6659138798713684, test_acc:74.38999938964844%
+Epoch4, loss:0.7591087818145752, Acc:71.60749816894531%, test_loss:0.6341168284416199, test_acc:75.70999908447266%
+Epoch5, loss:0.7047481536865234, Acc:73.66566467285156%, test_loss:0.6079897880554199, test_acc:76.80000305175781%
+Epoch6, loss:0.6630067229270935, Acc:75.25444793701172%, test_loss:0.5859068036079407, test_acc:77.72833251953125%
+Epoch7, loss:0.6294882297515869, Acc:76.52571105957031%, test_loss:0.566993772983551, test_acc:78.5199966430664%
+Epoch8, loss:0.601792573928833, Acc:77.58125305175781%, test_loss:0.5506070852279663, test_acc:79.20124816894531%
+Epoch9, loss:0.5784013867378235, Acc:78.46888732910156%, test_loss:0.5361939072608948, test_acc:79.79110717773438%
+Epoch10, loss:0.5582678914070129, Acc:79.23699951171875%, test_loss:0.5233564376831055, test_acc:80.29500579833984%
+```
+
+可以看到，比起原来的网络结构，在第10个Epoch，新的网络结构的准确率达到80%左右，比原网络的83%左右要低。但是同时你也会发现，新的网络训练和运算起来比原网络快了不止一倍。
+
+通过修改这个网络我们发现，使用更大的参数量可以达到更好的拟合效果，但是网络体积会变大，运算速度也会下降。在试图创建一个网络的时候，要顾虑这些方面，按需求找到参数量的平衡点。
+
+### 整个Pure代码
+
+请参考[LeNet代码实现](./LeNet-code.md)
