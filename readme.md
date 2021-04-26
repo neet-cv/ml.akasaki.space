@@ -113,6 +113,9 @@ Akasaki很菜，所以慢慢地学着，并在记事簿上写下笔记。Akasaki
 
 ### 第-2章：TensorFlow编程策略
 
+- [x] [TF张量操作API第一部分](./ch-2/operation-on-tensors-1.md)
+- [x] [TF张量操作API第二部分](./ch-2/operation-on-tensors-2.md)
+- [x] [对张量进行基本数学运算](./ch-2/operator-for-tensors.md)
 - [x] [TensorFLow编程策略](./ch-2/tensorflow-strategy.md)
 - [ ] 让数据变得能够训练
 
