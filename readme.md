@@ -98,7 +98,7 @@ Akasaki很菜，所以慢慢地学着，并在记事簿上写下笔记。Akasaki
 - [ ] [05. 目标检测数据集（皮卡丘）]()
 - [ ] [06. 单发多框检测(SSD)]()
 - [ ] [07. 区域卷积神经网络(R-CNN)系列]()
-- [ ] [08. 语义分割方法综述](./ch3/overview-of-semantic-segmentation.md)
+- [x] [08. 语义分割方法综述](./ch3/overview-of-semantic-segmentation.md)
 - [ ] [09. 全卷积网络(FCN)]()
 - [ ] [10. 样式迁移]()
 - [ ] [11. 实战 Sifar-10]()，以及[实战 ImageNet-Dogs]()
