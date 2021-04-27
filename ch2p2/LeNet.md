@@ -68,6 +68,29 @@ testing_dataset = testing_dataset.batch(batch_size)
 接下来我们定义LeNet5的往网络模型。在tensorflow的模型中我们往往不定义输入层，所以除去输入层`Lenet5`的模型应该有七层：
 
 ```python
+model = tf.keras.models.Sequential([
+    # 1.第一个卷积层
+    tf.keras.layers.Conv2D(filters=32,kernel_size=5,activation='sigmoid',input_shape=(28,28,1)),
+    # 2.最大池化
+    tf.keras.layers.MaxPool2D(pool_size=2, strides=2),
+    # 3.第二个卷积层
+    tf.keras.layers.Conv2D(filters=64,kernel_size=5,activation='sigmoid'),
+    # 4.最大池化
+    tf.keras.layers.MaxPool2D(pool_size=2, strides=2),
+    # 5.打平以便进入全连接
+    tf.keras.layers.Flatten(),
+    # 6.第一个全连接层
+    tf.keras.layers.Dense(512,activation='sigmoid'),
+    # 7.第一个全连接层
+    tf.keras.layers.Dense(10,activation='sigmoid')
+])
+```
+
+实际上这段代码使用了`Keras API`，这是在tensorflow进入2.0后出现的写法，或者叫“更精简的写法”。
+
+还有一种写法是面向对象的写法，或者叫做“更专业的写法”：
+
+```python
 class LeNetModel(tf.keras.Model):
     def __init__(self):
         super(LeNetModel, self).__init__()
@@ -100,30 +123,7 @@ class LeNetModel(tf.keras.Model):
 model = LeNetModel()
 ```
 
-实际上这段代码是一个面向对象的写法，或者说，“更专业的写法”。**上面整段代码可以用`Sequential API`简写**为：
-
-```python
-model = tf.keras.models.Sequential([
-    # 1.第一个卷积层
-    tf.keras.layers.Conv2D(filters=32,kernel_size=5,activation='sigmoid',input_shape=(28,28,1)),
-    # 2.最大池化
-    tf.keras.layers.MaxPool2D(pool_size=2, strides=2),
-    # 3.第二个卷积层
-    tf.keras.layers.Conv2D(filters=64,kernel_size=5,activation='sigmoid'),
-    # 4.最大池化
-    tf.keras.layers.MaxPool2D(pool_size=2, strides=2),
-    # 5.打平以便进入全连接
-    tf.keras.layers.Flatten(),
-    # 6.第一个全连接层
-    tf.keras.layers.Dense(512,activation='sigmoid'),
-    # 7.第一个全连接层
-    tf.keras.layers.Dense(10,activation='sigmoid')
-])
-```
-
-这两段代码具有相同效果。在构建简单地模型或仅做研究时，我更推荐使用`Sequential API`。但是遇到工程化和模型部署时，请使用面向对象的写法，继承`tf.keras.Model`。
-
-**你可以在[LeNet代码实现](./LeNet-code.md)中参考到使用`Kears API`的高级而简洁的写法**。
+这两段代码具有相同效果。你只需要选择其中一段。在构建简单地模型或仅做研究时，我更推荐使用`Keaas API`。但是遇到工程化和模型部署时，请使用面向对象的写法。你可以在[小插曲：Keras高级API](./write-code-with-keras.md)中对`Keras API`进行简单了解，并**可以在[LeNet代码实现](./LeNet-code.md)中看到这两种写法的完整代码**。
 
 ### 定义损失函数和优化器
 
@@ -181,6 +181,8 @@ for ep in range(epochs):
                           test_loss.result(),
                           test_acc.result() * 100.))
 ```
+
+你可以使用`Keras API`在几行之内完成损失函数和优化器的声名、模型的训练和测试。这里把这几部分展开来写，是为了让读者了解整个过程。如果你想立即了解使用`Keras API`的写法，请参考[LeNet代码实现](./LeNet-code.md)。
 
 ### 输出的内容
 

@@ -17,6 +17,8 @@ Akasaki很菜，所以慢慢地学着，并在记事簿上写下笔记。Akasaki
 
 </details>
 
+本仓库的很多代码主要使用[Tensorflow](https://www.tensorflow.org/)等实现。也许等我写完后[我的朋友们](https://github.com/PaperFormulaIV)会帮我翻译出一份pytorch版本。
+
 **这个仓库的部分文稿包含了LaTex公式**。我在每一个包含公式的文档头加入了mathjax相关的引用。如果你希望正常阅读，**请挂梯子访问[本仓库的网页版](https://ml.akasaki.space)**。如果你的网络条件导致了公式加载失败，请克隆本仓库到本地，并使用typora等markdown编辑器阅读。
 
 ##  目录
@@ -27,24 +29,29 @@ Akasaki很菜，所以慢慢地学着，并在记事簿上写下笔记。Akasaki
 
 ### 第零章：在开始之前
 
-**等等！**你确定你真的想碰这个方向吗？
+诶**等等**！你确定你真的想碰这个方向吗？
 
 - [x] [01. 毁灭网友的人工智能](./ch0/ai-that-destroying-netizens.md)
-- [x] [02. 选框架比陪你女朋友逛超市还难的朋友可以点进来看看](./ch0/nn-and-frameworks.md)
-- [x] [03. 骗麻麻给你买一块显卡的理由（可不阅读）](./ch0/configure-gpu.md)
-- [x] [04. 安装轮子和管理环境](./ch0/create-new-environment-using-conda.md)
+- [x] [02. 选框架比陪女朋友逛超市还难](./ch0/nn-and-frameworks.md)
+- [x] [03. 剁手买一块显卡的理由（可不阅读）](./ch0/configure-gpu.md)
+- [x] [04. 体验痛苦：安装轮子和管理环境](./ch0/create-new-environment-using-conda.md)
 
 ---
 
-### 第一章：聊一些基础基础小知识
+### 第一章上：HelloWorld！
 
-我猜你见过一些诸如深度学习的计算机视觉、深度学习的自然语言处理等名词，但是你肯定没看到过深度学习自己单独出现。没错，**深度学习是一种方法，往往用来解决各种问题。所以我们首先要了解方法的基本思想，才能看如何用它解决问题**。所以这一章我们主要了解最基本的机器学习任务线性回归以及其他的一些基础知识。看完本章也许初学者会不知所以然。但是请继续看下去，你就会发现这些东西的实际用处。
+我猜你见过一些诸如深度学习的计算机视觉、深度学习的自然语言处理等名词，但是你肯定没看到过深度学习自己单独出现。没错，**深度学习是一种方法，往往用来解决各种问题。所以我们首先要了解方法的基本思想，才能看如何用它解决问题**。所以这一章我们主要了解最基本的机器学习任务线性回归以及其他的一些基础知识。看**完本章也许初学者会不知所以然**。但是请继续看下去，你就会发现这些东西的实际用处。
 
-- [x] [01. 试着读取、操作和显示数据](./ch1/operate-on-data.md)
-- [x] [02. 自动求梯度](./ch1/automatic-gradient.md)
-- [x] [03. 机器学习的HelloWorld：线性回归](./ch1/linear-regression.md)，以及[线性回归的代码实现](./ch1/linear-regression-code.md)
-- [x] [04. softmax 回归](./ch1/softmax-regression.md)，以及[代码实现](./ch1/softmax-regression-code.md)
-- [x] [05. 多层感知机](./ch1/multilayer-perceptron.md)，以及[代码实现]()
+- [x] [01. 试着读取、操作和显示数据](./ch1p1/operate-on-data.md)
+- [x] [02. 自动求梯度](./ch1p1/automatic-gradient.md)
+- [x] [03. 机器学习的HelloWorld：线性回归](./ch1p1/linear-regression.md)，以及[线性回归的代码实现](./ch1/linear-regression-code.md)
+- [x] [04. softmax 回归](./ch1p1/softmax-regression.md)，以及[代码实现](./ch1/softmax-regression-code.md)
+
+---
+
+### 第一章下：深度学习基础
+
+- [x] [05. 多层感知机](./ch1p2/multilayer-perceptron.md)，以及[代码实现]()
 - [ ] [06. 模型的选择，欠拟合和过拟合]()
 - [ ] [07. 权重衰减]()
 - [ ] [08. 丢弃法]()
@@ -69,13 +76,14 @@ Akasaki很菜，所以慢慢地学着，并在记事簿上写下笔记。Akasaki
 
 上半章对卷积神经网络的一些基础知识做了简单介绍，下半章主要以历史的眼光观察经典的卷积神经网络。从LeNet手写数字识别成为第一个卷积神经网络的应用开始，到后来卷积神经网络往越来越深，成为深度卷积神经网络，再到后来出现并行、残差等概念，它们逐渐变得越来越成熟。这半章我们会了解这些网络的大体思路和代码写法。当然，如果你有兴趣可以阅读论文本身。
 
-- [x] [01. 第一个卷积神经网络(LeNet)](./ch2p2/LeNet.md)、相应[论文](./ch2p2/lecun-01a.pdf)以及[代码](./ch2p2/LeNet-code.md)
-- [ ] [02. 更深的卷积的神经网络(AlexNet)]()、相应[论文](./ch2p2/NIPS-2012-imagenet-classification-with-deep-convolutional-neural-networks-Paper.pdf)以及[代码]()
-- [ ] [03. 可复用的的网络单元(VGG)]()、相应[论文](./ch2p2/1409.1556VGG.pdf)以及[代码]()
-- [ ] [04. 带有残差的网络(ResNet)]()、相应[论文](./ch2p2/1512.03385ResNet.pdf)以及[代码]()
-- [ ] [05. 网络中的网络。(NiN)]()
-- [ ] [06. 含有并行连接的网络(GoogLeNet)]()
-- [ ] [07. 稠密链接网络(DenseNet)]()
+- [x] [01. 第一个卷积神经网络：LeNet](./ch2p2/LeNet.md)、相应[论文](./ch2p2/lecun-01a.pdf)以及[代码](./ch2p2/LeNet-code.md)
+- [ ] [02. 小插曲：Keras高级API]()
+- [ ] [03. 更深的卷积的神经网络：AlexNet]()、相应[论文](./ch2p2/NIPS-2012-imagenet-classification-with-deep-convolutional-neural-networks-Paper.pdf)以及[代码]()
+- [ ] [04. 可复用的的网络单元：VGG]()、相应[论文](./ch2p2/1409.1556VGG.pdf)以及[代码]()
+- [ ] [05. 带有残差的网络：ResNet]()、相应[论文](./ch2p2/1512.03385ResNet.pdf)以及[代码]()
+- [ ] [06. 网络中的网络：NiN]()
+- [ ] [07. 致敬LeNet：含有并行连接的网络GoogLeNet]()
+- [ ] [08. 稠密链接网络：DenseNet]()
 
 ---
 
