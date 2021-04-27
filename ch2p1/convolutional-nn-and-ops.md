@@ -17,13 +17,13 @@
 
 ### 数学的卷积
 
-函数$f$,$g$是定义在$\R^n$上的可测函数（measueable function），$f$与$g$的卷积就记作$f*g$，它是其中一个函数翻转，并平移后，与另外一个函数的乘积的积分，是一个对平移量的函数，也就是：
+函数$f$,$g$是定义在$R^n$上的可测函数（measueable function），$f$与$g$的卷积就记作$f*g$，它是其中一个函数翻转，并平移后，与另外一个函数的乘积的积分，是一个对平移量的函数，也就是：
 $$
-(f*g)(t) = \int_{\R^n} f(\tau)f(\tau )g(t-\tau ) d\tau
+(f*g)(t) = \int_{R^n} f(\tau)f(\tau )g(t-\tau ) d\tau
 $$
-如果函数不是定义在$\R^n$上的，可以吧函数定义域以外的值都规定成0，这样就变成了一个定义在$\R^n$上的函数。
+如果函数不是定义在$R^n$上的，可以吧函数定义域以外的值都规定成0，这样就变成了一个定义在$R^n$上的函数。
 
-在[泛函分析](https://zh.wikipedia.org/wiki/泛函分析)中，**卷积**（又称**叠积**（convolution）、**褶积**或**旋积**），是透过两个[函数](https://zh.wikipedia.org/wiki/函数) *f* 和 *g* 生成第三个函数的一种数学[算子](https://zh.wikipedia.org/wiki/算子)，表征函数 *f* 与经过翻转和平移的 *g* 的乘积函数所围成的曲边梯形的面积。卷积是[数学分析](https://zh.wikipedia.org/wiki/数学分析)中一种重要的运算。设：$f(x)$、$g(x)$是$\R$上的两个[可积函数](https://zh.wikipedia.org/wiki/可积函数)，作[积分](https://zh.wikipedia.org/wiki/积分)：
+在[泛函分析](https://zh.wikipedia.org/wiki/泛函分析)中，**卷积**（又称**叠积**（convolution）、**褶积**或**旋积**），是透过两个[函数](https://zh.wikipedia.org/wiki/函数) *f* 和 *g* 生成第三个函数的一种数学[算子](https://zh.wikipedia.org/wiki/算子)，表征函数 *f* 与经过翻转和平移的 *g* 的乘积函数所围成的曲边梯形的面积。卷积是[数学分析](https://zh.wikipedia.org/wiki/数学分析)中一种重要的运算。设：$f(x)$、$g(x)$是$R$上的两个[可积函数](https://zh.wikipedia.org/wiki/可积函数)，作[积分](https://zh.wikipedia.org/wiki/积分)：
 $$
 \int_{-\infty}^{+\infty} f(\tau)f(\tau )g(x-\tau ) d\tau
 $$
