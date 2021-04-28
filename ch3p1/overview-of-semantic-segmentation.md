@@ -93,13 +93,19 @@
 
 
 
-encoder由于pooling逐渐减少空间维度，而decoder逐渐恢复空间维度和细节信息。通常从encoder到decoder还有shortcut connetction（捷径连接，也就是跨层连接，其思想我猜是从ResNet开始的）。
+encoder由于pooling逐渐减少空间维度，而decoder逐渐恢复空间维度和细节信息。
+
+![image-20210428220457279](src/overview-of-semantic-segmentation/image-20210428220457279.png)
+
+实际上，符合下采样提取特征，再上采样恢复原大小的都可以称为encoder-decoder结构。
+
+#### 跨层连接的encoder-decoder结构
+
+通常从encoder到decoder还有shortcut connetction（捷径连接，也就是跨层连接，其思想我猜是从ResNet开始的）。
 
 ![image-20210427221642324](src/overview-of-semantic-segmentation/image-20210427221642324.png)
 
-上图是encoder-decoder的代表之一：UNet的结构。
-
-尽管FCN及encoder-decoder结构中移除了全连接层，但是CNN模型用于语义分割还存在一个问题，就是下采样操作。这里使用池化的下采样为例：pooling操作可以扩大感受野因而能够很好地整合上下文信息（context中文称为语境或者上下文，通俗的理解就是综合了更多的信息来进行决策），对high-level的任务（比如分类），这是很有效的。但同时，由于pooling下采样操作，使得分辨率降低，因此削弱了位置信息，而语义分割中需要score map和原图对齐，因此需要丰富的位置信息。
+上图是带有跨层连接的encoder-decoder的代表之一：UNet的结构。
 
 #### 高低层特征融合
 
@@ -112,6 +118,8 @@ encoder由于pooling逐渐减少空间维度，而decoder逐渐恢复空间维�
 ![FCN-3](src/overview-of-semantic-segmentation/FCN-3.png)
 
 ### 空洞卷积（Dilated/Atrous Convolution，代替了“池化-上采样”的过程）
+
+尽管FCN及encoder-decoder结构中移除了全连接层，但是CNN模型用于语义分割还存在一个问题，就是下采样操作。这里使用池化的下采样为例：pooling操作可以扩大感受野因而能够很好地整合上下文信息（context中文称为语境或者上下文，通俗的理解就是综合了更多的信息来进行决策），对high-level的任务（比如分类），这是很有效的。但同时，由于pooling下采样操作，使得分辨率降低，因此削弱了位置信息，而语义分割中需要score map和原图对齐，因此需要丰富的位置信息。
 
 Dilated/Atrous Convolution（空洞卷积），这种结构代替了池化，一方面它可以保持空间分辨率，另外一方面它由于可以扩大感受野因而可以很好地整合上下文信息（我觉得这个设计很有意思，原图的大小完全不会改变，也不需要上采样了）。
 

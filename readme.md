@@ -9,14 +9,13 @@ Akasaki很菜，所以慢慢地学着，并在记事簿上写下笔记。Akasaki
 <p><strong>  1. 这个知识有什么用</strong></p>
 <p><strong>  2. 这个知识如何使用或如何实现</strong></p>
 
-本仓库中的第一章直接引用[d2l-zh](https://github.com/d2l-ai/d2l-zh)原书内容，并稍作修改；后半部分是自己学习、阅读书籍、阅读书籍、阅读博文后整理的内容，很多内容在各大书籍和各大搜索引擎都能找到，我所做的是用自己的想法整理或书写这些内容。
+希望这份笔记对你也有用。如果真的有用，请留下一个star。
 
 </details>
 
 - 本仓库的功能：`入门深度学习`、`参考常用代码`、`了解深度神经网络经典论文`。请注意，本仓库后半部分主要讨论计算机视觉领域的基于深度学习的方法。
-
+- 本仓库中的第一章直接引用[d2l-zh](https://github.com/d2l-ai/d2l-zh)原书内容，并稍作修改；后半部分是自己学习、阅读书籍、阅读书籍、阅读博文后整理的内容，很多内容在各大书籍和各大搜索引擎都能找到，我所做的是用自己的想法整理或书写这些内容。
 - 本仓库的很多代码主要使用[Tensorflow](https://www.tensorflow.org/)等实现。也许等我写完后[我的朋友们](https://github.com/PaperFormulaIV)会帮我翻译出一份pytorch版本。
-
 - 这个仓库的部分文稿**包含了LaTex公式**。我在每一个包含公式的文档头加入了mathjax相关的引用。如果你希望正常阅读，**请挂梯子访问[本仓库的网页版](https://ml.akasaki.space)**。如果你的网络条件导致了公式加载失败，请克隆本仓库到本地，并使用typora等markdown编辑器阅读。
 
 ##  目录
@@ -55,8 +54,9 @@ Akasaki很菜，所以慢慢地学着，并在记事簿上写下笔记。Akasaki
 - [x] [06. 模型的选择，欠拟合和过拟合](./ch1p2/underfit-and-overfit.md)
 - [x] [07. 权重衰减](./ch1p2/weight-decay.md)
 - [x] [08. 丢弃法](./ch1p2/dropout.md)
-- [ ] [09. 正向传播和反向传播]()
-- [ ] [10. 使用多层感知机实现手写数字识别]()
+- [x] [09. 正向传播和反向传播](./ch1p2/forward-and-backprop.md)
+- [x] [10. 数值稳定和模型初始化](./ch1p2/numerical-stability-and-initializing.md)
+- [ ] [11. 使用多层感知机实现手写数字识别]()
 
 ---
 
@@ -147,7 +147,7 @@ Akasaki很菜，所以慢慢地学着，并在记事簿上写下笔记。Akasaki
 - [x] [01. TF张量操作API第一部分](./ch-1/operation-on-tensors-1.md)
 - [x] [02. TF张量操作API第二部分](./ch-1/operation-on-tensors-2.md)
 - [x] [03. 对张量进行基本数学运算](./ch-1/operator-for-tensors.md)
-- [x] [04. TensorFLow编程策略：计算图表示模型](./ch-1/tensorflow-strategy.md)
+- [x] [04. TensorFLow编程策略：计算图和模型表示](./ch-1/tensorflow-strategy.md)
 - [ ] [05. 训练数据的格式]()
 - [ ] [06. 模型持久化]()
 - [ ] [07. 训练可视化（以Tensorboard为例）]()
