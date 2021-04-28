@@ -196,3 +196,9 @@ Akasaki很菜，所以慢慢地学着，并在记事簿上写下笔记。Akasaki
 ![_](https://jwenjian-visitor-badge-5.glitch.me/badge?page_id=VisualDust.anything)
 ![_](https://img.shields.io/github/stars/VisualDust/talkischeap.svg?style=flat)
 ![_](https://img.shields.io/github/license/visualdust/talkischeap.svg?style=flat&label=license&message=notspecified)
+
+---
+
+## 无尽模式
+
+我在这里阅读论文，并写下笔记。（还没开始）
