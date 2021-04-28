@@ -20,6 +20,8 @@
 
 ![image-20210427222340602](src/overview-of-semantic-segmentation/image-20210427222340602.png)
 
+当然，对于实际应用中通道数量的具体数字可根据实际需求选择。例如，在前景分割中，仅需分割出前景和背景，因此只需要一个通道。而全景分割中，如果使用类one-hot编码，则需要有和对象数目+1一样多的通道数。
+
 ## 分割的技术
 
 在深度学习方法流行之前，TextonForest和基于随机森林分类器等语义分割方法是用得比较多的方法。但是本文章的背景是基于深度学习方法的计算机视觉，所以不做过多讨论。
@@ -28,15 +30,73 @@
 
 ### 块分类（Patch classification）
 
+块分类算得上是一类最古老的方法。
+
 如其名，把图像分成小块塞给网络进行分类。分成指定大小的小块是因为全连接网络只接受指定大小的输入。这大概是最初的基于深度学习的分割方法了（吧）。
 
 ### 全卷积方法（基于FCN）
 
+全卷积方法在块分类之后，优势是使用全卷积代替了块分类中的全连接。
+
 用于代替全连接的全卷积方法除了在其他视觉方法里很出名，也很快用到了分割算法中。2014年，全卷积网络（FCN）横空出世，FCN将网络全连接层用卷积取代，因此使任意图像大小的输入都变成可能，而且速度比Patch classification方法快很多。（我用简单分类模型实测了一下也是，全连接真的是太烂了，又慢又重，但是作为多层感知机到全卷积网路中间的过度组件，还是功不可没的。）
 
-尽管移除了全连接层，但是CNN模型用于语义分割还存在一个问题，就是下采样操作（这里以池化为例）。池化可以扩大感受野因而能够很好地整合上下文信息（如果想了解更多这方面的内容可以参考），
+#### 插值法实现的上采样
 
-### 空洞卷积（Dilated/Atrous Convolution，代替了池化-上采样的过程）
+在全卷积方法中，为了使输出和输入大小相同，在卷积导致特征图变小后还需要经过上采样使特征图变为原来大小。
+
+![deconv01](src/overview-of-semantic-segmentation/deconv01.gif)
+
+上图：一种反卷积的示意。其中蓝色较小的特征图是输入，通过在它周围填充，使其变为较大的特征图后，再进行卷积。得到的结果是绿色的特征图。
+
+![deconv02](src/overview-of-semantic-segmentation/deconv02.gif)
+
+上图：另一种反卷积的示意。其中蓝色较小的特征图经过某种填充方法进行填充，变为较大的特征图后再进行卷积。
+
+反卷积的常见思路是通过一些填充的方法将较小的特征图变大，然后通过卷积获得比原来的小特征图更大的特征图。较为常用的填充方法是插值法，主要可以分为两类，一类是线性图像插值方法，另一类是非线性图像插值方法：
+
+- 最近邻插值(Nearest neighbor interpolation)
+- 双线性插值(Bi-Linear interpolation)
+- 双立方插值(Bi-Cubic interpolation)
+
+以上的这些方法都是一些插值方法，需要我们在决定网络结构的时候进行挑选。这些方法就像是人工特征工程一样，并没有给神经网络学习的余地，神经网络不能自己学习如何更好地进行插值，这个显然是不够理想的。
+
+#### 转置卷积实现的上采样
+
+在上采样的方法中，比较出名的是转置卷积，因为它允许我们使用可学习的上采样过程。
+
+典型的转置卷积运算将采用滤波器视图中当前值的点积并作为相应的输出位置产生的单个值，而转置卷积的过程基本想法。对于转置卷积，我们从低分辨率特征图中获取单个值，并将滤波器中的所有权重乘以该值，将加权值输出到更大的特征图。
+
+![image-20210427223356560](src/overview-of-semantic-segmentation/image-20210427223356560.png)
+
+上图：转置卷积的一种示意。
+
+> Tips：神经网络中的解卷积层也被称作：转置卷积(Transposed Convolution)、上卷积（upconvolution）、完全卷积（full convolution）、转置卷积（transposed convolution）、微步卷积（fractionally-strided convolution）。
+>
+> 转置卷积常常在一些文献中也称之为反卷积(Deconvolution)和部分跨越卷积(Fractionally-strided Convolution)，因为称之为反卷积容易让人以为和数字信号处理中反卷积混起来，造成不必要的误解，因此下文都将称为转置卷积，并且建议各位不要采用反卷积这个称呼。
+
+### 编码器-解码器结构（encoder-decoder，本质基于FCN）
+
+
+
+encoder由于pooling逐渐减少空间维度，而decoder逐渐恢复空间维度和细节信息。通常从encoder到decoder还有shortcut connetction（捷径连接，也就是跨层连接，其思想我猜是从ResNet开始的）。
+
+![image-20210427221642324](src/overview-of-semantic-segmentation/image-20210427221642324.png)
+
+上图是encoder-decoder的代表之一：UNet的结构。
+
+尽管FCN及encoder-decoder结构中移除了全连接层，但是CNN模型用于语义分割还存在一个问题，就是下采样操作。这里使用池化的下采样为例：pooling操作可以扩大感受野因而能够很好地整合上下文信息（context中文称为语境或者上下文，通俗的理解就是综合了更多的信息来进行决策），对high-level的任务（比如分类），这是很有效的。但同时，由于pooling下采样操作，使得分辨率降低，因此削弱了位置信息，而语义分割中需要score map和原图对齐，因此需要丰富的位置信息。
+
+#### 高低层特征融合
+
+由于池化操作造成的信息损失，上采样（即使采用解卷积操作）只能生成粗略的分割结果图。因此，论文从高分辨率的特征图中引入跳跃连接（shortcut/skip connection）操作改善上采样的精细程度：
+
+![FCN-2](src/overview-of-semantic-segmentation/FCN-2.png)
+
+实验表明，这样的分割结果更细致更准确。在逐层fusion的过程中，做到第三行再往下，结果又会变差，所以作者做到这里就停了。可以看到如上三行的对应的结果：
+
+![FCN-3](src/overview-of-semantic-segmentation/FCN-3.png)
+
+### 空洞卷积（Dilated/Atrous Convolution，代替了“池化-上采样”的过程）
 
 Dilated/Atrous Convolution（空洞卷积），这种结构代替了池化，一方面它可以保持空间分辨率，另外一方面它由于可以扩大感受野因而可以很好地整合上下文信息（我觉得这个设计很有意思，原图的大小完全不会改变，也不需要上采样了）。
 
@@ -47,42 +107,6 @@ Dilated/Atrous Convolution（空洞卷积），这种结构代替了池化，一
 ![Atrous_conv](src/overview-of-semantic-segmentation/Atrous_conv.png)
 
 上图：另一张空洞卷积的示意图。
-
-### 编码器-解码器结构（encoder-decoder，本质基于FCN）
-
-encoder由于pooling逐渐减少空间维度，而decoder逐渐恢复空间维度和细节信息。通常从encoder到decoder还有shortcut connetction（捷径连接，也就是跨层连接，其思想我猜是从ResNet开始的）。
-
-![image-20210427221642324](src/overview-of-semantic-segmentation/image-20210427221642324.png)
-
-上图是encoder-decoder的代表之一：UNet的结构。
-
-### 反卷积的上采样
-
-在上采样的方法中，比较出名的是转置卷积，因为它允许我们使用可学习的上采样过程。典型的转置卷积运算将采用滤波器视图中当前值的点积并作为相应的输出位置产生的单个值，而转置卷积的过程基本想法。对于转置卷积，我们从低分辨率特征图中获取单个值，并将滤波器中的所有权重乘以该值，将加权值输出到更大的特征图。
-
-![image-20210427223356560](src/overview-of-semantic-segmentation/image-20210427223356560.png)
-
-上图：转置卷积的一种示意。
-
-下图：一种反卷积的示意。其中蓝色较小的特征图是输入，通过在它周围填充，使其变为较大的特征图后，再进行卷积。得到的结果是绿色的特征图。
-
-![deconv01](src/overview-of-semantic-segmentation/deconv01.gif)
-
-下图：另一种反卷积的示意。其中蓝色较小的特征图经过填充变为“空洞卷积核”的形状，再进行卷积，得到的输出是绿色的特征图。
-
-![deconv02](src/overview-of-semantic-segmentation/deconv02.gif)
-
-> 解卷积层也被称作上卷积（upconvolution）、完全卷积（full convolution）、转置卷积（transposed convolution）、微步卷积（fractionally-strided convolution）
-
-### 高低层特征融合
-
-由于池化操作造成的信息损失，上采样（即使采用解卷积操作）只能生成粗略的分割结果图。因此，论文从高分辨率的特征图中引入跳跃连接（shortcut/skip connection）操作改善上采样的精细程度：
-
-![FCN-2](src/overview-of-semantic-segmentation/FCN-2.png)
-
-实验表明，这样的分割结果更细致更准确。在逐层fusion的过程中，做到第三行再往下，结果又会变差，所以作者做到这里就停了。可以看到如上三行的对应的结果：
-
-![FCN-3](src/overview-of-semantic-segmentation/FCN-3.png)
 
 ### 条件随机场
 
