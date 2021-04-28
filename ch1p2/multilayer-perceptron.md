@@ -1,6 +1,6 @@
 # 多层感知机
 
-我们已经介绍了包括[线性回归](./linear-regression.md)和[softmax回归](./softmax-regression.md)在内的单层神经网络。然而深度学习主要关注多层模型。在本节中，我们将以多层感知机（multilayer perceptron，MLP）为例，介绍多层神经网络的概念。
+我们已经介绍了包括[线性回归](../ch1p1/linear-regression.md)和[softmax回归](../ch1p1/softmax-regression.md)在内的单层神经网络。然而深度学习主要关注多层模型。在本节中，我们将以多层感知机（multilayer perceptron，MLP）为例，介绍多层神经网络的概念。
 
 
 
@@ -174,5 +174,7 @@ $$
 $$
 其中$\phi$表示激活函数。在分类问题中，我们可以对输出$\boldsymbol{O}$做softmax运算，并使用softmax回归中的交叉熵损失函数。 在回归问题中，我们将输出层的输出个数设为1，并将输出$\boldsymbol{O}$直接提供给线性回归中使用的平方损失函数。
 
-- 多层感知机在输出层与输入层之间加入了一个或多个全连接隐藏层，并通过激活函数对隐藏层输出进行变换。
-- 常用的激活函数包括ReLU函数、sigmoid函数和tanh函数。
+## 小结
+
+* 多层感知机在输出层与输入层之间加入了一个或多个全连接隐藏层，并通过激活函数对隐藏层输出进行变换。
+* 常用的激活函数包括ReLU函数、sigmoid函数和tanh函数。
