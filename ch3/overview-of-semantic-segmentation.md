@@ -1,6 +1,14 @@
-# 图像语义分割综述
+# 图像语义分割综述（[cs.CV] 22 Apr 2017）
 
-## 关于分割
+这是一篇关于综述论文的解读。[原论文（A Review on Deep Learning Techniques Applied to Semantic Segmentation）](./Garcia-Garcia 等。 - 2017 - A Review on Deep Learning Techniques Applied to Se.pdf)
+
+摘要：
+
+> Image semantic segmentation is more and more being of interest for computer vision and machine learning researchers. Many applications on the rise need accurate and efficient segmentation mechanisms: autonomous driving, indoor navigation, and even virtual or augmented reality systems to name a few. This demand coincides with the rise of deep learning approaches in almost every field or application target related to computer vision, including semantic segmentation or scene understanding. This paper provides a review on deep learning methods for semantic segmentation applied to various application areas. Firstly, we describe the terminology of this field as well as mandatory background concepts. Next, the main datasets and challenges are exposed to help researchers decide which are the ones that best suit their needs and their targets. Then, existing methods are reviewed, highlighting their contributions and their significance in the field. Finally, quantitative results are given for the described methods and the datasets in which they were evaluated, following up with a discussion of the results. At last, we point out a set of promising future works and draw our own conclusions about the state of the art of semantic segmentation using deep learning techniques.
+
+我看了这篇综述受益匪浅，如果有时间的话请阅读原作。本文只是对原作阅读的粗浅笔记。
+
+## 介绍分割
 
 对图像进行分割主要有：语义分割（Semantic segmentation）和实例分割（Instance segmentation）。它们的区别一目了然：
 
@@ -52,11 +60,18 @@
 
 上图：另一种反卷积的示意。其中蓝色较小的特征图经过某种填充方法进行填充，变为较大的特征图后再进行卷积。
 
-反卷积的常见思路是通过一些填充的方法将较小的特征图变大，然后通过卷积获得比原来的小特征图更大的特征图。较为常用的填充方法是插值法，主要可以分为两类，一类是线性图像插值方法，另一类是非线性图像插值方法：
+反卷积的常见思路是通过一些填充的方法将较小的特征图变大，然后通过卷积获得比原来的小特征图更大的特征图。较为常用的填充方法是插值法。
+
+插值的方法主要可以分为两类，一类是线性图像插值方法：
 
 - 最近邻插值(Nearest neighbor interpolation)
 - 双线性插值(Bi-Linear interpolation)
 - 双立方插值(Bi-Cubic interpolation)
+
+另一类是非线性图像插值方法：
+
+- 基于小波变换的插值算法
+- 基于边缘信息的插值算法。
 
 以上的这些方法都是一些插值方法，需要我们在决定网络结构的时候进行挑选。这些方法就像是人工特征工程一样，并没有给神经网络学习的余地，神经网络不能自己学习如何更好地进行插值，这个显然是不够理想的。
 
@@ -124,3 +139,44 @@ Dilated/Atrous Convolution（空洞卷积），这种结构代替了池化，一
 
 ---
 
+## 分割的数据集
+
+还没看完，看完就写。
+
+---
+
+## 领域知名论文（具有时间轴属性）
+
+![image-20210428093955020](src/overview-of-semantic-segmentation/image-20210428093955020.png)
+
+1. FCN
+
+   主要贡献：使端对端的卷积语义分割网络变得流行起来；通过deconvolutional layers进行上采样；通过skip connection改善了上采样的粗糙度。
+
+2. SegNet
+
+   主要贡献：使用Maxpooling indices来增强位置信息。
+
+3. Dilated Convolutions
+
+   主要贡献：使用空洞卷积用来进行稠密预测（dense prediction）；提出上下文模块（context module），使用空洞卷积（Dilated Convolutions）来进行多尺度信息的的整合。
+
+4. DeepLab (v1 & v2)
+
+   主要贡献：使用atrous卷积，也就是后来的空洞卷积，扩大感受野，保持分辨率；提出了atrous spatial pyramid pooling (ASPP)，整合多尺度信息；使用全连接条件随机场（fully connected CRF)进行后处理，改善分割结果。
+
+5. RefineNet
+
+   主要贡献：精心设计了encoder-decoder架构中的decoder部分，使得性能提升；整个网络的设计都遵循residual connections，网络表达能力更强，梯度更容易反向传播。
+
+6. PSPNet
+
+   主要贡献：使用pyramid pooling整合context；使用auxiliary loss。
+
+7. Large Kernel Matters
+
+   主要贡献：提出一种具有非常大的内核卷积的编码器-解码器体系结构。
+
+8. DeepLab v3
+
+   主要贡献：改进的无孔空间金字塔池化（ASPP）；级联使用atrous卷积的模块。
