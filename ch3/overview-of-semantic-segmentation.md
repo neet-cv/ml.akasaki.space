@@ -141,13 +141,19 @@ Dilated/Atrous Convolution（空洞卷积），这种结构代替了池化，一
 
 ## 分割的数据集
 
+截止到原综述写作时间为止时较为流行的数据集：
+
+![image-20210428094548476](src/overview-of-semantic-segmentation/image-20210428094548476.png)
+
 还没看完，看完就写。
 
 ---
 
-## 领域知名论文（具有时间轴属性）
+## 领域知名论文
 
-![image-20210428093955020](src/overview-of-semantic-segmentation/image-20210428093955020.png)
+###### 截止到原综述写作时的基于深度学习的分割方法：
+
+![image-20210428094705161](src/overview-of-semantic-segmentation/image-20210428094705161.png)
 
 1. FCN
 
@@ -180,3 +186,7 @@ Dilated/Atrous Convolution（空洞卷积），这种结构代替了池化，一
 8. DeepLab v3
 
    主要贡献：改进的无孔空间金字塔池化（ASPP）；级联使用atrous卷积的模块。
+
+###### 原综述提及的基于深度学习的分割方法的关系可视化：
+
+![image-20210428094839526](src/overview-of-semantic-segmentation/image-20210428094839526.png)
