@@ -80,7 +80,7 @@ Akasaki很菜，所以慢慢地学着，并在记事簿上写下笔记。Akasaki
 
 - [x] [01. 第一个卷积神经网络：LeNet](./ch2p2/LeNet.md)、相应[论文](./ch2p2/lecun-01a.pdf)以及[代码](./ch2p2/LeNet-code.md)
 - [ ] [02. 小插曲：Keras高级API]()
-- [ ] [03. 更深的卷积的神经网络：AlexNet]()、相应[论文](./ch2p2/NIPS-2012-imagenet-classification-with-deep-convolutional-neural-networks-Paper.pdf)以及[代码]()
+- [x] [03. 更深的卷积的神经网络：AlexNet](./ch2p2/AlexNet.md)、相应[论文](./ch2p2/NIPS-2012-imagenet-classification-with-deep-convolutional-neural-networks-Paper.pdf)以及[代码](./ch2p2/AlexNet-code.md)
 - [ ] [04. 可复用的的网络单元：VGG]()、相应[论文](./ch2p2/1409.1556VGG.pdf)以及[代码]()
 - [ ] [05. 带有残差的网络：ResNet]()、相应[论文](./ch2p2/1512.03385ResNet.pdf)以及[代码]()
 - [ ] [06. 网络中的网络：NiN]()
