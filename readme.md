@@ -201,4 +201,7 @@ Akasaki很菜，所以慢慢地学着，并在记事簿上写下笔记。Akasaki
 
 ## 无尽模式
 
-我在这里阅读论文，并写下笔记。（还没开始）
+我在这里阅读论文，并写下笔记。
+
+『`分割`、`解码器`、`上采样`、`20200429`』[The Devil is in the Decoder: Classification, Regression and GANs](./unlimited-paper-works/The-Devil-is-in-the-Decoder-Classification-Regression-and-GANs.md)以及[原论文](./unlimited-paper-works/The-Devil-is-in-the-Decoder-Classification-Regression-and-GANs.pdf)
+
