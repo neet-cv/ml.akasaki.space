@@ -96,7 +96,7 @@ Akasaki很菜，所以慢慢地学着，并在记事簿上写下笔记。Akasaki
 - [x] [01. 深度学习之于计算机视觉](./ch3p1/deep-learning-for-computer-vision.md)
 - [ ] [02. 目标检测方法综述]()
 - [x] [03. 语义分割方法综述](./ch3p1/overview-of-semantic-segmentation.md)以及[原综述论文](./ch3p1/A-Review-on-Deep-Learning-Techniques-Applied-to-Semantic-Segmentation.pdf)
-- [ ] [04. 样式迁移方法综述]()
+- [x] [04. 样式迁移方法](./ch3p1/image-style-transfer.md)
 - [x] [05. 不着边的插曲：图像增广和微调](./ch3p1/image-augmentation.md)
 
 ---
