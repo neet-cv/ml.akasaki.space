@@ -80,13 +80,13 @@ $\mathcal{L}(., .)$计算分类器的损失。我们注意到上式使得具有�
 
 ​    下面附上一张动图方便理解:
 
-​    <img src="src/Untitled/70-20210501181806130.gif" alt="img" style="zoom:67%;" />
+​    <img src="src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/70-20210501181806130.gif" alt="img" style="zoom:67%;" />
 
 ​	通过图片我们可以看到.在X轴上取的点会随着迭代次数的增加而越来越接近函数的根.经过无限多次的迭代$x_n$,就等于函数f(x)的根.但牛顿法在实际应用的时候我们不会让算法就这么迭代下去,所以当$x_{k-1}$和$x_{k}$相同或者两个值的差小于一个阈值的时候,$x_{k}$就是函数$f(x)$的根.
 
 ​    那么问题来了,怎么样找到$f(x)$的导函数与X轴的交点.请看下图:
 
-.<img src="src/Untitled/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTQ0NTU1Ng==,size_16,color_FFFFFF,t_70-20210501181806068.png" alt="img" style="zoom:40%;" />
+.<img src="src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTQ0NTU1Ng==,size_16,color_FFFFFF,t_70-20210501181806068.png" alt="img" style="zoom:40%;" />
 
 图片是上边动图从$x_{1}$到$x_{2}$的动作.可以看到,三角形绿色的直角边的值是$x_{1} - x_{2}$ ,  $x_{1}$是已知的(随机出来的),而且函数表达式f(x)也是已知的(不知道要求的函数咱们折腾啥呢).所以三角形的另一条直角边$f(x_{1})$也是已知的.根据导函数定义,函数f(x)在$x_{1}$ 点的导函数就是$f^{'}(x) = \frac{f(x_{1})}{x_{1} - x_{2}}$ (公式一).
 
@@ -263,13 +263,13 @@ model.fit(x_train, y_train, validation_data=(x_val, y_val),
 
 最终训练结果，损失值稳定在0.015左右，准确度为70% 左右；
 
-![在这里插入图片描述](src/Untitled/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806123.png)
+![在这里插入图片描述](src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806123.png)
 
 ```python
 model.summary()
 ```
 
-![在这里插入图片描述](src/Untitled/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181805986.png)
+![在这里插入图片描述](src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181805986.png)
 
 由于数据是随机生成的，我们取1号举例，可以看到标签是0，结果也是很接近1的
 
@@ -301,7 +301,7 @@ with tf.GradientTape(persistent=True) as g:
 gradient = g.gradient(y, x1) 
 ```
 
-![在这里插入图片描述](src/Untitled/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806077.png)
+![在这里插入图片描述](src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806077.png)
 
 接下来跟着公式进行计算即可：
 
@@ -314,7 +314,7 @@ x_ = x1 + n * e
 print(model(x_))
 ```
 
-![在这里插入图片描述](src/Untitled/20210125171419702-20210501181806027.png)
+![在这里插入图片描述](src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/20210125171419702-20210501181806027.png)
 
 可以看到预测的结果完全变了！
 
@@ -373,7 +373,7 @@ Moosavi-dezfouli等人[72]提出了一个迭代计算最小范数对抗性扰动
 
 下面我们看一下Deep Fool算法和FGSM算法去攻击同一个图像修改量的对比图：
 
-<img src="src/Untitled/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806643.png" alt="在这里插入图片描述" style="zoom:50%;" />
+<img src="src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806643.png" alt="在这里插入图片描述" style="zoom:50%;" />
 
 可以看到Deep Fool的修改量明显的要小于FGSM；
 
@@ -436,7 +436,7 @@ $$
 
 这里论文里列举的实在太多了，就以论文中的表格来概括吧；
 
-![在这里插入图片描述](src/Untitled/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806370.png)
+![在这里插入图片描述](src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806370.png)
 
 表格中4星以上的攻击方法，之后应该都会出专门的文章进行学习和介绍的，也包括学习过程中的代码实现；
 
@@ -472,7 +472,7 @@ Xie等人[115]计算了用于语义分割和目标检测的对抗性示例，观
 
 在这种观点下，他们的方法称为“密集敌方生成”（Dense Adversary Generation），它优化了一组像素/方案上的损失函数，以生成敌方示例。生成的例子被测试来愚弄各种基于深度学习的分割和检测方法。他们的实验评估不仅成功地愚弄了目标网络，而且还表明所产生的扰动在不同的网络模型中具有良好的通用性。在下图中，展示了使用[115]中的方法进行分割和检测的网络欺骗的代表性示例。
 
-<img src="src/Untitled/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806647.png" alt="在这里插入图片描述" style="zoom:50%;" />
+<img src="src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806647.png" alt="在这里插入图片描述" style="zoom:50%;" />
 
 ## 4. ATTACKS IN THE REAL WORLD
 
@@ -482,7 +482,7 @@ Xie等人[115]计算了用于语义分割和目标检测的对抗性示例，观
 
 Rozsa等人[130]，[160]利用CelebA基准[161]探索了多种深度学习方法的稳定性，通过生成对抗性的例子来改变人脸识别的结果；看下图：
 
-<img src="src/Untitled/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806535.png" alt="在这里插入图片描述" style="zoom: 50%;" />
+<img src="src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806535.png" alt="在这里插入图片描述" style="zoom: 50%;" />
 
 通过使用所谓的“快速翻转属性”技术攻击深度网络分类器，他们发现深度神经网络对对手攻击的鲁棒性在不同的面部属性之间存在很大差异。对抗性攻击可以有效地将目标属性的标签转换为相关属性。
 
@@ -492,7 +492,7 @@ Shen等人[144]提出了两种不同的技术来生成具有高“吸引力分�
 
 Kurakin等人[35]首先证明了防御攻击的威胁也存在于物理世界中。为了说明这一点，他们打印了敌对的图像，并用手机摄像头拍下了照片。这些图像被输入到Tensor-Flow相机演示应用程序[181]，该应用程序使用谷歌的Inception模型[145]进行对象分类。结果表明，即使通过相机观察，也有很大一部分图像被错误分类。在图6中，示出了原稿的示例。
 
-![在这里插入图片描述](src/Untitled/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806426.png)
+![在这里插入图片描述](src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806426.png)
 
 以下网址还提供了一段视频[https://youtu.be/zQ uMenoBCk ](https://youtu.be/zQ uMenoBCk )显示了进一步的图像敌对攻击的威胁。这项工作研究了FGSM[23]、BIM和ILCM[35]在物理世界中的攻击方法。
 
@@ -500,7 +500,7 @@ Kurakin等人[35]首先证明了防御攻击的威胁也存在于物理世界中
 
 ​	Etimov等人[75]在[36]和[88]中提出的攻击的基础上，设计了物理世界的鲁棒扰动。他们证明了强大的物理条件，如在视角，距离和分辨率的变化是攻击的可能性。他们提出的算法称为RP2鲁棒物理扰动，用于生成对抗性的例子，道路标志识别系统。这个算法实现了高愚弄率在实际驾车设置。在这项工作中，针对物理路标引入了两种攻击类别：（a）海报打印：攻击者打印一张受到干扰的路标海报，并将其放置在真实的路标上（见下图）（b） 贴纸扰动：印刷在纸上，纸贴在真正的标志上。对于（b）两种类型的扰动进行了研究，（b1）细微扰动：占据整个标志，（b2）伪装扰动：标志上的涂鸦贴纸形式。因此，所有这些干扰都只需要彩色打印机，而不需要其他特殊硬件。成功地产生了（a）和（b）的扰动，使得扰动对物理世界中的自然变化保持鲁棒性，这表明了现实世界中敌对例子的威胁。
 
-![在这里插入图片描述](src/Untitled/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806396.png)
+![在这里插入图片描述](src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806396.png)
 
 ​	Lu等人[30]之前曾声称，由于移动车辆中的物理条件不断变化，对抗性示例对于自动车辆中的目标检测不是一个问题。然而，他们所采用的攻击方法[22]、[23]、[35]有些原始。Etimov等人[75]的发现与[66]中的结果正交。然而，在后续研究中，Lu等人[19]表明，像YOLO 9000[149]和FasterrRcnn[150]这样的探测器“目前”没有被Etimov等人[75]引入的攻击所欺骗。在后续研究中，Lu等人[19]表明，像YOLO 9000[149]和Faster rRcnn[150]这样的探测器“目前”没有被Etimov等人[75]引入的攻击所欺骗。Zeng等人[87]还认为，图像空间中的对抗性扰动在物理空间中并不能很好地推广; 然而，Athalye等人[65]表明，我们实际上可以打印3D物体，以便在物理世界中进行成功的对抗性攻击。我们在第4.3节讨论[65]。
 
@@ -570,7 +570,7 @@ Grosse等人[61]展示了为用作恶意软件分类工具的神经网络构建�
 
 ​	第一个方法不直接处理学习模型。其他两类更关注神经网络本身。这两类技术又可分为两类，即完全防御和仅检测。“完全防御”方法旨在使目标网络能够在对抗性示例上实现其原始目标，例如，分类器以可接受的精度预测对抗性示例进行预测。另一方面，“仅检测”方法意味着对潜在的对抗性示例发出危险信号，以便在任何进一步处理中拒绝它们。所描述的类别的分类也示于下图中。剩下的部分是根据这个分类法组织的。在所使用的分类法中，“修改”网络和使用“附加组件”的区别在于前者在训练期间对原始的深层神经网络结构/参数进行了更改。另一方面，后者保持原始模型的完整性，并在测试过程中附加外部模型；
 
-<img src="src/Untitled/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806435.png" alt="在这里插入图片描述" style="zoom:67%;" />
+<img src="src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806435.png" alt="在这里插入图片描述" style="zoom:67%;" />
 
 ### 6.1 Modified training/input
 
