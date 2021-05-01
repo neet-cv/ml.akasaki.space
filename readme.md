@@ -205,7 +205,7 @@ Akasaki很菜，所以慢慢地学着，并在记事簿上写下笔记。Akasaki
 
 『`分割`、`解码器`、`上采样`、`20210429`』[The Devil is in the Decoder: Classification, Regression and GANs](./unlimited-paper-works/The-Devil-is-in-the-Decoder-Classification-Regression-and-GANs.md)以及[原论文](./unlimited-paper-works/The-Devil-is-in-the-Decoder-Classification-Regression-and-GANs.pdf)
 
-『`恶意样本生成`、`adv learning`、`神经网络攻击`、`20210501`』[Threat of Adversarial Attacks on Deep Learning in Computer Vision: A Survey](./unlimited-paper-works/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey.md)以及[](./unlimited-paper-works/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey.pdf)
+『`恶意样本生成`、`adv learning`、`神经网络攻击`、`20210501`』[Threat of Adversarial Attacks on Deep Learning in Computer Vision: A Survey](./unlimited-paper-works/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey.md)以及[原论文](./unlimited-paper-works/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey.pdf)
 
-
+『`分割`、`分割优化`、`20210501`』[Progressive Semantic Segmentation](./unlimited-paper-works/progressive-semantic-segmentation.md)以及[原论文](./unlimited-paper-works/progressive-semantic-segmentation.pdf)
 
