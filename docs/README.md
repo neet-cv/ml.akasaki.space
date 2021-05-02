@@ -17,3 +17,13 @@ Akasaki很菜，所以慢慢地学着，并在记事簿上写下笔记。Akasaki
 - 本仓库中的第一章直接引用[d2l-zh](https://github.com/d2l-ai/d2l-zh)原书内容，并稍作修改；后面是自己学习、阅读书籍、阅读书籍、阅读博文后整理的内容，很多内容在各大书籍和各大搜索引擎都能找到，我所做的是用自己的想法整理或书写这些内容。也有很多内容是我自己的理解以及夹带的私货。
 - 本仓库的很多代码主要使用[Tensorflow](https://www.tensorflow.org/)等实现。也许等我写完后[我的朋友们](https://github.com/PaperFormulaIV)会帮我翻译出一份pytorch版本。
 - 这个仓库的部分文稿**包含了LaTex公式**。我在每一个包含公式的文档头加入了mathjax相关的引用。如果你希望正常阅读，**请挂梯子访问[本仓库的网页版](https://ml.akasaki.space)**。如果你的网络条件导致了公式加载失败，请克隆本仓库到本地，并使用typora等markdown编辑器阅读。
+
+## 捐助
+
+如果这个仓库有用的话请在[github](https://github.com/visualDust/talkischeap)为[本仓库](https://github.com/visualDust/talkischeap)施舍一个star，这便是最好的捐助，是我继续写笔记的动力。
+
+![image-20210427212743443](./src/readme/image-20210427212743443.png)
+
+![_](https://jwenjian-visitor-badge-5.glitch.me/badge?page_id=VisualDust.anything)
+![_](https://img.shields.io/github/stars/VisualDust/talkischeap.svg?style=flat)
+![_](https://img.shields.io/github/license/visualdust/talkischeap.svg?style=flat&label=license&message=notspecified)
