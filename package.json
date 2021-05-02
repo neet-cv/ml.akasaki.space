@@ -1,0 +1,16 @@
+{
+  "name": "notebook",
+  "version": "1.0.0",
+  "description": "A book",
+  "main": "index.js",
+  "author": "Therainisme",
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.8.2",
+    "vuepress-plugin-md-enhance": "^1.15.3"
+  },
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  }
+}
