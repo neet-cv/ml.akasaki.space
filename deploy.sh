@@ -14,12 +14,12 @@ echo 'ml.akasaki.space' > CNAME
 
 git init
 git add -A
-git commit -m 'deploy'
+git commit -m 'deployed'
 
 # 如果发布到 https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
-# git push -f git@github.com:therainisme/notebook.git master:gh-pages
+git push -f https://github.com/visualDust/ml.akasaki.space.git master:vuepress_pages
 
 cd -

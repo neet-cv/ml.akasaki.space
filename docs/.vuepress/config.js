@@ -9,7 +9,7 @@ module.exports = {
     head: [
         ['link', {
             rel: 'icon',
-            href: '/logo.png'
+            href: '/statics/logo.png'
         }],
         ['meta', {
             name: 'keywords',
@@ -31,15 +31,15 @@ module.exports = {
                     children: getSidebar('ch0')
                 },
                 {
-                    title: '第一章上：这HelloWorld有点长啊',
+                    title: '第一章上：HelloWorld',
                     children: getSidebar('ch1p1')
                 },
                 {
-                    title: '第一章下：深度学习基础——多层感知机',
+                    title: '第一章下：深度学习基础',
                     children: getSidebar('ch1p2')
                 },
                 {
-                    title: '第二章上：卷积神经网络及其要素',
+                    title: '第二章上：卷积神经网络',
                     children: getSidebar('ch2p1')
                 },
                 {
@@ -47,11 +47,11 @@ module.exports = {
                     children: getSidebar('ch2p2')
                 },
                 {
-                    title: '第三章上：谈一些计算机视觉的方向',
+                    title: '第三章上：谈一些计算机视觉方向',
                     children: getSidebar('ch3p1')
                 },
                 {
-                    title: '第三章下：尝试一些计算机视觉任务',
+                    title: '第三章下：一些计算机视觉任务',
                     children: getSidebar('ch3p2')
                 },
                 {
@@ -67,7 +67,7 @@ module.exports = {
                     children: getSidebar('ch-2')
                 },
                 {
-                    title: '无尽模式',
+                    title: '无尽模式（一直读论文）',
                     children: getSidebar('unlimited-paper-works')
                 },
             ]

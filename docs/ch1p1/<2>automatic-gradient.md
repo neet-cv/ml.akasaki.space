@@ -1,3 +1,5 @@
+# 2.3 自动求梯度
+
 ```python
 import tensorflow as tf
 print(tf.__version__)
@@ -9,7 +11,6 @@ print(tf.__version__)
 
     2.0.0
 
-# 2.3 自动求梯度
 
 在深度学习中，我们经常需要对函数求梯度（gradient）。本节将介绍如何使用tensorflow2.0提供的GradientTape来自动求梯度。
 
