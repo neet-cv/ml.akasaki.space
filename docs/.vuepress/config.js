@@ -55,7 +55,7 @@ module.exports = {
                     children: getSidebar('ch3p2')
                 },
                 {
-                    title: '附录',
+                    title: '附录（附录永远是你的好朋友）',
                     children: getSidebar('appendix')
                 },
                 {
