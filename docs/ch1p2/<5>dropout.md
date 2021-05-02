@@ -16,7 +16,7 @@ $$
 h_i' = \frac{\xi_i}{1-p} h_i
 $$
 
-由于$E(\xi_i) = 1-p$，因此
+由于 $E(\xi_i) = 1-p$ ，因此
 
 $$
 E(h_i') = \frac{E(\xi_i)}{1-p}h_i = h_i

@@ -12,7 +12,6 @@ cd docs/.vuepress/dist
 # 如果是发布到自定义域名
 echo 'ml.akasaki.space' > CNAME
 
-git init
 git add -A
 git commit -m 'deployed'
 

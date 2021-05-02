@@ -1,4 +1,4 @@
-# 渐进式语义分割
+# Progressive Semantic Segmentation
 
 > 论文名称：Progressive Semantic Segmentation
 >

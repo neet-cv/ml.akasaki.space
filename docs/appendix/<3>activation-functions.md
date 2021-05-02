@@ -48,7 +48,7 @@ plt.show()
 
 ![](./src/activation-functions/myplot.png)
 
-可以看出，该函数定义为$\text{ReLU}(x) = \max(x, 0) $，在$x>0$处函数值为$x$本身。因此在$x>0$处的梯度应该是1。
+可以看出，该函数定义为 $\text{ReLU}(x) = \max(x, 0) $ ，在 $x>0$ 处函数值为 $x$ 本身。因此在 $x>0$ 处的梯度应该是1。
 
 接下来我们打出它的梯度：
 

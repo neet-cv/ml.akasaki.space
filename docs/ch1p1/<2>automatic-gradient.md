@@ -1,4 +1,4 @@
-# 2.3 自动求梯度
+# 自动求梯度
 
 ```python
 import tensorflow as tf
@@ -14,7 +14,7 @@ print(tf.__version__)
 
 在深度学习中，我们经常需要对函数求梯度（gradient）。本节将介绍如何使用tensorflow2.0提供的GradientTape来自动求梯度。
 
-## 2.3.1 简单示例
+## 简单示例
 
 我们先看一个简单例子：对函数 $y = 2\boldsymbol{x}^{\top}\boldsymbol{x}$ 求关于列向量 $\boldsymbol{x}$ 的梯度。我们先创建变量`x`，并赋初值。
 
@@ -47,7 +47,7 @@ dy_dx
            [ 8.],
            [12.]], dtype=float32)>
 
-## 2.3.2 训练模式和预测模式
+## 训练模式和预测模式
 
 ```python
 with tf.GradientTape(persistent=True) as g:
@@ -73,7 +73,7 @@ dz_dx,dy_dx
             [4.],
             [6.]], dtype=float32)>)
 
-## 2.3.3 对Python控制流求梯度
+## 对Python控制流求梯度
 
 即使函数的计算图包含了Python的控制流（如条件和循环控制），我们也有可能对变量求梯度。
 

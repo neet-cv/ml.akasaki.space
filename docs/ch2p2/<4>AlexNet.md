@@ -53,3 +53,81 @@
 AlexNet的出现本身就带有很多开创性的特点。ReLU激活函数的提出要比AlexNet还早，但是在AlexNet之前，并没有关于CNN使用ReLU激活函数获得重大成功的例子。一些经典的激活函数，如sigmoid, 会在网络较深时产生梯度弥散的问题。AlexNet使用ReLU作为CNN的激活函数取得了成功，原因就在于ReLU激活函数在较深的网络中能够有效地克服sigmoid存在的梯度弥散问题。
 
 我们一般会在卷积层之后直接添加一个池化层进行处理，但是AlexNet 在卷积层和池化层之间还加入了一个LRN层。LRN（Local Response Normalization，局部相应归一化）层是在AlexNet中首次被提出并运用。对LRN层的描述最早见于Alex 那篇用CNN参加ImageNet比赛的论文，Alex在论文中的解释是:LRN层为了模仿生物神经系统的“侧抑制”机制而对局部神经元的活动创建竞争环境，这样做会让其中响应比较大的值变得相对更大，并抑制其他响应较小的神经元，能够进一步增强模型的泛化能力。随后，Alex 在ImageNet数据集上分别测试了添加LRN层的AlexNet以及没有添加LRN层的AlexNet。在两个网络结构完全相同的情况下，他发现使用了LRN层的CNN可以使top-l错误率有1.4%的降低，可以使top-5错误率有1.2%的降低。
+
+> 为了方便，从AlexNet开始，我们使用KerasAPI进行快速的编码。
+
+导入所需的包：
+
+```python
+import tensorflow as tf
+from tensorflow.keras import layers, datasets, Sequential
+```
+
+这次我们在`cifar10`上训练AlexNet。导入`cifar10`数据集并做一次标准化：
+
+```python
+(training_x, training_y), (testing_x, testing_y) = datasets.cifar10.load_data()
+training_x = (training_x.astype('float32') / 255.)
+testing_x = (testing_x.astype('float32') / 255.)
+```
+
+接下来定义模型：
+
+```python
+model = Sequential([
+    # Conv block #1
+    layers.Conv2D(filters=96, kernel_size=(3, 3)),
+    layers.BatchNormalization(),
+    layers.Activation('relu'),
+    layers.MaxPool2D(pool_size=(3, 3), strides=2),
+    # Conv block #2
+    layers.Conv2D(filters=256, kernel_size=(3, 3)),
+    layers.BatchNormalization(),
+    layers.Activation('relu'),
+    layers.MaxPool2D(pool_size=(3, 3), strides=2),
+    # Conv block #3
+    layers.Conv2D(filters=384, kernel_size=(3, 3), padding='same',
+                  activation='relu'),
+    # Conv block #4
+    layers.Conv2D(filters=384, kernel_size=(3, 3), padding='same',
+                  activation='relu'),
+    # Conv block #5
+    layers.Conv2D(filters=256, kernel_size=(3, 3), padding='same',
+                  activation='relu'),
+    layers.MaxPool2D(pool_size=(3, 3), strides=2),
+    # Dense fully connected
+    layers.Flatten(),
+    layers.Dense(2048, activation='relu'),
+    layers.Dropout(0.5),
+    layers.Dense(2048, activation='relu'),
+    layers.Dropout(0.5),
+    layers.Dense(10, activation='softmax')
+])
+```
+
+接下来对模型进行训练：
+
+```python
+model.compile(optimizer='adam',
+              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False),
+              metrics=['sparse_categorical_accuracy'])
+
+model.fit(training_x, training_y, batch_size=32, epochs=5, validation_data=(testing_x, testing_y))
+```
+
+训练输出：
+
+```
+Epoch 1/5
+1563/1563 [==============================] - 89s 57ms/step - loss: 1.6133 - sparse_categorical_accuracy: 0.4115 - val_loss: 1.5746 - val_sparse_categorical_accuracy: 0.4414
+Epoch 2/5
+1563/1563 [==============================] - 82s 52ms/step - loss: 1.2800 - sparse_categorical_accuracy: 0.5475 - val_loss: 1.2506 - val_sparse_categorical_accuracy: 0.5565
+Epoch 3/5
+1563/1563 [==============================] - 82s 52ms/step - loss: 1.1405 - sparse_categorical_accuracy: 0.5994 - val_loss: 1.4479 - val_sparse_categorical_accuracy: 0.4983
+Epoch 4/5
+1563/1563 [==============================] - 83s 53ms/step - loss: 1.0457 - sparse_categorical_accuracy: 0.6391 - val_loss: 1.2161 - val_sparse_categorical_accuracy: 0.5892
+Epoch 5/5
+1563/1563 [==============================] - 83s 53ms/step - loss: 0.9849 - sparse_categorical_accuracy: 0.6629 - val_loss: 1.1617 - val_sparse_categorical_accuracy: 0.6053
+```
+
+由于我在写作本文的时候使用一台办公本进行了训练，所以整个训练过程是缓慢的，我只训练了五个epochs就停了下来。但是能观察到，精确度正在逐渐上升。
