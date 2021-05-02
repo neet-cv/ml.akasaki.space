@@ -1,8 +1,9 @@
 const fs = require("fs");
 const path = require("path");
-const readLine = require("readline");
+const readLine = require("readline")
+
 /**
- *
+ * 扫描dir下面的.md文件
  * @param {string} dir
  */
 function getPages(dir) {
@@ -25,12 +26,18 @@ function getSidebar(folder) {
     });
     pages.forEach((md) => {
         const name = md.substring(0, md.length - 3)
+        const title = readMDFileTitle(`docs/${folder}/${md}`);
         sidebar.push({
-            title: name.substring(name.indexOf('>') + 1),
+            title,
             path: `/${folder}/${md}`,
+            collapsable: false,
         });
     });
     return sidebar;
+}
+
+function readMDFileTitle(path) {
+    return fs.readFileSync(path, 'utf8').split('\n')[0].replace('# ', '')
 }
 
 module.exports = {
