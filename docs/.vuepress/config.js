@@ -55,7 +55,7 @@ module.exports = {
                     children: getSidebar('ch3p2')
                 },
                 {
-                    title: '附录（附录永远是你的好朋友）',
+                    title: '附录：永远是你的好朋友',
                     children: getSidebar('appendix')
                 },
                 {
@@ -67,7 +67,7 @@ module.exports = {
                     children: getSidebar('ch-2')
                 },
                 {
-                    title: '无尽模式（一直读论文）',
+                    title: '魔法部日志（又名论文阅读日志）',
                     children: getSidebar('unlimited-paper-works')
                 },
             ]
