@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const readLine = require("readline")
 
 /**
  * 扫描dir下面的.md文件
@@ -8,7 +7,7 @@ const readLine = require("readline")
  */
 function getPages(dir) {
     return fs.readdirSync(dir).filter((self) => {
-        return !fs.statSync(path.join(dir, self)).isDirectory()
+        return !fs.statSync(path.join(dir, self)).isDirectory();
     });
 }
 
@@ -18,26 +17,24 @@ function getPages(dir) {
  * @param {string} title 标题
  */
 function getSidebar(folder) {
-    let pages = getPages(`docs/${folder}`);
-    const sidebar = [];
-    pages.sort(function(a, b) {
-        //todo 等学了正则再回来改吧....
-        return a.match(/\[(.+)\]/g)[0].replace('[', '').replace(']', '') * 1 - b.match(/\[(.+)\]/g)[0].replace('[', '').replace(']', '') * 1
-    });
-    pages.forEach((md) => {
-        const name = md.substring(0, md.length - 3)
-        const title = readMDFileTitle(`docs/${folder}/${md}`);
-        sidebar.push({
-            title,
-            path: `/${folder}/${md}`,
-            collapsable: false,
+    return getPages(`docs/${folder}`)
+        .map(path => ({
+            index: parseInt(path.match(/^\[(.+)\]/g)[1]),
+            path
+        }))
+        .sort((a, b) => a.index - b.index)
+        .map(({ path }) => {
+            const title = readMDFileTitle(`docs/${folder}/${path}`);
+            return {
+                title,
+                path: `/${folder}/${path}`,
+                collapsable: false,
+            };
         });
-    });
-    return sidebar;
 }
 
 function readMDFileTitle(path) {
-    return fs.readFileSync(path, 'utf8').split('\n')[0].replace('# ', '')
+    return fs.readFileSync(path, 'utf8').match(/^# (.+?)\n/m)[1];
 }
 
 module.exports = {
