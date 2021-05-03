@@ -1,4 +1,4 @@
-name: Build & Demo Deploy
+name: Build and Deploy
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -46,3 +46,5 @@ jobs:
           publish_dir: docs/.vuepress/dist/
           publish_branch: vuepress_pages
           force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
