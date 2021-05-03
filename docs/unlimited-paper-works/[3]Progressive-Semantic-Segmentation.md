@@ -1,6 +1,6 @@
 # Progressive Semantic Segmentation
 
-#### 这篇笔记的写作者是[ZeroRains](https://github.com/zeroRains)。
+### 这篇笔记的写作者是[ZeroRains](https://github.com/zeroRains)。
 
 > 论文名称：Progressive Semantic Segmentation
 >

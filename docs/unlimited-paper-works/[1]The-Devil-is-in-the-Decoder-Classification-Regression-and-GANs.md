@@ -1,6 +1,6 @@
 # The Devil is in the Decoder: Classification, Regression and GANs
 
-#### 这篇笔记的写作者是[VisualDust](https://github.com/visualDust)。
+### 这篇笔记的写作者是[VisualDust](https://github.com/visualDust)。
 
 这是一篇讲各种各样解码器的论文。[原论文（The Devil is in the Decoder: Classification, Regression and GANs）](/papers/The-Devil-is-in-the-Decoder-Classification-Regression-and-GANs.pdf)。
 

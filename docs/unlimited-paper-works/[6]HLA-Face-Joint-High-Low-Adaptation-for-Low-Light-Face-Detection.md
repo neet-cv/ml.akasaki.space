@@ -1,6 +1,6 @@
 # HLA-Face Joint High-Low Adaptation for Low Light Face Detection
 
-#### 这篇笔记的写作者是[PommesPeter](https://github.com/PommesPeter)。
+### 这篇笔记的写作者是[PommesPeter](https://github.com/PommesPeter)。
 
 这是一篇讲低光照人脸检测的论文。[原论文（HLA-Face Joint High-Low Adaptation for Low Light Face Detection）](/papers/HLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection.pdf)。
 

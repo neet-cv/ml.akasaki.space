@@ -1,6 +1,6 @@
 # Threat of Adversarial Attacks on Deep Learning in Computer Vision: A Survey
 
-#### 这篇笔记的写作者是[CoronaPolvo](https://github.com/coronaPolvo)。
+### 这篇笔记的写作者是[CoronaPolvo](https://github.com/coronaPolvo)。
 
 这是一篇神经对抗的综述文章，非常非常非常详细的介绍了当前神经对抗攻击的发展情况和已有的攻击和防御算法。
 
