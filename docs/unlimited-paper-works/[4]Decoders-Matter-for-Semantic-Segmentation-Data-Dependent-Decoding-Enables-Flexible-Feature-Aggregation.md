@@ -83,5 +83,29 @@ $$
 $$
 x = Pv; \hat{v} = Wx
 $$
-其中$P\in \R^{\hat{C}\times N}$是用来将$v$压缩为$x$的矩阵，$W \in \R^{N\times \hat{C}}$是一个逆投影矩阵，用于将$x$重建回$v$，而$v'$代表了重建后的$x$。在上述参数中这篇论文省去了很多偏移项。$P$和$W$可以通过在训练集上最小化$v$和$\hat{v}$的运算求得。
+其中$P\in \R^{\hat{C}\times N}$是用来将$v$压缩为$x$的矩阵，$W \in \R^{N\times \hat{C}}$是一个逆投影矩阵，用于将$x$重建回$v$，而$v'$代表了重建后的$x$。在上述参数中这篇论文省去了很多偏移项。$P$和$W$可以通过在训练集上最小化$v$和$\hat{v}$的运算求得。正式地说，就是：
+$$
+P^*, W^* = {argmin}_{P,W}\sum_{v}{||v - \hat{v}||}^2 = {argmin}_{P,W}\sum_{v}{||v - WPv||}^2
+$$
+你可以选择使用标准的SGD（随机梯度下降）方法来迭代优化计算这两个参数值。由于有正交性约束，我们也可以简单地使用[PCA（主成分分析）](https://zh.wikipedia.org/wiki/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90)的方法来实现封闭式的解决办法（你可以暂时不懂这个方法）。
+
+我们可以$\hat{Y}$来预训练这个网络：
+$$
+L(F, Y) = {||F - \hat{Y}||}^2
+$$
+接下来，由于我们拿到了训练的参数$P$和$W$，我们用学习到的重构矩阵$W$来上采样$\hat{F}$得到$F$，然后计算$F$与$Y$之间的误差，而不是对$Y$进行压缩处理：
+$$
+L(F, Y) = Loss(softmax(DUpsample(\hat{F})), Y))
+$$
+其中，$DUpsample(x)$是一个对输入$x$使用训练得到的进行线性上采样的过程。 相较于原来的方法，这个方法使用学习到的$W$进行上采样，很类似于$1\times 1$卷积的过程，只不过这次的卷积核是学习得到的$W$：
+
+![image-20210503182340370](src/[4]Decoders-Matter-for-Semantic-Segmentation-Data-Dependent-Decoding-Enables-Flexible-Feature-Aggregation/image-20210503182340370.png)
+
+这就是这篇论文提出的“DUpsample”的过程，上图是一个示意图。
+
+当然，除了学习一个线性的上采样过程，这篇论文在实验中也尝试了学习一个非线性的“自动编码器”进行上采样实验，这比线性的上采样能够更大程度上地减小重建损失。不过在实验中这种方法的分割精度和学习一个线性上采样后得到的分割精度是几乎一样的。所以我们在这篇论文中只关注了更简单的线性的重建方法。
+
+#### 讨论Depth-to-space和Sub-pixel的方法
+
+Depth-to-space的方法在[这篇](./[1]The-Devil-is-in-the-Decoder-Classification-Regression-and-GANs.md)文章中有过概述，可以参考其中的相关部分进行简要了解。
 
