@@ -23,9 +23,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            ~/node_modules
-            ~/package-lock.json
-          key: ${{ runner.os }}-${{ hashFiles('/package.json') }}
+            node_modules
+            package-lock.json
+          key: ${{ runner.os }}-${{ hashFiles('package.json') }}
 
       - name: Use Node.js 12.x
         uses: actions/setup-node@v2
