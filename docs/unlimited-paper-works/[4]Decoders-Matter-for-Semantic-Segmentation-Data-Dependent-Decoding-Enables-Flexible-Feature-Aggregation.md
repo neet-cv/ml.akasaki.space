@@ -99,13 +99,41 @@ L(F, Y) = Loss(softmax(DUpsample(\hat{F})), Y))
 $$
 其中，$DUpsample(x)$是一个对输入$x$使用训练得到的进行线性上采样的过程。 相较于原来的方法，这个方法使用学习到的$W$进行上采样，很类似于$1\times 1$卷积的过程，只不过这次的卷积核是学习得到的$W$：
 
-![image-20210503182340370](src/[4]Decoders-Matter-for-Semantic-Segmentation-Data-Dependent-Decoding-Enables-Flexible-Feature-Aggregation/image-20210503182340370.png)
+![](src/[4]Decoders-Matter-for-Semantic-Segmentation-Data-Dependent-Decoding-Enables-Flexible-Feature-Aggregation/image-20210503182340370.png)
 
 这就是这篇论文提出的“DUpsample”的过程，上图是一个示意图。
 
 当然，除了学习一个线性的上采样过程，这篇论文在实验中也尝试了学习一个非线性的“自动编码器”进行上采样实验，这比线性的上采样能够更大程度上地减小重建损失。不过在实验中这种方法的分割精度和学习一个线性上采样后得到的分割精度是几乎一样的。所以我们在这篇论文中只关注了更简单的线性的重建方法。
 
-#### 讨论Depth-to-space和Sub-pixel的方法
+#### 本方法之于Depth-to-space和Sub-pixel方法的讨论
 
-Depth-to-space的方法在[这篇](./[1]The-Devil-is-in-the-Decoder-Classification-Regression-and-GANs.md)文章中有过概述，可以参考其中的相关部分进行简要了解。
+Depth-to-space和Sub-pixel的方法在[这篇](./[1]The-Devil-is-in-the-Decoder-Classification-Regression-and-GANs.md)文章中有过概述，可以参考其中的相关部分进行简要了解。
+
+DUpsample的最简单的线性形式可以看作是Depth-to-space和Sub-pixel的带有预训练的上采样卷积核的改进版本。为了避免可训练参数（trainable variables）过多导致优化困难，通常情况下Depth-to-space和Sub-pixel方法会控制上采样的次数或比率（比如控制上采样率为4）。但是由于本方法使用预训练的上采样，所以理论上可以很大程度上提高上采样率。
+
+### 将DUpsample和Softmax相结合
+
+之前我们已经对DUpsample如何取代老式的双线性上采样进行了描述，接下来的一步是将DUpsamle结合到编码器-解码器结构中，从而形成端到端的可训练系统。虽然能通过$1\times 1$卷积直接将其融合到其中，但是这样仍然会产生一些麻烦，比如加大训练难度（毕竟层数变多了）。可能是由于$W$的学习过程中损失的计算使用了one-hot编码的$Y$（训练集的 ground truth），这篇论文的作者在实验中发现DUpsample方法连接Softmax函数时很难直接产出足够“尖锐”的值，这使得交叉熵损失函数可能在训练过程中被“卡住”，从而导致训练过程收敛缓慢。
+
+为了解决该问题，这篇论文提出在softmax中添加temperature参数$T$，让softmax的激活能力更加尖锐或是软弱：
+$$
+Softmax(z_i) = \frac{\exp(z_i/T)}{\sum_j \exp(z_j/T)}
+$$
+由于参数$T$可以使用标准的反向传播算法自动学习，在这篇论文的实验中，作者证明自适应的temperature参数$T$能够让训练收敛得更快而无需引入更多超参数。
+
+### 更加灵活地聚合卷积产生的特征
+
+足够深的CNN在计算机视觉的很多领域获得了成功，但是过深的CNN会导致很多语义分割需要的细粒度信息丢失，同时有很多相关研究（比如ResNet之类的）表明，结合卷积程度较低的特征能够增强分割性能。
+
+令$\hat{F}$为最终的CNN输出的特征图，该特征图将会被用于双线性上采样或是上述的DUpsample方法进行像素级的预测；$\hat{F}_i$和$\hat{F}_{last}$分别表示在骨干特征提取网络的第$i$层和最后一层输出的特征图。在这里，为了简单起见，这篇论文只对融合一个低层级特征进行了讨论，但是这个方法可以扩增至融合更多不同层级的特征，这也许会进一步提升分割的性能。
+
+![image-20210503104215395](src/[4]Decoders-Matter-for-Semantic-Segmentation-Data-Dependent-Decoding-Enables-Flexible-Feature-Aggregation/image-20210503104215395.png)
+
+上图中（这就是一开始的那张DeepLab的简要示意图）解码器（Decoder）部分的特征聚合阶段可以简要表示为：
+$$
+F = f(concat(F_i,upsample(F_{last})))
+$$
+其中$f$表示某种CNN，$upsample$使用的是双线性的方法。$concat$是在通道（channel）维度的串联运算符。这就产生了一个问题：由于$f$是CNN，所以其计算开销与输入直接相关，从而导致这种结构无法利用很低级的特征（因为在CNN中，越低级的特征可能对应的特征图就越大）。
+
+
 
