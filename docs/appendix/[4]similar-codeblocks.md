@@ -131,7 +131,7 @@ check_image_in_dataset_via_plot(imsges, how_many=36, gray_scale=True)
 
 其中images是图像的list。你会看到这样的显示：
 
-![image-20210413100216656](src/similar-codeblocks/image-20210413100216656.png)
+![image-20210413100216656](./src/similar-codeblocks/image-20210413100216656.png)
 
 
 

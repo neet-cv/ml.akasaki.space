@@ -8,7 +8,7 @@
 
 多层感知机在单层神经网络的基础上引入了一到多个隐藏层（hidden layer）。隐藏层位于输入层和输出层之间。下图展示了一个多层感知机的神经网络图。它带有隐藏层的多层感知机。它含有一个隐藏层，该层中有5个隐藏单元。
 
-![](src/multilayer-perceptron/mlp.svg)
+![](./src/multilayer-perceptron/mlp.svg)
 
 在上图所示的多层感知机中，输入和输出个数分别为4和3，中间的隐藏层中包含了5个隐藏单元（hidden unit）。由于输入层不涉及计算，上图中的多层感知机的层数为2。可见，隐藏层中的神经元和输入层中各个输入完全连接，输出层中的神经元和隐藏层中的各个神经元也完全连接。因此，多层感知机中的隐藏层和输出层都是全连接层。
 
@@ -52,7 +52,7 @@ plt.show()
 
 下图是会上面这段代码绘制出的图形
 
-![](src/multilayer-perceptron/myplot.png)
+![](./src/multilayer-perceptron/myplot.png)
 
 可以看出，该函数定义为$\text{ReLU}(x) = \max(x, 0) $，在$x>0$处函数值为$x$本身。因此在$x>0$处的梯度应该是1。
 
@@ -71,7 +71,7 @@ plt.show()
 
 下图是代码打印出的图形：
 
-![](src/multilayer-perceptron/relugrad.png)
+![](./src/multilayer-perceptron/relugrad.png)
 
 ### Sigmoid函数
 
@@ -98,7 +98,7 @@ plt.show()
 
 这段代码绘制的图像如下图：
 
-![](src/multilayer-perceptron/sigmoid.png)
+![](./src/multilayer-perceptron/sigmoid.png)
 
 依据链式法则，sigmoid函数的导数为：
 $$
@@ -117,7 +117,7 @@ plt.plot(x.numpy(), grad)
 plt.show()
 ```
 
-![](src/multilayer-perceptron/sigmoidgrad.png)
+![](./src/multilayer-perceptron/sigmoidgrad.png)
 
 
 
@@ -144,7 +144,7 @@ plt.plot(x, out)
 plt.show()
 ```
 
-![](src/multilayer-perceptron/tanh.png)
+![](./src/multilayer-perceptron/tanh.png)
 
 老规矩打印tanh梯度的图像：
 
@@ -159,7 +159,7 @@ plt.plot(x.numpy(), grad)
 plt.show()
 ```
 
-![](src/multilayer-perceptron/tahngard.png)
+![](./src/multilayer-perceptron/tahngard.png)
 
 
 

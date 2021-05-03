@@ -51,7 +51,7 @@ $$
 
 因为高阶多项式函数模型参数更多，模型函数的选择空间更大，所以高阶多项式函数比低阶多项式函数的复杂度更高。因此，高阶多项式函数比低阶多项式函数更容易在相同的训练数据集上得到更低的训练误差。给定训练数据集，模型复杂度和误差之间的关系通常如下图所示。给定训练数据集，如果模型的复杂度过低，很容易出现欠拟合；如果模型复杂度过高，很容易出现过拟合。应对欠拟合和过拟合的一个办法是针对数据集选择合适复杂度的模型。
 
-![img](src/underfit-and-overfit/3.11_capacity_vs_error.svg)
+![img](./src/underfit-and-overfit/3.11_capacity_vs_error.svg)
 
 
 ### 训练数据集大小
@@ -183,7 +183,7 @@ weight: [[ 1.1857017]
 bias: [4.9984303]
 ```
 
-![img](src/underfit-and-overfit/3.11_output1.png)
+![img](./src/underfit-and-overfit/3.11_output1.png)
 
 
 
@@ -204,7 +204,7 @@ weight: [[18.400213]]
 bias: [-1.3679209]
 ```
 
-![img](src/underfit-and-overfit/3.11_output2.png)
+![img](./src/underfit-and-overfit/3.11_output2.png)
 
 
 ### 训练样本不足（过拟合）
@@ -226,7 +226,7 @@ weight: [[2.843685  ]
 bias: [1.8927275]
 ```
 
-![img](src/underfit-and-overfit/3.11_output3.png)
+![img](./src/underfit-and-overfit/3.11_output3.png)
 
 
 我们将在接下来的两个小节继续讨论过拟合问题以及应对过拟合的方法。
