@@ -124,7 +124,7 @@ fit_and_plot(lambd=0)
 L2 norm of w: 1.3868197
 ```
 
-![img](src/weight-decay/3.12_output1.png)
+![img](./src/weight-decay/3.12_output1.png)
 
 
 ### 使用权重衰减
@@ -141,7 +141,7 @@ fit_and_plot(lambd=3)
 L2 norm of w: 0.3116793
 ```
 
-![img](src/weight-decay/3.12_output2.png)
+![img](./src/weight-decay/3.12_output2.png)
 
 
 ## 简洁实现
@@ -178,7 +178,7 @@ fit_and_plot_tf2(0, lr)
 L2 norm of w: 1.4336505
 ```
 
-![img](src/weight-decay/3.12_output3.png)
+![img](./src/weight-decay/3.12_output3.png)
 
 
 ``` python
@@ -191,7 +191,7 @@ fit_and_plot_tf2(3, lr)
 L2 norm of w: 0.26387808
 ```
 
-![img](src/weight-decay/3.12_output4.png)
+![img](./src/weight-decay/3.12_output4.png)
 
 
 ## 小结
