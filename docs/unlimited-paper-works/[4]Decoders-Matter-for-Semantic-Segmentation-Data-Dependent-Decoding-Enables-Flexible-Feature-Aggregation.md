@@ -1,4 +1,4 @@
-# Decoders Matter for Semantic Segmentation : Data-Dependent Decoding Enables Flexible Feature Aggregation
+# Decoders Matter for Semantic Segmentation: Data-Dependent Decoding Enables Flexible Feature Aggregation
 
 ### 这篇笔记的写作者是[VisualDust](https://github.com/visualDust)。
 
