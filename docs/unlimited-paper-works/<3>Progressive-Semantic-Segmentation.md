@@ -1,5 +1,7 @@
 # Progressive Semantic Segmentation
 
+#### 这篇笔记的写作者是[ZeroRains](https://github.com/zeroRains)。
+
 > 论文名称：Progressive Semantic Segmentation
 >
 > code:[https://github.com/VinAIResearch/MagNet.](https://github.com/VinAIResearch/MagNet.)

@@ -1,5 +1,7 @@
 # The Devil is in the Decoder: Classification, Regression and GANs
 
+#### 这篇笔记的写作者是[VisualDust](https://github.com/visualDust)。
+
 这是一篇讲各种各样解码器的论文。[原论文（The Devil is in the Decoder: Classification, Regression and GANs）](/papers/The-Devil-is-in-the-Decoder-Classification-Regression-and-GANs.pdf)。
 
 由于“解码器（decoder，有些时候也被称为feature extractor）”的概念与像素级的分类、回归等问题多多少少都有瓜葛。以下是decoder被应用于像素级的任务：

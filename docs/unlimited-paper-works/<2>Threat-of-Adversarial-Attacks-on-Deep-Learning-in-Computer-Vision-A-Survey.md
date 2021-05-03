@@ -1,10 +1,12 @@
 # Threat of Adversarial Attacks on Deep Learning in Computer Vision: A Survey
 
-这是一篇神经对抗攻击综述论文。
+#### 这篇笔记的写作者是[CoronaPolvo](https://github.com/coronaPolvo)。
+
+这是一篇神经对抗的综述文章，非常非常非常详细的介绍了当前神经对抗攻击的发展情况和已有的攻击和防御算法。
 
 > Deep learning is at the heart of the current rise of machine learning and artificial intelligence. In the field of Computer Vision, it has become the workhorse for applications ranging from self-driving cars to surveillance and security. Whereas deep neural networks have demonstrated phenomenal success (often beyond human capabilities) in solving complex problems, recent studies show that they are vulnerable to adversarial attacks in the form of subtle perturbations to inputs that lead a model to predict incorrect outputs. For images, such perturbations are often too small to be perceptible, yet they completely fool the deep learning models. Adversarial attacks pose a serious threat to the success of deep learning in practice. This fact has lead to a large influx of contributions in this direction. This article presents the first comprehensive survey on adversarial attacks on deep learning in Computer Vision. We review the works that design adversarial attacks, analyze the existence of such attacks and propose defenses against them. To emphasize that adversarial attacks are possible in practical conditions, we separately review the contributions that evaluate adversarial attacks in the real-world scenarios. Finally, we draw on the literature to provide a broader outlook of the research direction.
 
-这是一篇神经对抗的综述文章，非常非常非常详细的介绍了当前神经对抗攻击的发展情况和已有的攻击和防御算法。本文主要对文章进行翻译，还加入了个人对一些算法的理解与解释。这篇文章我大概看了一个星期。真的是一篇非常不错的综述论文。
+本文主要对文章进行翻译，还加入了个人对一些算法的理解与解释。这篇文章我大概看了一个星期。真的是一篇非常不错的综述论文。
 
 ---
 
