@@ -2,7 +2,7 @@
 
 ### 这篇笔记的写作者是[VisualDust](https://github.com/visualDust)。
 
-这是一篇关于数据依赖型解码器的理论和测试工作的论文。
+这是一篇关于数据依赖型解码器的理论和测试工作的论文。原论文是[Decoders Matter for Semantic Segmentation : Data-Dependent Decoding Enables Flexible Feature Aggregation](/papers/Decoders-Matter-for-Semantic-Segmentation-Data-Dependent-Decoding-Enables-Flexible-Feature-Aggregation.pdf)。
 
 近年来，常见的语义分割方法利用编码器-解码器结构进行逐像素的预测任务。在这些解码器每一层的最后通常是一层双线性上采样的过程，用于将像素恢复至原有像素大小。本论文的研究表明，这种与数据无关的双线性上采样方法可能会导致结果并不完美。
 
@@ -99,7 +99,7 @@ L(F, Y) = Loss(softmax(DUpsample(\hat{F})), Y))
 $$
 其中，$DUpsample(x)$是一个对输入$x$使用训练得到的进行线性上采样的过程。 相较于原来的方法，这个方法使用学习到的$W$进行上采样，很类似于$1\times 1$卷积的过程，只不过这次的卷积核是学习得到的$W$：
 
-![](src/[4]Decoders-Matter-for-Semantic-Segmentation-Data-Dependent-Decoding-Enables-Flexible-Feature-Aggregation/image-20210503182340370.png)
+![](./src/Decoders-Matter-for-Semantic-Segmentation-Data-Dependent-Decoding-Enables-Flexible-Feature-Aggregation/image-20210503182340370.png)
 
 这就是这篇论文提出的“DUpsample”的过程，上图是一个示意图。
 
@@ -127,13 +127,24 @@ $$
 
 令$\hat{F}$为最终的CNN输出的特征图，该特征图将会被用于双线性上采样或是上述的DUpsample方法进行像素级的预测；$\hat{F}_i$和$\hat{F}_{last}$分别表示在骨干特征提取网络的第$i$层和最后一层输出的特征图。在这里，为了简单起见，这篇论文只对融合一个低层级特征进行了讨论，但是这个方法可以扩增至融合更多不同层级的特征，这也许会进一步提升分割的性能。
 
-![image-20210503104215395](src/[4]Decoders-Matter-for-Semantic-Segmentation-Data-Dependent-Decoding-Enables-Flexible-Feature-Aggregation/image-20210503104215395.png)
+![image-20210503104215395](./src/Decoders-Matter-for-Semantic-Segmentation-Data-Dependent-Decoding-Enables-Flexible-Feature-Aggregation/image-20210503104215395.png)
 
 上图中（这就是一开始的那张DeepLab的简要示意图）解码器（Decoder）部分的特征聚合阶段可以简要表示为：
 $$
 F = f(concat(F_i,upsample(F_{last})))
 $$
-其中$f$表示某种CNN，$upsample$使用的是双线性的方法。$concat$是在通道（channel）维度的串联运算符。这就产生了一个问题：由于$f$是CNN，所以其计算开销与输入直接相关，从而导致这种结构无法利用很低级的特征（因为在CNN中，越低级的特征可能对应的特征图就越大）。
+其中$f$表示某种CNN，$upsample$使用的是双线性的方法。$concat$是在通道（channel）维度的串联运算符。这就产生了一个问题：由于$f$是CNN，所以其计算开销与输入直接相关，从而导致这种结构无法利用很低级的特征（因为在CNN中，越低级的特征可能对应的特征图就越大）。但是，为了获得更好地分割效果，在高分辨率图像上，解码器只能选择低层级特征进行聚合。
+
+相反，在这篇论文提出的框架中，由于DUpsample的引入，更高层级的特征能够更好地恢复到更大的分辨率上，所以我们可以放心地将任何低层级特征下采样到$F_{last}$，然后将特征聚合用于最终的预测。在这种方法中，上个等式也将被改写为：
+$$
+F = f(concat(downsample(F_i),F_{last}))
+$$
+从改写之后的等式我们可以看出，$upsample$操作被取消，取而代之的是一个$downsample$操作，这使得计算的效率被大大提高。在这篇论文后面的实验环节中，这种方法也被证明能够很大程度上提升分割的性能和表现。
+
+只有在使用DUpsample的时候，才能放心地使用之前提到的对低层级特征进行下采样的方法；否则整个分割网络的性能会被不够优秀的最终一层的上采样方法所限制。这就是为什么传统的方法中往往需要解码器将低分辨率的高层特征上采样到高分辨率低层级特征后才进行特征聚合的原因。
 
 
 
+## 实验
+
+实验部分请自行阅读[原论文](/papers/Decoders-Matter-for-Semantic-Segmentation-Data-Dependent-Decoding-Enables-Flexible-Feature-Aggregation.pdf)
