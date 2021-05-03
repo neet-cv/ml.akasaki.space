@@ -49,7 +49,7 @@
 
     E(.)的网络结构:
 
-    ![image-20210503121108631](src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503121108631.png)
+    ![image-20210503121108631](./src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503121108631.png)
 
 - $D(.)$:用于将图像暗化的网络
 
@@ -78,9 +78,9 @@
 
     * 提出了**双向低级特征适应模式**。正常图像低照度化是一个复杂的过程，可以分解成三个因素：亮度、噪声、色偏。所以对于$L$来说调整亮度变成$E(L)$,对于$H$来说用噪声和色偏形成$D(H)$.这样操作使得$E(L)$和$D(H)$更加相似。这样做降低了生成低照度图像和正常图像的困难。将特定的部分低照度，模型不会收到结构域之间的语义差距的干扰
 
-        ![image-20210503114617138](src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503114617138.png)
+        ![image-20210503114617138](./src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503114617138.png)
 
-        ![image-20210503120027621](src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503120027621.png)
+        ![image-20210503120027621](./src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503120027621.png)
 
         1. 增强——变亮:
 
@@ -105,17 +105,17 @@
 
     * 使用**多任务高级特征适应**，很多特征适应方法都是基于图像对齐、伪标签训练、对抗学习等，图像对齐和伪标签训练不能处理差距比较大的。对抗学习不稳定，我们使用图像的自然信息也就是图像本身，进行自监督学习。通过自监督分类器共享域，特征被强制映射到相同的高维子空间，因此使得靠近高级特征间隙。学习方案：
 
-        ![image-20210503120539220](src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503120539220.png)
+        ![image-20210503120539220](./src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503120539220.png)
 
         自监督学习模块结构
 
-        ![image-20210503121622540](src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503121622540.png)
+        ![image-20210503121622540](./src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503121622540.png)
 
         骨干网络:
 
         (采用DSFD的主干，VGG16提取出6层多尺度特征:conv3_3,conv4_3,conv5_3,conv_fc7,conv6_2,conv7_2)
 
-        ![image-20210503121806149](src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503121806149.png)
+        ![image-20210503121806149](./src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503121806149.png)
 
         1. 使得$E(L)$与$H$靠近$(E(L)\lrarr H)$，基于上下文的自我监督学习设计目标，模型通过学习空间上的上下文信息。使用拼图方法能很好地完成上面的目标。将一个3x3的patch放到整个图像上，设这个patch排序数为30，相当于就是一个30分类问题,损失函数为
             $$
@@ -129,7 +129,7 @@
 
             ​	从刚才的主干中抽取出6层特征图，然后进行相应jigsaw操作.
 
-            ![image-20210503121716018](src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503121716018.png)
+            ![image-20210503121716018](./src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503121716018.png)
 
         2. 使得$H$和$D(H)$靠近$(H\lrarr D(H))$，灵感来自于相对学习，在相对学习中，查询一个v,判断这个v是在正样本对还是负样本对，类似点乘的方法。目标函数
             $$
@@ -163,21 +163,21 @@
 
     - 人脸检测
 
-        ![image-20210503112828764](src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503112828764.png)
+        ![image-20210503112828764](./src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503112828764.png)
 
     - 增强效果
 
-        ![image-20210503112918707](src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503112918707.png)
+        ![image-20210503112918707](./src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503112918707.png)
 
     - 暗化效果
 
-        ![image-20210503113047596](src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503113047596.png)
+        ![image-20210503113047596](./src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503113047596.png)
 
     - 无监督域域适应
 
         无监督域适应是基于Faster-RCNN,但是表现很差，所以使用DSFD作为人脸检测器，使用不同方式进行增强的效果，进行消融实验。
 
-        ![image-20210503113256527](src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503113256527.png)
+        ![image-20210503113256527](./src/%3C6%3EHLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection/image-20210503113256527.png)
 
 - 
 - Jigsaw方法是什么
