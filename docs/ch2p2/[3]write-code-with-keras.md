@@ -9,12 +9,12 @@
 
 2017年，Google的TensorFlow团队决定在TensorFlow核心库中支持Keras。TensorFlow 2.0 包含了一个完整的生态系统，包括 TensorFlow Lite（用于移动和嵌入式设备）和用于开发生产机器学习流水线的 TensorFlow Extended（用于部署生产模型）。
 
-![img](src/write-code-with-keras/edfkokgjhdfghidshidsfjdgeiruyfg.png)
+![img](./src/write-code-with-keras/edfkokgjhdfghidshidsfjdgeiruyfg.png)
 
 上面这张图（具有一定时效性）简要的说明了Tensorflow和Keras错综复杂的关系。Keras 和 TensorFlow 之间复杂纠缠的关系就像一对高中情侣的爱情故事，他们约会、分手，但最终找到了一个共处的方式。你可以暂时不了解它们的关系。你只需要知道，现在Tensorflow称为了Keras的默认后端。
 
 **结论就是，现在你安装Tensorflow就一定会安装Keras，安装Keras也一定会按照Tensorflow**。
 
-![img](src/write-code-with-keras/640.png)
+![img](./src/write-code-with-keras/640.png)
 
 就如同在[LeNet代码实现](./[2]LeNet-code.md)中提到的两种等效的写法，在代码中大面积使用Keras API能让你的代码变得短小精悍、易读、易于维护。所以，在研究过程中你应该尽量多使用Keras API。在接下来的所有章节中，我也将尽量使用Keras API完成功能。

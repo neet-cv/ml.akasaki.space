@@ -8,7 +8,7 @@
 
 夹带私货，你先选着tensorflow吧，绝对不会吃亏。
 
-![img](src/nn-and-frameworks/640.png)
+![img](./src/nn-and-frameworks/640.png)
 
 如上图，Tensorflow是一整个生态系统。Tensorflow对各种硬件、语言、部署环境的支持能力比Pytorch要好，但是有人说Pytorch配环境比Tensorflow容易，主要是因为Tensorflow需要手动安装CUDA和CUDNN——不过只要你配好一次环境，在未来的很长一段时间内你都不需要再对环境作出什么改动了，并且其实熟练了之后，安装这些软件并没有什么难处。由于历史上Tensorflow从1.x升级为2.x，有人说Tensorflow的兼容性比Pytorch差。不必很担心这个问题，因为Tensorflow不会再继续“不能向前支持”的升级了，并且Tensorflow2.x加入了对1.x专用的支持包。
 
