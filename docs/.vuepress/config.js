@@ -9,7 +9,7 @@ module.exports = {
     head: [
         ['link', {
             rel: 'icon',
-            href: '/statics/logo.png'
+            href: '/statics/logo.svg'
         }],
         ['meta', {
             name: 'keywords',
