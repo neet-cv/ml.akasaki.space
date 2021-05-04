@@ -2,7 +2,7 @@
 
 这里不会包含任何讲解的内容，讲解的内容请参考[第一个卷积神经网络(LeNet)](./LeNet.md)
 
-## 比较标准的写法（96行）
+## 比较“标准”且常见的写法（96行）
 
 ```python
 import tensorflow as tf
@@ -103,7 +103,7 @@ for ep in range(epochs):
                           test_acc.result() * 100.))
 ```
 
-## 使用tf.keras高层API的快捷写法（带注释32行）
+## 提高Keras API使用率以节省代码量的版本（带注释32行）
 
 ```python
 import tensorflow as tf
@@ -140,3 +140,4 @@ model.fit(training_x, training_y, epochs=5, validation_split=0.1)
 model.evaluate(testing_x, testing_y, verbose=2)
 ```
 
+在接下来的几篇文章中，为了简洁性，我将尽量使用Keras API完成所有功能。

@@ -86,9 +86,7 @@ model = tf.keras.models.Sequential([
 ])
 ```
 
-实际上这段代码使用了`Keras API`，这是在tensorflow进入2.0后出现的写法，或者叫“更精简的写法”。
-
-还有一种写法是面向对象的写法，或者叫做“更专业的写法”：
+还有一种等效的写法看上去“更专业”：
 
 ```python
 class LeNetModel(tf.keras.Model):
@@ -123,7 +121,7 @@ class LeNetModel(tf.keras.Model):
 model = LeNetModel()
 ```
 
-这两段代码具有相同效果。你只需要选择其中一段。在构建简单地模型或仅做研究时，我更推荐使用`Keaas API`。但是遇到工程化和模型部署时，请使用面向对象的写法。你可以在[小插曲：Keras高级API](./write-code-with-keras.md)中对`Keras API`进行简单了解，并**可以在[LeNet代码实现](./LeNet-code.md)中看到这两种写法的完整代码**。
+这两段代码具有相同效果。你只需要选择其中一段。不难看出，这两段代码的主要区别就是低一段中Keras API的使用率更高，它使用了`Sequential`，省去了很多代码量。在研究过程中，我更推荐你提高Keras API的使用率，这样会让你的代码简洁、易读、维护性强。你可以在之后的一篇叫做[新玩具：Keras API](./[3]write-code-with-keras.md)的文章中大致了解Keras。
 
 ### 定义损失函数和优化器
 
