@@ -9,7 +9,7 @@ import tensorflow as tf
 from tensorflow.keras import datasets, layers, initializers
 
 # 加载数据集
-(training_x, training_y), (testing_x, testing_y) = datasets.fashion_mnist.load_data()
+(training_x, training_y), (testing_x, testing_y) = datasets.mnist.load_data()
 training_x = (training_x.astype('float32') / 255.)
 testing_x = (testing_x.astype('float32') / 255.)
 training_x = tf.reshape(training_x, (training_x.shape[0], training_x.shape[1], training_x.shape[2], 1))
@@ -110,7 +110,7 @@ import tensorflow as tf
 from tensorflow.keras import datasets
 
 # 加载数据集
-(training_x, training_y), (testing_x, testing_y) = datasets.fashion_mnist.load_data()
+(training_x, training_y), (testing_x, testing_y) = datasets.mnist.load_data()
 training_x = (training_x.astype('float32') / 255.)
 testing_x = (testing_x.astype('float32') / 255.)
 training_x = tf.reshape(training_x, (training_x.shape[0], training_x.shape[1], training_x.shape[2], 1))

@@ -1,6 +1,7 @@
 node_modules
 dist
 code/
+others/
 deploy.sh
 yarn-error.log
 yarn.lock
