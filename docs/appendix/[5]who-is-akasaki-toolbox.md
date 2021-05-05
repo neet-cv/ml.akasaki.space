@@ -4,7 +4,7 @@
 
 这是工具箱的联系方式：
 
-`Email`: miya@akasaki.space
+`Email`: `'@'.join(['miya', 'akasaki.space'])` （Python 表达式）
 
 `QQ`: 2189208625
 
