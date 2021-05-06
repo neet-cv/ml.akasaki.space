@@ -2,7 +2,7 @@
 
 ### 这篇笔记的写作者是[PommesPeter](https://github.com/PommesPeter)。
 
-这是一篇讲低光照人脸检测的论文。[原论文（HLA-Face Joint High-Low Adaptation for Low Light Face Detection）](https://arxiv.org/pdf/2104.01984.pdf)。
+这是一篇讲低光照人脸检测的论文。[原论文（HLA-Face Joint High-Low Adaptation for Low Light Face Detection）](/papers/HLA-Face-Joint-High-Low-Adaptation-for-Low-Light-Face-Detection.pdf)。
 
 - 充分利用现有的正常光数据，并探索如何将面部探测器从正常光线调整到低光。这项任务的挑战是，正常和低光之间的差距对于像素级和物体级别来说太大而复杂。因此，大多数现有的lowlighenhance和适应方法不达到所需的performance。
 - 本文是DARK FACE为基准，针对现有的正常照度图像，将图像调整成低照度图像，不需要标签
