@@ -17,7 +17,8 @@ function getPages(dir) {
  * @param {string} title 标题
  */
 function getSidebar(folder) {
-    return getPages(`docs/${folder}`)
+    console.info('==> Getting pages under ' + folder);
+    var pages = getPages(`docs/${folder}`)
         .map(path => ({
             index: parseInt(path.match(/^\[(.+)\]/g)[1]),
             path
@@ -31,10 +32,13 @@ function getSidebar(folder) {
                 collapsable: false,
             };
         });
+    pages.forEach(x => console.info('-> page ' + x.index + ': ' + x.path));
+    return pages;
 }
 
 function readMDFileTitle(path) {
-    return fs.readFileSync(path, 'utf8').match(/^# (.+?)\n/m)[1];
+    var match = fs.readFileSync(path, 'utf8').match(/^# (.+?)\n/m);
+    return match ? match[1] : path;
 }
 
 module.exports = {
