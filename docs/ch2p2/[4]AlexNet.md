@@ -1,5 +1,7 @@
 # AlexNet：更深的卷积神经网络
 
+AlexNet是在LeNet的思想基础上将卷积神经网络变得更深的应用。其原论文是[ImageNet Classification with Deep Convolutional Neural Networks](https://papers.nips.cc/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf)。
+
 上一节介绍了LeNet-5经典卷积网络模型的构成以及如何实现这样的一个网络，并且在实现的模型上获得了90%以上的正确率，但是LeNet-5缺乏对于更大、更多的图片进行分类的能力(MNIST中图片的分辨率仅为28x28,而通常电子设备捕获的照片至少比这个数值大10倍)。在2012年，Hinton 的学生Alex Krizhevsky借助深度学习的相关理论提出了深度卷积神经网络模型AlexNet。 在2012年的ILSVRC竞赛中(翻阅第1章的深度学习现代应用，那里有更多关于这个大赛的介绍)，AlexNet模型取得了top-5 错误率为15.3%的好成绩，相较于Top-5错误率为16.2%的第二名以明显的优势胜出。从此，AlexNet 成为CNN领域比较有标志性的一个网络模型。
 
 > 警告：如果你在使用GPU运算的话，AlexNet可能需要超过4GB的显存来运行。

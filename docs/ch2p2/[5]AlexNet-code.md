@@ -1,5 +1,7 @@
 # AlexNet代码实现
 
+这里不会包含任何讲解的内容，讲解的内容请参考[AlexNet：更深的卷积神经网络](./AlexNet.md)。
+
 ## 使用tf.keras高层API的快捷写法（带注释42行）
 
 ```python

@@ -1,5 +1,7 @@
 # LeNet：初试卷积神经网络
 
+你可以认为LeNet是第一个卷积神经网络成功的应该用。LeNet的原论文是[Gradient-Based Learning Applied to Document Recognition](http://yann.lecun.com/exdb/publis/pdf/lecun-01a.pdf)。
+
 在[“多层感知机”](../ch1p2/<1>multilayer-perceptron.md)一节里我们构造了一个含单隐藏层的多层感知机模型来对Fashion-MNIST数据集中的图像进行分类。每张图像高和宽均是28像素。我们将图像中的像素逐行展开，得到长度为784的向量，并输入进全连接层中。然而，这种分类方法有一定的局限性。
 
 1. 图像在同一列邻近的像素在这个向量中可能相距较远。它们构成的模式可能难以被模型识别。
