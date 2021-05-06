@@ -20,7 +20,7 @@ DAT：Dataset Alternation Training(数据集交替训练机制)
 
 分割结果：
 
-![image-20210505160138997](https://gitee.com/zeroRains/drawing-bed/raw/master/20210505160141image-20210505160138997.png)
+![image-20210505160138997](./src/Cross-Dataset-Collaborative-Learning-for-Semantic-Segmentation/20210505160141image-20210505160138997.png)
 
 
 
@@ -40,7 +40,7 @@ Domain adaptation(DA 领域适应)或knowledge transfer(知识转化)为跨数�
 
 对比不同数据集在conv层和bn层的参数分布：
 
-![image-20210503155720590](https://gitee.com/zeroRains/drawing-bed/raw/master/20210505101559image-20210503155720590.png)
+![image-20210503155720590](./src/Cross-Dataset-Collaborative-Learning-for-Semantic-Segmentation/20210505101559image-20210503155720590.png)
 
 结论：
 
@@ -51,13 +51,13 @@ Domain adaptation(DA 领域适应)或knowledge transfer(知识转化)为跨数�
 
 ### 网络结构图
 
-![image-20210503160330765](https://gitee.com/zeroRains/drawing-bed/raw/master/20210505101605image-20210503160330765.png)
+![image-20210503160330765](./src/Cross-Dataset-Collaborative-Learning-for-Semantic-Segmentation/20210505101605image-20210503160330765.png)
 
 在数据集感知块(DAB)其作为我们通常的CONV+BN+RELU的一个替代，即基本计算单元的替代
 
 DAB的结构如下，其实很简单，使用的卷积层是一个固定数据集训练出来的，但是在BN层中选择的是不同的数据集i除拉的BN层。据论文说，这里又一个自动交换机的东西，自动地将不同分布的数据集分配到对应的BN层中。
 
-![image-20210503161147231](https://gitee.com/zeroRains/drawing-bed/raw/master/20210505101608image-20210503161147231.png)
+![image-20210503161147231](./src/Cross-Dataset-Collaborative-Learning-for-Semantic-Segmentation/20210505101608image-20210503161147231.png)
 
 假设我们有N个数据集，那么每个数据集的BN层可以通过下面这个公式设定
 $$
@@ -83,7 +83,7 @@ $$
 
 作者尝试设置间隔训练t，即训练A数据集t次，才训练B数据集1次，经过作者实验，得出结论，当t=1时可以获得最好的效果。
 
-![image-20210505151844779](https://gitee.com/zeroRains/drawing-bed/raw/master/20210505151847image-20210505151844779.png)
+./![image-20210505151844779](./src/Cross-Dataset-Collaborative-Learning-for-Semantic-Segmentation/20210505151847image-20210505151844779.png)
 
 ### DAT优点
 
@@ -125,9 +125,9 @@ $w^i$：表示损失权重，作者将其设置为1，以使这些损失值范�
 
 实验先是对两个数据集进行实验，采用单数据集(Single-dataset)，微调(Finetuning)，标签映射(Label remapping)，和DAT的不同跨数据训练方式得到的结果如下:
 
-![image-20210505155009177](https://gitee.com/zeroRains/drawing-bed/raw/master/20210505155011image-20210505155009177.png)
+![image-20210505155009177](./src/Cross-Dataset-Collaborative-Learning-for-Semantic-Segmentation/20210505155011image-20210505155009177.png)
 
 对三个数据集训练的结果也有较好的提升：
 
-![image-20210505155136346](https://gitee.com/zeroRains/drawing-bed/raw/master/20210505155137image-20210505155136346.png)
+![image-20210505155136346](./src/Cross-Dataset-Collaborative-Learning-for-Semantic-Segmentation/20210505155137image-20210505155136346.png)
 
