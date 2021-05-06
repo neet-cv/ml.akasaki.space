@@ -2,14 +2,12 @@ name: Build and Deploy
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
-on:
-  push:
-    branches: [ master ]
+on: push
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build_and_deploy:
+  build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -42,12 +40,11 @@ jobs:
         run: npm run build
 
       - name: Deploy to Github Pages
+        if: ${{ github.ref == 'refs/heads/master' }}
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/.vuepress/dist/
           publish_branch: vuepress_pages
           force_orphan: true
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
           cname: 'ml.akasaki.space'

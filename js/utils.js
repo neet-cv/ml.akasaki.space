@@ -20,13 +20,14 @@ function getSidebar(folder) {
     console.info('==> Getting pages under ' + folder);
     var pages = getPages(`docs/${folder}`)
         .map(path => ({
-            index: parseInt(path.match(/^\[(.+)\]/g)[1]),
+            index: parseFloat(path.match(/\[([\d.]+)\]/)[1]),
             path
         }))
         .sort((a, b) => a.index - b.index)
-        .map(({ path }) => {
+        .map(({ index, path }) => {
             const title = readMDFileTitle(`docs/${folder}/${path}`);
             return {
+                index,
                 title,
                 path: `/${folder}/${path}`,
                 collapsable: false,
