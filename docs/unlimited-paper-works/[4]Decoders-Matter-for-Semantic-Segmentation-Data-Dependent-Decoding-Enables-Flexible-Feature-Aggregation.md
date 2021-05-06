@@ -2,7 +2,7 @@
 
 ### 这篇笔记的写作者是[VisualDust](https://github.com/visualDust)。
 
-这是一篇关于数据依赖型解码器的理论和测试工作的论文。原论文是[Decoders Matter for Semantic Segmentation : Data-Dependent Decoding Enables Flexible Feature Aggregation](/papers/Decoders-Matter-for-Semantic-Segmentation-Data-Dependent-Decoding-Enables-Flexible-Feature-Aggregation.pdf)。
+这是一篇关于数据依赖型解码器的理论和测试工作的论文。原论文是[Decoders Matter for Semantic Segmentation : Data-Dependent Decoding Enables Flexible Feature Aggregation](https://arxiv.org/pdf/1903.02120.pdf)。
 
 近年来，常见的语义分割方法利用编码器-解码器结构进行逐像素的预测任务。在这些解码器每一层的最后通常是一层双线性上采样的过程，用于将像素恢复至原有像素大小。本论文的研究表明，这种与数据无关的双线性上采样方法可能会导致结果并不完美。
 
