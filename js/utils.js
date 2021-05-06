@@ -24,9 +24,10 @@ function getSidebar(folder) {
             path
         }))
         .sort((a, b) => a.index - b.index)
-        .map(({ path }) => {
+        .map(({ index, path }) => {
             const title = readMDFileTitle(`docs/${folder}/${path}`);
             return {
+                index,
                 title,
                 path: `/${folder}/${path}`,
                 collapsable: false,
