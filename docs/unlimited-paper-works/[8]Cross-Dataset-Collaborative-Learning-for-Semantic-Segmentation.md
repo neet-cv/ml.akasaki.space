@@ -1,4 +1,4 @@
-# 跨数据域协同学习的语义分割
+# Cross-Dataset Collaborative Learning for Semantic Segmentation
 
 ### 这篇笔记的写作者是[ZeroRains](https://github.com/zeroRains)。
 
