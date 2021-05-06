@@ -2,9 +2,7 @@
 
 ### 这篇笔记的写作者是[ZeroRains](https://github.com/zeroRains)。
 
-> 论文名称：Progressive Semantic Segmentation
->
-> code:[https://github.com/VinAIResearch/MagNet.](https://github.com/VinAIResearch/MagNet.)
+原论文：[Progressive Semantic Segmentation](https://arxiv.org/pdf/2104.03778.pdf)
 
 ## 问题描述 
 
