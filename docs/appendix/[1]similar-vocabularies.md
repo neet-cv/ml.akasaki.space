@@ -1,14 +1,6 @@
 # 机器学习(?)术语表
 
-## 这里已经包含了的名词
-
-现在只有很少一部分名词的解释。当然，以后的一段时间这里的名词会变得越来越多。
-
-协变量协变量偏移 , 量纲 , 无量纲化 , 数据集 , 输入 , 输出 , 样本 , 特征 , 特征图 , 批量标准化 , 标准化 , 归一化 , 中心化 , 标准化、归一化、中心化的区别 , 过拟合 , 欠拟合 , 特征缩放 , 损失函数 , 准确率 , 随机梯度下降 , 有监督学习 , 无监督学习 , 半监督学习 , 向前传播 , 向后传播 
-
 查找一个词条的办法是按下键盘上的`Ctrl+F`，然后键入关键字。
-
-## 拼音首字母索引：
 
 ---
 
@@ -16,44 +8,100 @@
 
 ### 字母 A
 
-- 准确率（accuracy）「[查看来源](https://developers.google.com/machine-learning/glossary/#%E5%87%86%E7%A1%AE%E7%8E%87-accuracy)」
+- 准确率（accuracy）
 
   [**分类模型**](https://developers.google.com/machine-learning/glossary/#classification_model)的正确预测所占的比例。在[**多类别分类**](https://developers.google.com/machine-learning/glossary/#multi-class)中，准确率的定义如下：
 $$
   \text{准确率} = \frac{\text{正确的预测数}} {\text{样本总数}}
 $$
 
-在[**二元分类**](https://developers.google.com/machine-learning/glossary/#binary_classification)中，准确率的定义如下：
+​		在[**二元分类**](https://developers.google.com/machine-learning/glossary/#binary_classification)中，准确率的定义如下：
 
 $$
   \text{准确率} = \frac{\text{正例数} + \text{负例数}} {\text{样本总数}}
 $$
 
-请参阅[**正例**](https://developers.google.com/machine-learning/glossary/#TP)和[**负例**](https://developers.google.com/machine-learning/glossary/#TN)。
+​		请参阅[**正例**](https://developers.google.com/machine-learning/glossary/#TP)和[**负例**](https://developers.google.com/machine-learning/glossary/#TN)。
 
-- A/B testing （A/B 测试）「[查看来源](https://developers.google.com/machine-learning/glossary/#ab-%E6%B5%8B%E8%AF%95-ab-testing)」
+- A/B testing （A/B 测试）
 
   一种统计方法，用于将两种或多种技术进行比较，通常是将当前采用的技术与新技术进行比较。A/B 测试不仅旨在确定哪种技术的效果更好，而且还有助于了解相应差异是否具有显著的统计意义。A/B 测试通常是采用一种衡量方式对两种技术进行比较，但也适用于任意有限数量的技术和衡量方式。
+  
+- 激活函数 (activation function)
+
+  一种函数（常见的有ReLU、tanh等），用于对上一层的所有输入求加权和，然后生成一个输出值（通常为非线性值），并将其传递给下一层。
+
+- AdaGrad（Adaptive Subgradient Methods for Online Learning and Stochastic Optimization）
+
+  一种先进的梯度下降法，用于重新调整每个参数的梯度，以便有效地为每个参数指定独立的学习速率。如需查看完整的解释，请参阅[这篇论文](http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf)。
 
 ---
 
 ### 字母 B
 
-- 向后传播（反向传播，backwarding，back propagation）
+- 反向传播 (backpropagation)
+
+  在神经网络上执行梯度下降法的主要算法。该算法会先按前向传播方式计算（并缓存）每个节点的输出值，然后再按反向传播遍历图的方式计算损失函数值相对于每个参数的[偏导数](https://en.wikipedia.org/wiki/Partial_derivative)。
 
 - 批量标准化（BN，batch normalization）
 
   BN 是由 Google 于 2015 年提出，这是一个深度神经网络训练的技巧，它不仅可以加快了模型的收敛速度，而且更重要的是在一定程度缓解了深层网络中“梯度弥散”的问题，从而使得训练深层网络模型更加容易和稳定。所以目前 BN 已经成为几乎所有卷积神经网络的标配技巧了。
+  
+- 基准 (baseline)
+
+  一种简单的模型或启发法，用作比较模型效果时的参考点。基准有助于模型开发者针对特定问题量化最低预期效果。
+
+- 批次 (batch)
+
+  模型训练的一次迭代（即一次梯度更新）中使用的样本集。另请参阅[**批次大小**](https://developers.google.com/machine-learning/glossary/#batch_size)。
+
+- 批次大小 (batch size)
+
+  一个批次中的样本数。例如，SGD的批次大小为 1，而小批次的大小通常介于 10 到 1000 之间。批次大小在训练和推断期间通常是固定的；不过，TensorFlow 允许使用动态批次大小。
+
+- 偏差 (bias，偏差项)
+
+  距离原点的截距或偏移。偏差（也称为偏差项）在机器学习模型中用$b$或$w_0$表示。例如，在下面的公式中，偏差为 b：
+  $$
+  y′ = b + w_1 x_1 + w_2 x_2 + \cdots w_n x_n
+  $$
+  请勿与预测偏差混淆。
+
+- 二元分类 (binary classification)
+
+  一种分类任务，可输出两种互斥类别之一。例如，对电子邮件进行评估并输出“垃圾邮件”或“非垃圾邮件”的机器学习模型就是一个二元分类器。
 
 ---
 
 ### 字母 C
 
-- 分类模型（classification model）「[查看来源](https://developers.google.com/machine-learning/glossary/#%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B-classification-model)」
+- 校准层 (calibration layer)
+
+  一种预测后调整，通常是为了降低预测偏差的影响。调整后的预测和概率应与观察到的标签集的分布一致。
+
+- 分类模型（classification model）
+
+  一种能够进行分类任务的模型，可输出多种互斥类别之一。例如，对电子邮件进行评估并输出“垃圾邮件”或“非垃圾邮件”的机器学习模型就是一个二元分类器，而区分10种不同动物的模型就是一个十分类的分类器。
+
+- 候选采样 (candidate sampling)
+
+  一种训练时进行的优化，会使用某种函数（例如 softmax）针对所有正类别标签计算概率，但对于负类别标签，则仅针对其随机样本计算概率。例如，如果某个样本的标签为“小猎犬”和“狗”，则候选采样将针对“小猎犬”和“狗”类别输出以及其他类别（猫、棒棒糖、栅栏）的随机子集计算预测概率和相应的损失项。这种采样基于的想法是，只要正类别始终得到适当的正增强，负类别就可以从频率较低的负增强中进行学习，这确实是在实际中观察到的情况。候选采样的目的是，通过不针对所有负类别计算预测结果来提高计算效率。
+
+- 分类数据 (categorical data)
+
+  一种特征，拥有一组离散的可能值。以某个名为 `house style` 的分类特征为例，该特征拥有一组离散的可能值（共三个），即 `Tudor, ranch, colonial`。通过将 `house style` 表示成分类数据，相应模型可以学习 `Tudor`、`ranch` 和 `colonial` 分别对房价的影响。
+
+  有时，离散集中的值是互斥的，只能将其中一个值应用于指定样本。例如，`car maker` 分类特征可能只允许一个样本有一个值 (`Toyota`)。在其他情况下，则可以应用多个值。一辆车可能会被喷涂多种不同的颜色，因此，`car color` 分类特征可能会允许单个样本具有多个值（例如 `red` 和 `white`）。
+
+  分类特征有时称为离散特征。与数值数据相对。
+
+- 形心 (centroid)
+
+  聚类的中心，由 k-means 或 k-median 算法的具体实现决定。例如，如果 k 为 3，则 k-means 或 k-median 算法会找出 3 个形心。
 
 - 协变量（covariate）
 
-  在机器学习和深度学习方法中，协变量指的是与[输入](//todo)无关的其他变量。在计算机视觉中，输入一般指的是图像或特征图（[feature map](//todo)），而协变量可以指权重 w 等。举个例子：
+  在机器学习和深度学习方法中，协变量指的是与输入无关的其他变量。在计算机视觉中，输入一般指的是图像或特征图（feature map），而协变量可以指权重 w 等。举个例子：
 
   $$
   S(t) = KTt + e
@@ -65,6 +113,10 @@ $$
 
 - 协变量偏移（covariate shift）
 
+- 级联（cascade）
+
+  级联在计算机科学里指多个对象之间的映射关系，建立数据之间的级联关系提高管理效率。在计算机视觉中，级联通常用在由低层到高层的特征提取中。
+
 ---
 
 ### 字母 D
@@ -72,6 +124,8 @@ $$
 - 数据集（dataset）
 
 - 解码器（decoder）
+
+  在计算机视觉中，解码器通常和编码器（encoder）同时出现，两者组合起来用于图像的分割任务。解码器通常由转置卷积层和上采样层组成，用于将编码器编码的特征“解码”回原图大小或接近原图的大小。
 
 - 无量纲化（dimensionless，nondimensionalize）
 
@@ -82,6 +136,8 @@ $$
 ### 字母 E
 
 - 编码器（encoder）
+
+  在计算机视觉中，编码器通常和解码器（decoder）组合起来用于图像的分割任务。编码器通常由CNN构成，用于将特征逐级提取，这个过程也可以被称为编码。
 
 ---
 
