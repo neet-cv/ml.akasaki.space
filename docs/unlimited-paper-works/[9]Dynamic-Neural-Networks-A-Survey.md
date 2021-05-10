@@ -87,9 +87,7 @@
 
 对不同的输入样本，这种网络会动态调节自己的结构或参数。
 
-
-
-样本自适应的动态网络分为：
+ 这篇论文将样本自适应的动态网络分为：
 
 - 动态结构（Dynamic architecture）
   - 动态深度（Dynamic Depth）
@@ -101,16 +99,16 @@
     - 跳过分支（Skip Branches）
   - 动态路由（Dynamic Routing）
 - 动态参数
-
-![](./src/Dynamic-Neural-Networks-A-Survey/image-20210507124329926-1620362650442.png)
-
-上图（原论文Fig.2）：一些多尺度动态网络结构示意图。其中`(a)`为多尺度DenseNet，`(b)`为带有早退机制的网络，`c`为自适应输入分辨率的网络，`(d)`为在SuperNet中存在的动态路径。
+  - 动态参数加权（Attention on weight）
+  - 动态卷积核形状（Kernel shape adaptation）
 
 ---
 
-### 动态深度（Dynamic Depth）
+### 动态结构（Dynamic Architecture）
 
-#### 早退机制（early escape）
+#### 动态深度（Dynamic Depth）
+
+##### 早退机制（early escape）
 
 简而言之，动态深度就是网络会根据某种机制判定样本是简单的还算复杂的，对于难一点的样本，网络可以将其一算到底，而对于简单一些的样本，网络计算到中间的时候就可以停止计算了。
 
@@ -142,7 +140,7 @@
 
 还有许多具有早退机制的网络，如果我看到了会单独写一节来介绍。
 
-#### 跨层连接（skip connections）
+##### 跨层连接（skip connections）
 
 早退机制是通过在网络执行的某个阶段退出从而节省计算开销的，而跨层连接的动态神经网络则会执行完整个网络，只是在网络的中间层会出现跨层的连接方式。跨层连接一般被实现在一些具有类似于`skip connection`或是`residual connection`的网络结构中。
 
@@ -162,9 +160,9 @@
 
 还有许多具有跳层机制的网络，如果我看到了会单独写一节来介绍。
 
-### 动态宽度（Dynamic Width）
+#### 动态宽度（Dynamic Width）
 
-#### 动态通道数（Dynamic channel pruning in CNNs）
+##### 动态通道数（Dynamic channel pruning in CNNs）
 
 动态宽度的动态神经网络，顾名思义，这种网络会根据输入动态调整网络的宽度。一种比较简单的思路是，动态调整通道数量：
 
@@ -174,9 +172,9 @@
 
 另一种可行的方法是使用多个不同宽度的网络对输入进行处理，当某个深度的网络的输出（例如`softmax`输出）达到某个阈值时，就不再加深网络了。
 
-#### 专家子网络加权（Mixture of Experts，MOE）
+##### 专家子网络加权（Mixture of Experts，MOE）
 
-这种方法是通过将很多不同的网络的结果进行动态加权来提升网络性能的一种方法。请注意，这种方法会加大计算量和参数量。
+这种方法是通过将很多不同的网络的结果进行动态加权来提升网络性能的一种方法。
 
 ![image-20210509174050883](./src/Dynamic-Neural-Networks-A-Survey/image-20210509174050883.png)
 
@@ -185,14 +183,106 @@
 - (a)是一种“软加权”，对多个网络的输出进行动态加权，每个子网络都会被执行完，通过调节加权达到更好的性能。
 - (b)是一种“硬加权”，通过一个`Gating Module`决定某个子网络是否参与决策。如果某个子网络不参与决策，则它根本不会被执行。
 
-#### 动态全连接层大小（Dynamic width of fully-connected layers）
+请注意，这种方法会加大计算量和参数量。在后面的动态参数方法中，会介绍一种和该方法思路很类似的方法。
+
+##### 动态全连接层大小（Dynamic width of fully-connected layers）
 
 自如起名，动态修改全连接层的大小，不需要任何额外模块和设计。这里不做详细介绍。
 
 ---
 
-### 动态路由（Dynamic Routing）
+#### 动态路由（Dynamic Routing）
 
-上面介绍的动态深度和动态宽度的方法广义上实际上都能视为某种简单的动态路由方法。这里的动态路由单独拿出来，指具有更加复杂的超网络结构的动态路由。
+上面介绍的动态深度和动态宽度的方法广义上实际上都能视为某种简单的动态路由方法。这里的动态路由单独拿出来，指具有更加复杂的超网络结构（超网络不再是简单地链式结构）的动态路由，这种结构甚至会给不同的样本以不同的计算图。
 
-//todo 我还没写完
+![](./src/Dynamic-Neural-Networks-A-Survey/image-20210509114605362.jpg)
+
+这里有两个可能的设计：
+
+- (c)是一种树状结构
+- (d)是一种多尺度的动态结构
+
+---
+
+### 动态参数（Dynamic Parameters）
+
+动态参数指的是网络会根据输入的不同使用不同的参数对输入进行运算。可能的动态参数方法有：
+
+![image-20210510083907081](./src/Dynamic-Neural-Networks-A-Survey/image-20210510083907081.png)
+
+- (a)使用一个动态参数加权调节（Parameter Adjustment）模块，根据输入产生一个影响运算参数的参数。
+- (b)使用一个动态参数产生（Parameter Generation）模块，根据输入的不同产生不同的参数比如新的卷积核，对输入进行运算。
+- (c)软注意力（Soft attention）方法
+
+#### 动态参数加权（Attention on weight）
+
+动态参数的设计能够提升模型的表达能力。下面举一个简单地例子进行说明：
+
+![image-20210510084536681](./src/Dynamic-Neural-Networks-A-Survey/image-20210510084536681.png)
+
+在上图中`+`表示加和，$\alpha_1$、$\alpha_2$、$\alpha_3$分别表示一个动态参数调节模块产生的权重。根据输入的不同，这三个提前设定的卷积核通过不同的权重加权形成新的卷积核。上图中的这种操作等效于：
+
+![image-20210510084826504](./src/Dynamic-Neural-Networks-A-Survey/image-20210510084826504.png)
+
+输入分别与三个不同的卷积核进行运算，并且通过$\alpha_1$、$\alpha_2$、$\alpha_3$三个权重加权形成输出。这种设计让人不禁想到在动态结构的设计中出现的专家子网络加权（Mixture of Experts，MOE）方法。不过之前的专家子网络加权方法在这种情形下要卷积三次，而动态参数加权的设计只卷积一次。
+
+上面这两种等效的表达可以写为下列等式：
+$$
+(\sum_{n}a_n w_n)\cdot x = \sum_{n}a_n(w_n\cdot x)
+$$
+
+
+#### 动态卷积核形状（Kernel shape adaptation）
+
+动态卷积核形状的方法能根据输入的不同调节卷积核的形状，以此来获得不同的感受野。比较著名的相关工作是一篇叫做Deformable Convolutional Networks（可形变卷积网络）的论文。
+
+![image-20210510091338617](./src/Dynamic-Neural-Networks-A-Survey/image-20210510091338617.png)
+
+上图是论文Deformable Convolutional Networks中的示意图。
+
+#### 动态参数和注意力的关系（Dynamic features or Dynamic weights）
+
+有一个很好的问题：
+
+> The goal of dynamic parameters is generating dynamic features. So why not rescale features directly with attention?
+
+注意力机制也是为了动态产生特征的，为什么还要有动态参数的方法呢？例如，在较为出名的transformer中，是通过key和query的相似度对value进行动态调节；还有SENet（Squeeze-and-excitation networks）中，对不同通道进行的动态调节。
+
+![image-20210510094907451](./src/Dynamic-Neural-Networks-A-Survey/image-20210510094907451.png)
+
+上图是SENet中提及的方法，输入经过正常的卷积运算产生一些channel，同时一个注意力模块（Attention Module）接收输入并产生一个注意力向量，作用于卷积产生的这些channel，使它们被乘以不同的权值。这种方法被称作通道注意力（Channel-wise attention）。
+
+所以在某些角度上我们可以说：
+$$
+DynamicFeatures = DynamicWeight
+$$
+表示为公式就是：
+$$
+(x\times W)\otimes \alpha  =  x\times(W\otimes \alpha)\\
+$$
+其中，符号$\otimes$是克罗内克积，可以查阅相关资料进行了解。
+
+上述公式中，等号左侧是动态卷积，先使用$W$对输入的$x$完成卷积，再乘上参数$\alpha$；等号右侧是动态参数，先使用参数$\alpha$影响卷积参数$w$，再对输入的$x$进行卷积。它们在数学上是等价的。
+
+---
+
+## 空间自适应的动态神经网络（Spatial-wise dynamic networks）
+
+传统的卷积神经网络存在一个问题：
+
+> Most conventional networks perform the same computation across different spatial locations of an image.
+
+对于一张图片，在不同位置包含的信息量可能是不一样的。所以传统网络对图像中每个不同的位置使用相同的运算方法听上去会带来很多冗余的计算量。
+
+在这篇论文中，作者将空间自适应方法大致分：
+
+- 像素级（Pixel Level）
+  - 动态结构（Dynamic Architecture）
+  - 动态参数（Dynamic Parameter）
+- 区域级（Region Level）
+  - 动态变换（Dynamic Transformation）
+  - 硬注意力（Hard Attention）
+- 分辨率级（Resolution Level）
+  - 自适应缩放率（Adaptive Scaling Ratios）
+  - 多尺度架构（Multi-scalue Architecture）
+
