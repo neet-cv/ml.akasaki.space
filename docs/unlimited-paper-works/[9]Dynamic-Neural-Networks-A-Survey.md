@@ -246,7 +246,7 @@ $$
 
 > The goal of dynamic parameters is generating dynamic features. So why not rescale features directly with attention?
 
-注意力机制也是为了动态产生特征的，为什么还要有动态参数的方法呢？例如，在较为出名的transformer中，是通过key和query的相似度对value进行动态调节；还有SENet（Squeeze-and-excitation networks）中，对不同通道进行的动态调节。
+注意力机制也是为了动态产生特征的，为什么还要有动态参数的方法呢？例如，在较为出名的transformer中，是通过key和query的相似度对value进行动态调节；还有SENet（[Squeeze-and-excitation networks](https://arxiv.org/abs/1709.01507)）中，对不同通道进行的动态调节。
 
 ![image-20210510094907451](./src/Dynamic-Neural-Networks-A-Survey/image-20210510094907451.png)
 
@@ -286,3 +286,57 @@ $$
   - 自适应缩放率（Adaptive Scaling Ratios）
   - 多尺度架构（Multi-scalue Architecture）
 
+#### 像素级自适应（Pixel Level）
+
+像素级的一种代表工作如下：
+
+![image-20210510144149172](./src/Dynamic-Neural-Networks-A-Survey/image-20210510144149172-1620628910961.png)
+
+在上图中，对于输入，经过一个轻量化的计算得到一个Mask代表哪些位置是重要的。根据生成的Mask进行一个稀疏的卷积，并得到一个稀疏的输出。对于没有被Mask覆盖的区域，可能通过Skip Connection等方式直接跳过运算，直接得到输出。
+
+#### 区域级自适应（Region-Level）
+
+区域级空间自适应方法的一种可行的方法是：
+
+![image-20210510145118821](./src/Dynamic-Neural-Networks-A-Survey/image-20210510145118821.png)
+
+将图片输入到一个选择器中，选择器选出其中比较重要的一部分（抠出一个小Patch），并只将这一部分输入进网络或运算模块。
+
+![image-20210510145427441](./src/Dynamic-Neural-Networks-A-Survey/image-20210510145427441.png)
+
+上图是一篇名为[Glance and Focus: a Dynamic Approach to Reducing Spatial Redundancy in Image Classification](https://arxiv.org/abs/2010.05300)的相关论文中的一个示意图。对于较为简单的样本，在一个小分辨率上直接得到可信的预测；对于复杂的样本，在网络得到置信度很高的输出之前，不断从图片中选择“较为重要”的一部分继续推测。
+
+这种方法除了实现了一种注意力机制之外，还实现了网络的早退。
+
+#### 分辨率级自适应（Resolution-Level）
+
+分辨率自适应也是一种基于早退的方法，其基本构想是使用递进的网络深度处理不同分辨率的输入。
+
+![image-20210510150347394](./src/Dynamic-Neural-Networks-A-Survey/image-20210510150347394.png)
+
+上图截取自相关工作RANet（[Resolution Adaptive Networks for Efficient Inference](https://arxiv.org/abs/2003.07326)），对于简单的输入，使用一个很小的子网络，若达到很好的置信度输出，则早退；对于复杂的输入，使用更深的网络进行推断。
+
+![image-20210510150607144](./src/Dynamic-Neural-Networks-A-Survey/image-20210510150607144.png)
+
+上图是RANet的一种推断过程。图中各层`Conv Block`之间的蓝色箭头实现了特征复用。
+
+## 时间自适应（Temporal-wise dynamic network）
+
+对于序列的输入，例如视频或文本的输入，可以使用时间自适应的动态网络结构。
+
+这篇论文将时间自适应的网络分为：
+
+- 用于处理文本（Text）
+  - 动态更新隐藏态（Dynamic Update of Hidden States）
+  - 时间早退（Temporally Early Exiting）
+  - 动态跳跃（Dynamic Jumping）
+- 用于处理视频（Video）
+  - 动态循环神经网络（Dynamic RNNs）
+    - 动态更新隐藏态（Dynamic Update of Hidden States）
+    - 时间早退（Temporally Early Exiting）
+    - 动态跳跃（Dynamic Jumping）
+  - 帧采样（Frame Sampling）
+
+![image-20210510151837557](./src/Dynamic-Neural-Networks-A-Survey/image-20210510151837557.png)
+
+上图是常见的时间自适应设计。
