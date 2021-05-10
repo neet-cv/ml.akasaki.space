@@ -30,47 +30,58 @@ module.exports = {
             '/': [
                 {
                     title: '第零章：在开始之前',
-                    children: getSidebar('ch0')
+                    children: getSidebar('ch0'),
+                    sidebarDepth: 4
                 },
                 {
                     title: '第一章上：HelloWorld',
-                    children: getSidebar('ch1p1')
+                    children: getSidebar('ch1p1'),
+                    sidebarDepth: 4
                 },
                 {
                     title: '第一章下：深度学习基础',
-                    children: getSidebar('ch1p2')
+                    children: getSidebar('ch1p2'),
+                    sidebarDepth: 4
                 },
                 {
                     title: '第二章上：卷积神经网络',
-                    children: getSidebar('ch2p1')
+                    children: getSidebar('ch2p1'),
+                    sidebarDepth: 4
                 },
                 {
                     title: '第二章下：经典卷积神经网络',
-                    children: getSidebar('ch2p2')
+                    children: getSidebar('ch2p2'),
+                    sidebarDepth: 4
                 },
                 {
                     title: '第三章上：谈一些计算机视觉方向',
-                    children: getSidebar('ch3p1')
+                    children: getSidebar('ch3p1'),
+                    sidebarDepth: 4
                 },
                 {
                     title: '第三章下：一些计算机视觉任务',
-                    children: getSidebar('ch3p2')
+                    children: getSidebar('ch3p2'),
+                    sidebarDepth: 4
                 },
                 {
                     title: '附录：永远是你的好朋友',
-                    children: getSidebar('appendix')
+                    children: getSidebar('appendix'),
+                    sidebarDepth: 4
                 },
                 {
                     title: '第-1章：TensorFlow编程策略',
-                    children: getSidebar('ch-1')
+                    children: getSidebar('ch-1'),
+                    sidebarDepth: 4
                 },
                 {
                     title: '第-2章：数字信号处理（DSP）',
-                    children: getSidebar('ch-2')
+                    children: getSidebar('ch-2'),
+                    sidebarDepth: 4
                 },
                 {
                     title: '魔法部日志（又名论文阅读日志）',
-                    children: getSidebar('unlimited-paper-works')
+                    children: getSidebar('unlimited-paper-works'),
+                    sidebarDepth: 4
                 },
             ]
         }
