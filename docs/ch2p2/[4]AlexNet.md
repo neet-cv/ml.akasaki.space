@@ -73,27 +73,29 @@ testing_x = (testing_x.astype('float32') / 255.)
 
 ```python
 model = Sequential([
-    # Conv block #1
+    # 第一层卷积
     layers.Conv2D(filters=96, kernel_size=(3, 3)),
+    # 第一层卷积具有BN层
     layers.BatchNormalization(),
     layers.Activation('relu'),
     layers.MaxPool2D(pool_size=(3, 3), strides=2),
-    # Conv block #2
+    # 第二层卷积
     layers.Conv2D(filters=256, kernel_size=(3, 3)),
+    # 第二层卷积具有BN层
     layers.BatchNormalization(),
     layers.Activation('relu'),
     layers.MaxPool2D(pool_size=(3, 3), strides=2),
-    # Conv block #3
+    # 第三层卷积，并没有BN层，也没有池化
     layers.Conv2D(filters=384, kernel_size=(3, 3), padding='same',
                   activation='relu'),
-    # Conv block #4
+    # 第四层卷积，并没有BN层，也没有池化
     layers.Conv2D(filters=384, kernel_size=(3, 3), padding='same',
                   activation='relu'),
-    # Conv block #5
+    # 第五层卷积，并没有BN层
     layers.Conv2D(filters=256, kernel_size=(3, 3), padding='same',
                   activation='relu'),
     layers.MaxPool2D(pool_size=(3, 3), strides=2),
-    # Dense fully connected
+    # 打平进入全连接进行分类
     layers.Flatten(),
     layers.Dense(2048, activation='relu'),
     layers.Dropout(0.5),
