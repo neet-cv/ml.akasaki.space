@@ -2,18 +2,16 @@ name: Build and Deploy
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
-on: push
+on: [ push, pull_request ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+
   build:
-    # The type of runner that the job will run on
+    name: Build
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Git checkout
         uses: actions/checkout@v2
 
@@ -48,3 +46,15 @@ jobs:
           publish_branch: vuepress_pages
           force_orphan: true
           cname: 'ml.akasaki.space'
+
+  check_path:
+    name: Check file paths for Windows
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Check file paths
+        run: |
+          find | grep '[\\\\<>:"|?*]' && exit 1 || exit 0
