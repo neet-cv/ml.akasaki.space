@@ -4,7 +4,7 @@
 
 原论文[Feature Pyramid Networks for Object Detection](https://arxiv.org/abs/1612.03144)。
 
-这篇论文就是大家熟知的FPN了。FPN是比较早期的一份工作（CVPR2017），在当时具有很多亮点：FPN主要解决的是物体检测中的多尺度问题，通过简单的网络连接改变，在基本不增加原有模型计算量情况下，大幅度提升了小物体检测的性能。
+这篇论文就是大家熟知的FPN了。FPN是**比较早期的一份工作**（请注意，这篇论文只是多尺度特征融合的一种方式。不过这篇论文提出的比较早（CVPR2017），在当时看来是非常先进的），在当时具有很多亮点：FPN主要解决的是物体检测中的多尺度问题，通过简单的网络连接改变，在基本不增加原有模型计算量情况下，大幅度提升了小物体检测的性能。
 
 > Feature pyramids are a basic component in recognition systems for detecting objects at different scales. But recent deep learning object detectors have avoided pyramid representations, in part because they are compute and memory intensive. In this paper, we exploit the inherent multi-scale, pyramidal hierarchy of deep convolutional networks to construct feature pyramids with marginal extra cost. A top-down architecture with lateral connections is developed for building high-level semantic feature maps at all scales. This architecture, called a Feature Pyramid Network (FPN), shows significant improvement as a generic feature extractor in several applications. Using FPN in a basic Faster R-CNN system, our method achieves state-of-the-art single-model results on the COCO detection benchmark without bells and whistles, surpassing all existing single-model entries including those from the COCO 2016 challenge winners. In addition, our method can run at 5 FPS on a GPU and thus is a practical and accurate solution to multi-scale object detection. Code will be made publicly available.
 
