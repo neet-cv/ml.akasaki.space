@@ -1,4 +1,6 @@
-# 图像语义分割综述
+# A Review on Deep Learning Techniques Applied to Semantic Segmentation
+
+### 这篇笔记的写作者是[VisualDust](https://github.com/visualDust)。
 
 这是一篇关于综述论文的解读。[原论文（A Review on Deep Learning Techniques Applied to Semantic Segmentation）](https://arxiv.org/pdf/1704.06857.pdf)
 
