@@ -37,7 +37,7 @@
 
 假设输入层为一个大小为64×64像素、三通道彩色图片。经过一个包含4个Filter的卷积层，最终输出4个Feature Map，且尺寸与输入层相同。
 
-![image-20210516170258393](E:/Workspace/MemoLibrary/PaperRepo/PaperNote/MobileNetV2%20Inverted%20Residuals%20and%20linear%20bottleneck/src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210516170258393.png)
+![image-20210516170258393](./src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210516170258393.png)
 
 
 
@@ -53,7 +53,7 @@ N_std = 4 × 3 × 3 × 3 = 108
 
   第一层做深度卷积(DW)，通过使用对每一个通道使用轻量级的卷积进行滤波。对每一个通道使用卷积，在二维平面上进行，运算完之后生成3个特征图，此时通道数并没有扩大，没有有效利用不同通道上相同位置的特征信息。所以需要接下来的点卷积(PW)
 
-![image-20210516165901837](E:/Workspace/MemoLibrary/PaperRepo/PaperNote/MobileNetV2%20Inverted%20Residuals%20and%20linear%20bottleneck/src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210516165901837.png)
+![image-20210516165901837](./src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210516165901837.png)
 
 ```python
 # 参数量
@@ -62,7 +62,7 @@ N_depthwise = 3 × 3 × 3 = 27
 
 第二层是一个$1\times 1$的卷积，叫做点卷积，负责通过计算输入通道的线性组合来建立新的特征。
 
-- ![image-20210516165910834](E:/Workspace/MemoLibrary/PaperRepo/PaperNote/MobileNetV2%20Inverted%20Residuals%20and%20linear%20bottleneck/src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210516165910834.png)
+- ![image-20210516165910834](./src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210516165910834.png)
 
 ```python
 # 参数量
@@ -94,7 +94,7 @@ N_sum = N_depthwise + N_pointwise = 39
 
   如果当前激活空间内兴趣流形完整度较高，经过ReLU，可能会让激活空间坍塌，不可避免的会丢失信息。
 
-  ![image-20210516162727671](E:/Workspace/MemoLibrary/PaperRepo/PaperNote/MobileNetV2%20Inverted%20Residuals%20and%20linear%20bottleneck/src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210516162727671.png)
+  ![image-20210516162727671](./src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210516162727671.png)
 
   如图所示，输入的是一个二维的数据，兴趣流形就是蓝色的螺旋线，本例使用矩阵$T$将数据嵌入到n维空间中，后接ReLU，再使用$T^{-1}$将其投影回2D平面。可以看到设置$n=2,3$时信息丢失严重，中心点坍塌掉了。当$n=15..30$之间，恢复的信息明显多了。
 
@@ -118,9 +118,9 @@ N_sum = N_depthwise + N_pointwise = 39
 
 网络结构如下:
 
-![image-20210516160202078](E:/Workspace/MemoLibrary/PaperRepo/PaperNote/MobileNetV2%20Inverted%20Residuals%20and%20linear%20bottleneck/src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210516160202078.png)
+![image-20210516160202078](./src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210516160202078.png)
 
-![img](E:/Workspace/MemoLibrary/PaperRepo/PaperNote/MobileNetV2%20Inverted%20Residuals%20and%20linear%20bottleneck/src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/v2-38bcaaee3e9e28611ecc984727e6d598_720w.jpg)
+![img](./src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/v2-38bcaaee3e9e28611ecc984727e6d598_720w.jpg)
 
 设计思路主要还是深度可分离卷积模块的堆叠，在v1的基础上，除了使用DSC模块之外，添加了**Projection layer**和**Expansion layer**。在提取特征的时候使用高维tensor(高维信息多)，在处理特征的时候使用低维tensor.
 
@@ -128,7 +128,7 @@ N_sum = N_depthwise + N_pointwise = 39
 
 **Expansion layer**的功能正相反，使用$1\times 1$的网络结构，目的是将**低维空间映射到高维空间**。这里**Expansion factor**有一个超参数是维度扩展几倍。可以根据实际情况来做调整的，默认值是6，也就是扩展6倍。
 
-![image-20210516161042196](E:/Workspace/MemoLibrary/PaperRepo/PaperNote/MobileNetV2%20Inverted%20Residuals%20and%20linear%20bottleneck/src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210516161042196.png)
+![image-20210516161042196](./src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210516161042196.png)
 
 此图更详细的展示了整个模块的结构。我们输入是24维，最后输出也是24维。但这个过程中，我们扩展了6倍，然后应用深度可分离卷积进行处理。
 
@@ -136,7 +136,7 @@ N_sum = N_depthwise + N_pointwise = 39
 
 与传统的Residuals不同，传统的ResNet网络结构如下：
 
-![image-20210516161633202](E:/Workspace/MemoLibrary/PaperRepo/PaperNote/MobileNetV2%20Inverted%20Residuals%20and%20linear%20bottleneck/src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210516161633202.png)
+![image-20210516161633202](./src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210516161633202.png)
 
 可以注意到，对比**Inverted**版本的，在残差求和之前，他们都是维度比较小的，经过一个$1\times 1$卷积之后变回原来的通道数（高维->低维）。而Inverted版本的是输入较低维度的，在残差求和之前通过Expansion layer使用$1\times 1$的网络架构将低维空间映射到高维空间。（低维->高维）
 
@@ -146,7 +146,7 @@ N_sum = N_depthwise + N_pointwise = 39
 
 然而，如果只是使用低维的tensor效果并不会好。如果卷积层的过滤器都是使用低维的tensor来提取特征的话，那么就没有办法提取到整体的足够多的信息。所以，如果提取特征数据的话，我们可能更希望有高维的tensor来做这个事情。V2就设计这样一个结构来达到平衡。
 
-![img](E:/Workspace/MemoLibrary/PaperRepo/PaperNote/MobileNetV2%20Inverted%20Residuals%20and%20linear%20bottleneck/src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/v2-0595ba48c058f23b476f2ce7b4663237_720w.jpg)
+![img](./src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/v2-0595ba48c058f23b476f2ce7b4663237_720w.jpg)
 
 先通过Expansion layer来扩展维度，之后在用深度可分离卷积来提取特征，之后使用Projection layer来压缩数据，让网络从新变小。因为Expansion layer 和 Projection layer都是有可以学习的参数，所以整个网络结构可以学习到如何更好的扩展数据和从新压缩数据。
 
