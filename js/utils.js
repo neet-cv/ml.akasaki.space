@@ -41,7 +41,7 @@ function getSidebar(folder) {
 }
 
 function readMDFileTitle(path) {
-    var match = fs.readFileSync(path, 'utf8').match(/^# (.+?)\n/m);
+    var match = fs.readFileSync(path, 'utf8').match(/^# (.+?)[\r\n]/m);
     return match ? match[1] : path;
 }
 
