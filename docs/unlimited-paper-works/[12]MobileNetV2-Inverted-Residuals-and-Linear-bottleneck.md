@@ -146,7 +146,7 @@ N_sum = N_depthwise + N_pointwise = 39
 
 然而，如果只是使用低维的tensor效果并不会好。如果卷积层的过滤器都是使用低维的tensor来提取特征的话，那么就没有办法提取到整体的足够多的信息。所以，如果提取特征数据的话，我们可能更希望有高维的tensor来做这个事情。V2就设计这样一个结构来达到平衡。
 
-![image-20210517095431302](./src/%5B12%5DMobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210517095431302.png)
+![image-20210517095431302](./src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210517095431302.png)
 
 先通过Expansion layer来扩展维度，之后在用深度可分离卷积来提取特征，之后使用Projection layer来压缩数据，让网络从新变小。因为Expansion layer 和 Projection layer都是有可以学习的参数，所以整个网络结构可以学习到如何更好的扩展数据和从新压缩数据。
 
