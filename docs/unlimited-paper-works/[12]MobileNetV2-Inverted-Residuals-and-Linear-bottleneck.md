@@ -120,7 +120,7 @@ N_sum = N_depthwise + N_pointwise = 39
 
 ![image-20210516160202078](./src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210516160202078.png)
 
-![image-20210517095545070](./src/%5B12%5DMobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210517095545070.png)
+![image-20210517095545070](./src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210517095545070.png)
 
 设计思路主要还是深度可分离卷积模块的堆叠，在v1的基础上，除了使用DSC模块之外，添加了**Projection layer**和**Expansion layer**。在提取特征的时候使用高维tensor(高维信息多)，在处理特征的时候使用低维tensor.
 
