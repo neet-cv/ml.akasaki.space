@@ -14,6 +14,10 @@ module.exports = {
         ['meta', {
             name: 'keywords',
             content: 'Akasaki,Deep learning,Machine learning,工具箱,工具箱的深度学习记事簿,Akasaki的深度学习记事簿'
+        }],
+        ['meta', {
+            name: 'google-site-verification',
+            content: 'VVNYs0bXM_EKTgxJ8XIfvXShjHsksGNv3YNedxBGFjU'
         }]
     ],
     themeConfig: {
