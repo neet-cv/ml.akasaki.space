@@ -9,7 +9,7 @@
 
 摘要:
 
-> In this paper we describe a new mobile architecture, MobileNetV2, that improves the state of the art performance of mobile models on multiple tasks and bench- marks as well as across a spectrum of different model sizes. We also describe efficient ways of applying these mobile models to object detection in a novel framework we call SSDLite. Additionally, we demonstrate how to build mobile semantic segmentation models through a reduced form of DeepLabv3 which we call Mobile DeepLabv3. is based on an inverted residual structure where the shortcut connections are between the thin bottle- neck layers. The intermediate expansion layer uses lightweight depthwise convolutions to filter features as a source of non-linearity. Additionally, we find that it is important to remove non-linearities in the narrow layers in order to maintain representational power. We demon- strate that this improves performance and provide an in- tuition that led to this design. Finally, our approach allows decoupling of the in- put/output domains from the expressiveness of the trans- formation, which provides a convenient framework for further analysis. We measure our performance on ImageNet [1] classification, COCO object detection [2], VOC image segmentation [3]. We evaluate the trade-offs between accuracy, and number of operations measured by multiply-adds (MAdd), as well as actual latency, and the number of parameters.
+> In this paper we describe a new mobile architecture, MobileNetV2, that improves the state of the art performance of mobile models on multiple tasks and bench- marks as well as across a spectrum of different model sizes. We also describe efficient ways of applying these mobile models to object detection in a novel framework we call SSDLite. Additionally, we demonstrate how to build mobile semantic segmentation models through a reduced form of DeepLabv3 which we call Mobile DeepLabv3. is based on an inverted residual structure where the shortcut connections are between the thin bottle- neck layers. The intermediate expansion layer uses lightweight depthwise convolutions to filter features as a source of non-linearity. Additionally, we find that it is important to remove non-linearities in the narrow layers in order to maintain representational power. We demon- strate that this improves performance and provide an in- tuition that led to this design. Finally, our approach allows decoupling of the in- put/output domains from the expressiveness of the trans- formation, which provides a convenient framework for further analysis. We measure our performance on ImageNet classification, COCO object detection [2], VOC image segmentation [3]. We evaluate the trade-offs between accuracy, and number of operations measured by multiply-adds (MAdd), as well as actual latency, and the number of parameters.
 
 ## Introduction
 
@@ -120,19 +120,19 @@ N_sum = N_depthwise + N_pointwise = 39
 
 ![image-20210516160202078](./src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210516160202078.png)
 
-![img](./src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/v2-38bcaaee3e9e28611ecc984727e6d598_720w.jpg)
+![image-20210517095545070](./src/%5B12%5DMobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210517095545070.png)
 
 设计思路主要还是深度可分离卷积模块的堆叠，在v1的基础上，除了使用DSC模块之外，添加了**Projection layer**和**Expansion layer**。在提取特征的时候使用高维tensor(高维信息多)，在处理特征的时候使用低维tensor.
 
-**Projection layer**也是使用$1\times 1$的网络结构，他的目的是希望把**高维特征映射到低维空间**去。使用 $1\times 1$的网络结构将高维空间映射到低维空间的设计有的时候我们也称之为**Bottleneck layer。**与传统的残差连接不同，对于一个块大小为$h\times w$，扩展因子为$t$和卷积核大小为$k$，输入通道为$d'$，输出通道为$d''$总共需要进行$h\times w\times d'\times t(d'+k^2+d'')$次乘法。通过一个额外的$1\times 1$卷积使得网络能够利用更小的输入和输出。从而实现降低维度大小，也就是降低乘法计算量的方法.
+**Projection layer**也是使用$1\times 1$的网络结构，他的目的是希望把**高维特征映射到低维空间**去。使用 $1\times 1$的网络结构将高维空间映射到低维空间的设计有的时候我们也称之为**Bottleneck layer。**
 
-**Expansion layer**的功能正相反，使用$1\times 1$的网络结构，目的是将**低维空间映射到高维空间**。这里**Expansion factor**有一个超参数是维度扩展几倍。可以根据实际情况来做调整的，默认值是6，也就是扩展6倍。
+**Expansion layer**的功能正相反，使用$1\times 1$的网络结构，目的是将**低维空间映射到高维空间**。这里**Expansion factor**有一个超参数(Expansion Factor)是维度扩展几倍。可以根据实际情况来做调整的，默认值是6，也就是扩展6倍。与传统的残差连接不同，对于一个块大小为$h\times w$，扩展因子为$t$和卷积核大小为$k$，输入通道为$d'$，输出通道为$d''$总共需要进行$h\times w\times d'\times t(d'+k^2+d'')$次乘法。通过一个额外的$1\times 1$卷积使得网络能够利用更小的输入和输出。从而实现降低维度大小，也就是降低乘法计算量的方法.
 
 ![image-20210516161042196](./src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210516161042196.png)
 
 此图更详细的展示了整个模块的结构。我们输入是24维，最后输出也是24维。但这个过程中，我们扩展了6倍，然后应用深度可分离卷积进行处理。
 
-**bottleneck residual block（ResNet）**是中间窄两头胖**(中间是维度小的，两边是维度大的)**，在MobileNetV2中正好反了过来**(中间是维度大的，两边是维度小的)**，所以，在MobileNetV2的论文中我们称这样的网络结构为**Inverted residuals**。需要注意的是residual connection是在输入和输出的部分进行连接。另外，我们之前已经讲的**Linear Bottleneck**在这里使用，因为从高维向低维转换，使用ReLU激活函数可能会造成信息丢失或破坏（不使用非线性激活数数）。所以在projection convolution这一部分，**我们不再使用ReLU激活函数而是使用线性激活函数。**（这也是为什么前面要提到linear bottleneck）
+**bottleneck residual block(ResNet)**是中间窄两头胖**(中间是维度小的，两边是维度大的)**，在MobileNetV2中正好反了过来**(中间是维度大的，两边是维度小的)**，所以，在MobileNetV2的论文中我们称这样的网络结构为**Inverted residuals**。需要注意的是residual connection是在输入和输出的部分进行连接。另外，我们之前已经讲的**Linear Bottleneck**在这里使用，因为从高维向低维转换，使用ReLU激活函数可能会造成信息丢失或破坏（不使用非线性激活数数）。所以在projection convolution这一部分，**我们不再使用ReLU激活函数而是使用线性激活函数。**（这也是为什么前面要提到linear bottleneck）
 
 与传统的Residuals不同，传统的ResNet网络结构如下：
 
@@ -146,7 +146,7 @@ N_sum = N_depthwise + N_pointwise = 39
 
 然而，如果只是使用低维的tensor效果并不会好。如果卷积层的过滤器都是使用低维的tensor来提取特征的话，那么就没有办法提取到整体的足够多的信息。所以，如果提取特征数据的话，我们可能更希望有高维的tensor来做这个事情。V2就设计这样一个结构来达到平衡。
 
-![img](./src/MobileNetV2-Inverted-Residuals-and-Linear-bottleneck/v2-0595ba48c058f23b476f2ce7b4663237_720w.jpg)
+![image-20210517095431302](./src/%5B12%5DMobileNetV2-Inverted-Residuals-and-Linear-bottleneck/image-20210517095431302.png)
 
 先通过Expansion layer来扩展维度，之后在用深度可分离卷积来提取特征，之后使用Projection layer来压缩数据，让网络从新变小。因为Expansion layer 和 Projection layer都是有可以学习的参数，所以整个网络结构可以学习到如何更好的扩展数据和从新压缩数据。
 
