@@ -1,6 +1,6 @@
 # MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications
 
-#### 这篇笔记的写作者是[PommesPeter](https://github.com/PommesPeter)。
+### 这篇笔记的写作者是[PommesPeter](https://github.com/PommesPeter)。
 
 这是一篇讲解一种轻量级主干网络的论文。[原论文（MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications）](https://arxiv.org/abs/1704.04861)。
 
@@ -93,11 +93,11 @@
 
 ![image-20210518111850667](./src/MobileNets-Efficient-Convolutional-Neural-Networks-for-Mobile-Vision-Applications/image-20210518111850667.png)
 
-![image-20210518111920979](src/MobileNets-Efficient-Convolutional-Neural-Networks-for-Mobile-Vision-Applications/image-20210518111920979.png)
+![image-20210518111920979](./src/MobileNets-Efficient-Convolutional-Neural-Networks-for-Mobile-Vision-Applications/image-20210518111920979.png)
 
-![image-20210518111929583](src/MobileNets-Efficient-Convolutional-Neural-Networks-for-Mobile-Vision-Applications/image-20210518111929583.png)
+![image-20210518111929583](./src/MobileNets-Efficient-Convolutional-Neural-Networks-for-Mobile-Vision-Applications/image-20210518111929583.png)
 
-![image-20210518111942245](src/MobileNets-Efficient-Convolutional-Neural-Networks-for-Mobile-Vision-Applications/image-20210518111942245.png)
+![image-20210518111942245](./src/MobileNets-Efficient-Convolutional-Neural-Networks-for-Mobile-Vision-Applications/image-20210518111942245.png)
 
 
 
