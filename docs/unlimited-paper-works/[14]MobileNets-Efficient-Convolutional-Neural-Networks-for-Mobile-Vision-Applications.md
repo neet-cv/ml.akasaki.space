@@ -73,7 +73,7 @@
 
   ![image-20210518110406332](./src/MobileNets-Efficient-Convolutional-Neural-Networks-for-Mobile-Vision-Applications/image-20210518110406332.png)
 
-  ![image-20210518112758044](src/MobileNets-Efficient-Convolutional-Neural-Networks-for-Mobile-Vision-Applications/image-20210518112758044.png)
+  ![image-20210518112758044](./src/MobileNets-Efficient-Convolutional-Neural-Networks-for-Mobile-Vision-Applications/image-20210518112758044.png)
 
 - Hyper-Parameters
 
