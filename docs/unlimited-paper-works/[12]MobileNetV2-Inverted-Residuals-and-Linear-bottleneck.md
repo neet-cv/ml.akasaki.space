@@ -1,6 +1,6 @@
 # MobileNetV2: Inverted Residuals and Linear Bottlenecks
 
-#### 这篇笔记的写作者是[PommesPeter](https://github.com/PommesPeter)。
+### 这篇笔记的写作者是[PommesPeter](https://github.com/PommesPeter)。
 
 这是一篇讲解一种轻量级主干网络的论文。[原论文（MobileNetV2: Inverted Residuals and Linear Bottlenecks）](https://arxiv.org/abs/1801.04381)。
 
