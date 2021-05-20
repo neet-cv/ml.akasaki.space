@@ -1,6 +1,6 @@
 # VGG的代码实现
 
-这里不会包含任何讲解的内容，讲解的内容请参考[VGG：可复用的网络块](./VGGNet.md)。
+这里不会包含任何讲解的内容，讲解的内容请参考[VGG：可复用的网络块](./[7]VGGNet.md)。
 
 ```python
 import tensorflow as tf
