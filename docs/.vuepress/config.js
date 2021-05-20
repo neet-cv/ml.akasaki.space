@@ -62,7 +62,7 @@ module.exports = {
                     children: getSidebar('ch3p1'),
                 },
                 {
-                    title: '第三章下：一些计算机视觉任务',
+                    title: '第三章下：了解更高级的技术',
                     children: getSidebar('ch3p2'),
                 },
                 {
