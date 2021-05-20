@@ -256,4 +256,5 @@ Epoch10, loss:0.191986545920372, Acc:94.149169921875%, test_loss:0.0999863892793
 
 ### 整个Pure代码
 
-请参考[LeNet代码实现](./LeNet-code.md)
+请参考[LeNet代码实现](./[2]LeNet-code.md)
+
