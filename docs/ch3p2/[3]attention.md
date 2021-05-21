@@ -8,7 +8,7 @@
 
 Attention机制听上去是一个很高大上的词汇，实际上，Attention在不经意间就会被使用。例如，循环神经网络中每一步计算都依赖于上一步计算结果的过程就可以被视为一种Attention：在 Attention 机制引入之前，有一个问题大家一直很苦恼：长距离的信息会被弱化，就好像记忆能力弱的人，记不住过去的事情是一样的。
 
-![img](src/attention/050PPR_S07iQPbpke.jpg)
+![img](./src/attention/050PPR_S07iQPbpke.jpg)
 
 如上图，在处理序列的循环神经网咯中，Attention的功能是关注重点，就算文本比较长，也能从中间抓住重点，不丢失重要的信息。上图中红色的预期就是被挑出来的重点。
 
@@ -31,6 +31,7 @@ Attention具有以下三大优点：
 ## Attention的基本理解
 
 Attention机制如果浅层的理解，跟他的名字非常匹配。他的核心逻辑就是**从关注全部到关注重点**。
+
 
 ### Attention的计算区域
 

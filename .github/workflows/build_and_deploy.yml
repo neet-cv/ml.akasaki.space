@@ -48,13 +48,17 @@ jobs:
           cname: 'ml.akasaki.space'
 
   check_path:
-    name: Check file paths for Windows
+    name: Check
     runs-on: ubuntu-latest
 
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
 
-      - name: Check file paths
+      - name: Check file paths for Windows
         run: |
           find | grep '[\\\\<>:"|?*]' && exit 1 || exit 0
+
+      - name: Check image paths
+        run: |
+          grep -P '!\[.*\]\((?!(https?:|\.|/)).+\)' docs/**/*.md && exit 1 || exit 0
