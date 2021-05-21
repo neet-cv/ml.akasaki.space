@@ -61,4 +61,4 @@ jobs:
 
       - name: Check image paths
         run: |
-          grep '](src' docs/**/*.md && exit 1 || exit 0
+          grep -P '!\[.*\]\((?!(https?:|\.|/)).+\)' docs/**/*.md && exit 1 || exit 0
