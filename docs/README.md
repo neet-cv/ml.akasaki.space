@@ -1,5 +1,7 @@
 # `工具箱的`深度學習記事簿
 
+这里是`https://ml.akasaki.space/`的Pytorch版本，CoronaPolvo在咕了Akasaki一个学期后终于开始翻译这个仓库Pytorch版本的代码了`[2021|5|24]`
+
 <details>
 <summary><strong>点击此处展开一堆P话</strong></summary>
 “理解机器学习和深度学习的最佳方法是学以致用。”
@@ -19,7 +21,7 @@ Akasaki很菜，所以慢慢地学着，并在记事簿上写下笔记。Akasaki
 
 - 本仓库的功能：`入门深度学习`、`参考常用代码`、`了解深度神经网络经典论文`。请注意，本仓库后半部分主要讨论计算机视觉领域的基于深度学习的方法。
 - 本仓库中的第一章直接引用[d2l-zh](https://github.com/d2l-ai/d2l-zh)原书内容，并稍作修改；后面是自己学习、阅读书籍、阅读书籍、阅读博文后整理的内容，很多内容在各大书籍和各大搜索引擎都能找到，我所做的是用自己的想法整理或书写这些内容。也有很多内容是我自己的理解以及夹带的私货。
-- 本仓库的很多代码主要使用[Tensorflow](https://www.tensorflow.org/)等实现。也许等我写完后[我的朋友们](https://github.com/PaperFormulaIV)会帮我翻译出一份pytorch版本。
+- 本仓库的很多代码主要使用`Pytorch`等实现。想看`Tensorflow`版本的小伙伴可以访问`https://ml.akasaki.space/`
 
 ## 可能的学习过程
 
