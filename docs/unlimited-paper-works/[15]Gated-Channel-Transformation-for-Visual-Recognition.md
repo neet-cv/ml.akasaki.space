@@ -2,7 +2,7 @@
 
 ### 这篇笔记的写作者是[AsTheStarsFall](https://github.com/asthestarsfalll)。 
 
-> 论文名称：[Gated Channel Transformation for Visual Recognition](https://arxiv.org/pdf/1909.11519.pdf)
+> 论文名称：[Gated Channel Transformation for Visual Recognition](https://arxiv.org/abs/1909.11519)
 >
 > 作者：Zongxin Yang, Linchao Zhu, Y u Wu, and Yi Yang
 >

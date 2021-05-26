@@ -8,7 +8,7 @@
 
 # Convolution
 
-1. [空间无关性(spatial agnostic)](https://arxiv.org/pdf/1805.12177.pdf)：same kernel for different position
+1. [空间无关性(spatial agnostic)](https://arxiv.org/abs/1805.12177)：same kernel for different position
    - 优点：参数共享，平移等变
    - 缺点：不能灵活改变参数，卷积核尺寸不能过大，只能通过堆叠来扩大感受野、捕捉长距离关系
 2. 通道特异性(channel specific)：different kernels for different channels
