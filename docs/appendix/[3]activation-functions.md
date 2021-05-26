@@ -153,4 +153,4 @@ plt.plot(x.numpy(), grad)
 plt.show()
 ```
 
-![](./src/activation-functions/tahngard.png)
+![](./src/activation-functions/tanhgrad.png)

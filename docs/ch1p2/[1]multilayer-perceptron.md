@@ -159,7 +159,7 @@ plt.plot(x.numpy(), grad)
 plt.show()
 ```
 
-![](./src/multilayer-perceptron/tahngard.png)
+![](./src/multilayer-perceptron/tanhgrad.png)
 
 关于激活函数的更多信息，在之后单独的一节[激活函数](./[3]activation-functions.md)中会有更多介绍。
 
