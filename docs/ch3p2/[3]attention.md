@@ -33,6 +33,7 @@ Attention具有以下三大优点：
 Attention机制如果浅层的理解，跟他的名字非常匹配。他的核心逻辑就是**从关注全部到关注重点**。
 
 
+
 ### Attention的计算区域
 
 根据计算区域的不同，Attention可以被分为软注意力（Soft Attention）、硬注意力（Hard Attention）、局部注意力（Local Attention）。
