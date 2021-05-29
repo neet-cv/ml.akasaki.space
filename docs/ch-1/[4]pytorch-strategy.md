@@ -124,7 +124,7 @@ $$
 
 **参考文献**
 
-[[1] pytorch的计算图[EB/OL].(2018-1-03)[2021-05-21].https://zhuanlan.zhihu.com/p/33378444.](https://zhuanlan.zhihu.com/p/33378444)
+[[1] pytorch的计算图[EB/OL].(2018-1-03)[2018-02-03].https://zhuanlan.zhihu.com/p/33378444.](https://zhuanlan.zhihu.com/p/33378444)
 
 
 

@@ -1,51 +1,51 @@
 # 数据操作
 
 ```python
-import tensorflow as tf
-print(tf.__version__)
+import torch
+print(torch.__version__)
 ```
 
-    2.0.0
+    1.7.0+cu110
 
 在深度学习中，我们通常会频繁地对数据进行操作。作为动手学深度学习的基础，本节将介绍如何对内存中的数据进行操作。
 
-在TensorFlow中，`tensor`是一个类，也是存储和变换数据的主要工具。如果你之前用过NumPy，你会发现`tensor`和NumPy的多维数组非常类似。然而，`tensor`提供GPU计算和自动求梯度等更多功能，这些使`tensor`更加适合深度学习。
+在Pytorch中，`tensor`是一个类，也是存储和变换数据的主要工具。如果你之前用过NumPy，你会发现`tensor`和NumPy的多维数组非常类似。然而，`tensor`提供GPU计算和自动求梯度等更多功能，这些使`tensor`更加适合深度学习。
 
 ## 创建 tensor
 
 我们先介绍`tensor`的最基本功能，我们用arange函数创建一个行向量。
 
 ```python
-x = tf.constant(range(12))
+x = torch.tensor(range(12))
 
 print(x.shape)
 ```
 
-    (12,)
+    torch.Size([12])
 
 ```python
-x
+print(x)
 ```
 
 
-    <tf.Tensor: id=0, shape=(12,), dtype=int32, numpy=array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11])>
+    tensor([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11])
 
 这时返回了一个`tensor`实例，其中包含了从0开始的12个连续整数。
 
 我们可以通过`shape`属性来获取`tensor`实例的形状。
 
 ```python
-x.shape
+print(x.shape)
 ```
 
 
-    TensorShape([12])
+    torch.Size([12])
 
 我们也能够通过`len`得到`tensor`实例中元素（element）的总数。
 
 
 ```python
-len(x)
+print(len(x))
 ```
 
 
@@ -56,14 +56,13 @@ len(x)
 
 ```python
 X = tf.reshape(x,(3,4))
-X
+print(X)
 ```
 
 
-    <tf.Tensor: id=2, shape=(3, 4), dtype=int32, numpy=
-    array([[ 0,  1,  2,  3],
-           [ 4,  5,  6,  7],
-           [ 8,  9, 10, 11]])>
+    tensor([[ 0,  1,  2,  3],
+            [ 4,  5,  6,  7],
+            [ 8,  9, 10, 11]])
 
 注意X属性中的形状发生了变化。上面`x.reshape((3, 4))`也可写成`x.reshape((-1, 4))`或`x.reshape((3, -1))`。由于`x`的元素个数是已知的，这里的-1是能够通过元素个数和其他维度的大小推断出来的。
 
@@ -75,14 +74,13 @@ tf.zeros((2,3,4))
 ```
 
 ```
-<tf.Tensor: id=5, shape=(2, 3, 4), dtype=float32, numpy=
-array([[[0., 0., 0., 0.],
-        [0., 0., 0., 0.],
-        [0., 0., 0., 0.]],
-    
-       [[0., 0., 0., 0.],
-        [0., 0., 0., 0.],
-        [0., 0., 0., 0.]]], dtype=float32)>
+tensor([[[0., 0., 0., 0.],
+         [0., 0., 0., 0.],
+         [0., 0., 0., 0.]],
+
+        [[0., 0., 0., 0.],
+         [0., 0., 0., 0.],
+         [0., 0., 0., 0.]]])
 ```
 
 
@@ -94,10 +92,9 @@ tf.ones((3,4))
 ```
 
 ```
-<tf.Tensor: id=8, shape=(3, 4), dtype=float32, numpy=
-array([[1., 1., 1., 1.],
-       [1., 1., 1., 1.],
-       [1., 1., 1., 1.]], dtype=float32)>
+tensor([[1., 1., 1., 1.],
+        [1., 1., 1., 1.],
+        [1., 1., 1., 1.]])
 ```
 
 
@@ -106,15 +103,14 @@ array([[1., 1., 1., 1.],
 
 
 ```python
-Y = tf.constant([[2,1,4,3],[1,2,3,4],[4,3,2,1]])
-Y
+Y = torch.tensor([[2, 1, 4, 3], [1, 2, 3, 4], [4, 3, 2, 1]])
+print(Y)
 ```
 
 ```
-<tf.Tensor: id=9, shape=(3, 4), dtype=int32, numpy=
-array([[2, 1, 4, 3],
-       [1, 2, 3, 4],
-       [4, 3, 2, 1]])>
+tensor([[2, 1, 4, 3],
+        [1, 2, 3, 4],
+        [4, 3, 2, 1]])
 ```
 
 
@@ -123,15 +119,13 @@ array([[2, 1, 4, 3],
 
 
 ```python
-tf.random.normal(shape=[3,4], mean=0, stddev=1)
+print(torch.randn(3, 4))
 ```
 
 ```
-<tf.Tensor: id=15, shape=(3, 4), dtype=float32, numpy=
-array([[-0.06770465, -2.518872  ,  0.5077952 ,  0.6465717 ],
-       [ 0.2775639 ,  0.15904428, -0.38203633,  0.30524674],
-       [-0.16228472, -0.7232593 ,  0.11517206, -0.49598092]],
-      dtype=float32)>
+tensor([[ 1.0070, -0.2015,  0.3744,  0.7960],
+        [-0.7998,  0.6268,  0.4862, -0.2268],
+        [ 0.5583,  0.5322, -0.7755,  1.2299]])
 ```
 
 
@@ -146,10 +140,9 @@ X + Y
 ```
 
 ```
-<tf.Tensor: id=16, shape=(3, 4), dtype=int32, numpy=
-array([[ 2,  2,  6,  6],
-       [ 5,  7,  9, 11],
-       [12, 12, 12, 12]])>
+tensor([[ 2,  2,  6,  6],
+        [ 5,  7,  9, 11],
+        [12, 12, 12, 12]])
 ```
 
 
@@ -162,10 +155,9 @@ X * Y
 ```
 
 ```
-<tf.Tensor: id=17, shape=(3, 4), dtype=int32, numpy=
-array([[ 0,  1,  8,  9],
-       [ 4, 10, 18, 28],
-       [32, 27, 20, 11]])>
+tensor([[ 0,  1,  8,  9],
+        [ 4, 10, 18, 28],
+        [32, 27, 20, 11]])
 ```
 
 
@@ -178,10 +170,9 @@ X / Y
 ```
 
 ```
-<tf.Tensor: id=20, shape=(3, 4), dtype=float64, numpy=
-array([[ 0.  ,  1.  ,  0.5 ,  1.  ],
-       [ 4.  ,  2.5 ,  2.  ,  1.75],
-       [ 2.  ,  3.  ,  5.  , 11.  ]])>
+tensor([[ 0.0000,  1.0000,  0.5000,  1.0000],
+        [ 4.0000,  2.5000,  2.0000,  1.7500],
+        [ 2.0000,  3.0000,  5.0000, 11.0000]])
 ```
 
 
@@ -190,15 +181,14 @@ array([[ 0.  ,  1.  ,  0.5 ,  1.  ],
 
 
 ```python
-Y = tf.cast(Y, tf.float32)
-tf.exp(Y)
+Y = Y.type(torch.float32)
+print(torch.exp(Y))
 ```
 
 ```
-<tf.Tensor: id=22, shape=(3, 4), dtype=float32, numpy=
-array([[ 7.389056 ,  2.7182817, 54.598152 , 20.085537 ],
-       [ 2.7182817,  7.389056 , 20.085537 , 54.598152 ],
-       [54.598152 , 20.085537 ,  7.389056 ,  2.7182817]], dtype=float32)>
+tensor([[ 7.3891,  2.7183, 54.5981, 20.0855],
+        [ 2.7183,  7.3891, 20.0855, 54.5981],
+        [54.5981, 20.0855,  7.3891,  2.7183]])
 ```
 
 
@@ -207,15 +197,14 @@ array([[ 7.389056 ,  2.7182817, 54.598152 , 20.085537 ],
 
 
 ```python
-Y = tf.cast(Y, tf.int32)
-tf.matmul(X, tf.transpose(Y))
+Y = Y.type(torch.long)
+torch.matmul(X, Y.T)
 ```
 
 ```
-<tf.Tensor: id=26, shape=(3, 3), dtype=int32, numpy=
-array([[ 18,  20,  10],
-       [ 58,  60,  50],
-       [ 98, 100,  90]])>
+tensor([[ 18,  20,  10],
+        [ 58,  60,  50],
+        [ 98, 100,  90]])
 ```
 
 
@@ -224,21 +213,18 @@ array([[ 18,  20,  10],
 
 
 ```python
-tf.concat([X,Y],axis = 0), tf.concat([X,Y],axis = 1)
+torch.cat([X, Y], 0), torch.cat((X, Y), 1)
 ```
 
 ```
-(<tf.Tensor: id=28, shape=(6, 4), dtype=int32, numpy=
- array([[ 0,  1,  2,  3],
+tensor([[ 0,  1,  2,  3],
         [ 4,  5,  6,  7],
         [ 8,  9, 10, 11],
         [ 2,  1,  4,  3],
         [ 1,  2,  3,  4],
-        [ 4,  3,  2,  1]])>,
- <tf.Tensor: id=30, shape=(3, 8), dtype=int32, numpy=
- array([[ 0,  1,  2,  3,  2,  1,  4,  3],
+        [ 4,  3,  2,  1]]) tensor([[ 0,  1,  2,  3,  2,  1,  4,  3],
         [ 4,  5,  6,  7,  1,  2,  3,  4],
-        [ 8,  9, 10, 11,  4,  3,  2,  1]])>)
+        [ 8,  9, 10, 11,  4,  3,  2,  1]])
 ```
 
 
@@ -247,37 +233,32 @@ tf.concat([X,Y],axis = 0), tf.concat([X,Y],axis = 1)
 
 
 ```python
-tf.equal(X,Y)
+torch.equal(X, Y)
 ```
 
 ```
-<tf.Tensor: id=31, shape=(3, 4), dtype=bool, numpy=
-array([[False,  True, False,  True],
-       [False, False, False, False],
-       [False, False, False, False]])>
+False
 ```
-
-
 
 对`tensor`中的所有元素求和得到只有一个元素的`tensor`。
 
 
 ```python
-tf.reduce_sum(X)
+torch.sum(X)
 ```
 
 ```
-<tf.Tensor: id=33, shape=(), dtype=int32, numpy=66>
+tensor(66)
 ```
 
 
 ```python
-X = tf.cast(X, tf.float32)
-tf.norm(X)
+X = X.type(torch.float32)
+print(torch.mean(X))
 ```
 
 ```
-<tf.Tensor: id=39, shape=(), dtype=float32, numpy=22.494444>
+tensor(5.5000)
 ```
 
 
@@ -290,17 +271,15 @@ tf.norm(X)
 
 
 ```python
-A = tf.reshape(tf.constant(range(3)), (3,1))
-B = tf.reshape(tf.constant(range(2)), (1,2))
-A, B
+A = torch.reshape(torch.tensor(range(3)), (3, 1))
+B = torch.reshape(torch.tensor(range(2)), (1, 2))
+print(A, B)
 ```
 
 ```
-(<tf.Tensor: id=42, shape=(3, 1), dtype=int32, numpy=
- array([[0],
+tensor([[0],
         [1],
-        [2]])>,
- <tf.Tensor: id=45, shape=(1, 2), dtype=int32, numpy=array([[0, 1]])>)
+        [2]]) tensor([[0, 1]])
 ```
 
 
@@ -313,10 +292,9 @@ A + B
 ```
 
 ```
-<tf.Tensor: id=46, shape=(3, 2), dtype=int32, numpy=
-array([[0, 1],
-       [1, 2],
-       [2, 3]])>
+tensor([[0, 1],
+        [1, 2],
+        [2, 3]])
 ```
 
 
@@ -333,57 +311,49 @@ X[1:3]
 ```
 
 ```
-<tf.Tensor: id=50, shape=(2, 4), dtype=float32, numpy=
-array([[ 4.,  5.,  6.,  7.],
-       [ 8.,  9., 10., 11.]], dtype=float32)>
+tensor([[ 4.,  5.,  6.,  7.],
+        [ 8.,  9., 10., 11.]])
 ```
-
-
 
 我们可以指定`tensor`中需要访问的单个元素的位置，如矩阵中行和列的索引，并为该元素重新赋值。
 
 
 ```python
-X = tf.Variable(X)
-X[1,2].assign(9)
+print(X[1, 2])
+X[1, 2] = 9
+print(X[1, 2])
 ```
 
 ```
-<tf.Variable 'UnreadVariable' shape=(3, 4) dtype=float32, numpy=
-array([[ 0.,  1.,  2.,  3.],
-       [ 4.,  5.,  9.,  7.],
-       [ 8.,  9., 10., 11.]], dtype=float32)>
+tensor(6.)
+tensor(9.)
 ```
-
-
 
 当然，我们也可以截取一部分元素，并为它们重新赋值。在下面的例子中，我们为行索引为1的每一列元素重新赋值。
 
 
 ```python
-X = tf.Variable(X)
 X
 ```
 
 ```
-<tf.Variable 'Variable:0' shape=(3, 4) dtype=float32, numpy=
-array([[ 0.,  1.,  2.,  3.],
-       [ 4.,  5.,  9.,  7.],
-       [ 8.,  9., 10., 11.]], dtype=float32)>
+tensor([[ 0.,  1.,  2.,  3.],
+        [ 4.,  5.,  9.,  7.],
+        [ 8.,  9., 10., 11.]])
 ```
 
 
 
 
 ```python
-X[1:2,:].assign(tf.ones(X[1:2,:].shape, dtype = tf.float32)*12)
+X[1:2, :] = 12
+print(X)
 ```
 
 ```
-<tf.Variable 'UnreadVariable' shape=(3, 4) dtype=float32, numpy=
-array([[ 0.,  1.,  2.,  3.],
-       [12., 12., 12., 12.],
-       [ 8.,  9., 10., 11.]], dtype=float32)>
+tensor([[ 0.,  1.,  2.,  3.],
+        [12., 12., 12., 12.],
+        [ 8.,  9., 10., 11.]])
 ```
 
 
@@ -394,12 +364,11 @@ array([[ 0.,  1.,  2.,  3.],
 
 
 ```python
-X = tf.Variable(X)
-Y = tf.cast(Y, dtype=tf.float32)
+Y = Y.type(torch.float32)
 
 before = id(Y)
 Y = Y + X
-id(Y) == before
+print(id(Y) == before)
 ```
 
 ```
@@ -411,10 +380,10 @@ False
 
 
 ```python
-Z = tf.Variable(tf.zeros_like(Y))
+Z = torch.zeros_like(Y)
 before = id(Z)
-Z[:].assign(X + Y)
-id(Z) == before
+Z[:] = X + Y
+print(id(Z) == before)
 ```
 
 
@@ -422,14 +391,12 @@ id(Z) == before
 
     True
 
-
-
-实际上，上例中我们还是为`X + Y`开了临时内存来存储计算结果，再复制到`Z`对应的内存。如果想避免这个临时内存开销，我们可以使用`assign_{运算符全名}`函数。
+实际上，上例中我们还是为`X + Y`开了临时内存来存储计算结果，再复制到`Z`对应的内存。如果想避免这个临时内存开销，我们可以使用`=`直接赋值。
 
 
 ```python
-Z = tf.add(X, Y)
-id(Z) == before
+Z = torch.add(X, Y)
+print(id(Z) == before)
 ```
 
 
@@ -444,8 +411,8 @@ id(Z) == before
 
 ```python
 before = id(X)
-X.assign_add(Y)
-id(X) == before
+X += Y
+print(id(X) == before)
 ```
 
 
@@ -463,17 +430,16 @@ id(X) == before
 ```python
 import numpy as np
 
-P = np.ones((2,3))
-D = tf.constant(P)
-D
+P = np.ones((2, 3))
+D = torch.tensor(P)
+print(D)
 ```
 
 
 
 
-    <tf.Tensor: id=115, shape=(2, 3), dtype=float64, numpy=
-    array([[1., 1., 1.],
-           [1., 1., 1.]])>
+    tensor([[1., 1., 1.],
+            [1., 1., 1.]], dtype=torch.float64)
 
 
 
@@ -489,3 +455,4 @@ np.array(D)
 
     array([[1., 1., 1.],
            [1., 1., 1.]])
+
