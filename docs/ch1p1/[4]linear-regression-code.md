@@ -6,13 +6,13 @@
 
 ``` python 
 %matplotlib inline
-import tensorflow as tf
-print(tf.__version__)
+import torch
+print(torch.__version__)
 from matplotlib import pyplot as plt
 import random
 ```
 
-        2.0.0
+    1.7.0+cu110
 
 ## 手动实现 
 
@@ -28,11 +28,11 @@ $$
 ``` python
 num_inputs = 2
 num_examples = 1000
-true_w = [2, -3.4]
+true_w = torch.tensor([2, -3.4])
 true_b = 4.2
-features = tf.random.normal((num_examples, num_inputs),stddev = 1)
-labels = true_w[0] * features[:,0] + true_w[1] * features[:,1] + true_b
-labels += tf.random.normal(labels.shape,stddev=0.01)
+features = torch.randn(num_examples, num_inputs)
+labels = true_w[0] * features[:, 0] + true_w[1] * features[:, 1] + true_b
+labels += torch.normal(0, 0.01, size=labels.size())
 ```
 
 注意，`features`的每一行是一个长度为2的向量，而`labels`的每一行是一个长度为1的向量（标量）。
@@ -44,8 +44,7 @@ print(features[0], labels[0])
 输出：
 
 ```
-(<tf.Tensor: id=31, shape=(2,), dtype=float32, numpy=array([0.24220389, 0.41220406], dtype=float32)>,
- <tf.Tensor: id=35, shape=(), dtype=float32, numpy=3.3064191>)
+tensor([0.7686, 1.5004]) tensor(0.6350)
 ```
 
 通过生成第二个特征`features[:, 1]`和标签 `labels` 的散点图，可以更直观地观察两者间的线性关系。
@@ -56,6 +55,7 @@ def set_figsize(figsize=(3.5, 2.5)):
 
 set_figsize()
 plt.scatter(features[:, 1], labels, 1)
+plt.show()
 ```
 
 ![img](./src/linear-regression-code/3.2_output1.png)
