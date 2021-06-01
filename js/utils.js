@@ -20,7 +20,6 @@ function getSidebar(folder) {
     console.info('==> Getting pages under ' + folder);
     var pages = getPages(`docs/${folder}`)
         .map(path => {
-            console.log(parseFloat(path.match(/\[([\d.]+)\]/)[1]))
             return {
                 index: parseFloat(path.match(/\[([\d.]+)\]/)[1]),
                 path
