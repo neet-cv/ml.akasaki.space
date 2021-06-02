@@ -21,7 +21,7 @@ jobs:
         with:
           path: |
             node_modules
-          key: ${{ runner.os }}-v16-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-v16-${{ hashFiles('yarn.lock') }}
 
       - name: Use Node.js 16.x
         uses: actions/setup-node@v2
@@ -31,10 +31,10 @@ jobs:
       - name: Install dependencies
         if: steps.cache_node_modules.outputs.cache-hit != 'true'
         run: |
-          npm ci
+          yarn install --frozen-lockfile
 
       - name: Build
-        run: npm run build
+        run: yarn build
 
       - name: Deploy to Github Pages
         if: ${{ github.ref == 'refs/heads/master' }}
