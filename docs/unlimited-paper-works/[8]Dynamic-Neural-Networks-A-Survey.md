@@ -14,6 +14,8 @@
 
 这篇论文对近些年吸引了很多研究者的动态神经网络进行了较为系统的总结概括。
 
+## Abstract（摘要）
+
 > Dynamic neural network is an emerging research topic in deep learning. Compared to static models which have fixed computational graphs and parameters at the inference stage, dynamic networks can adapt their structures or parameters to different inputs, leading to notable advantages in terms of accuracy, computational efficiency, adaptiveness, etc. In this survey, we comprehensively review this rapidly developing area by dividing dynamic networks into three main categories: 1) instance-wise dynamic models that process each instance with data-dependent architectures or parameters; 2) spatial-wise dynamic networks that conduct adaptive computation with respect to different spatial locations of image data and 3) temporal-wise dynamic models that perform adaptive inference along the temporal dimension for sequential data such as videos and texts. The important research problems of dynamic networks, e.g., architecture design, decision making scheme, optimization technique and applications, are reviewed systematically. Finally, we discuss the open problems in this field together with interesting future research directions.
 
 动态神经网络近些年的相关研究逐渐变多，比起固定计算图的传统的静态神经网络，动态神经网络能够可以根据输入的具体数据调整它们的结构或是参数，同时在速度和精度方面占有优势。一种比喻是：“在输入较为简单时，动态神经网络可以很快；在输入较为复杂时，动态神经网络可以精度很高”。

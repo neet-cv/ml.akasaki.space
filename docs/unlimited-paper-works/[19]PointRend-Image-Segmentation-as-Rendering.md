@@ -6,6 +6,8 @@
 
 这是一篇用于改善图像分割问题中边缘分割效果的方法的论文的阅读笔记。该方法“将分割问题看作渲染问题”，达到了较好的效果。论文原文：[PointRend: Image Segmentation as Rendering](https://arxiv.org/abs/1912.08193)。在阅读这篇笔记之前，请确保先了解图像分割技术。对分割的技术进行简要的了解，可以参考[另一篇笔记](./[10]Overview-Of-Semantic-Segmentation.md)。
 
+## Abstract（摘要）
+
 > We present a new method for efficient high-quality image segmentation of objects and scenes. By analogizing classical computer graphics methods for efficient rendering with over- and undersampling challenges faced in pixel labeling tasks, we develop a unique perspective of image segmentation as a rendering problem. From this vantage, we present the PointRend (Point-based Rendering) neural network module: a module that performs point-based segmentation predictions at adaptively selected locations based on an iterative subdivision algorithm. PointRend can be flexibly applied to both instance and semantic segmentation tasks by building on top of existing state-of-the-art models. While many concrete implementations of the general idea are possible, we show that a simple design already achieves excellent results. Qualitatively, PointRend outputs crisp object boundaries in regions that are over-smoothed by previous methods. Quantitatively, PointRend yields significant gains on COCO and Cityscapes, for both instance and semantic segmentation. PointRend's efficiency enables output resolutions that are otherwise impractical in terms of memory or computation compared to existing approaches. Code has been made available at [this https URL](https://github.com/facebookresearch/detectron2/tree/master/projects/PointRend).
 
 ## 介绍（Introduction）

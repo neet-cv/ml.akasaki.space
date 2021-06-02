@@ -125,6 +125,29 @@ A possible template of reading articles can be:
 
 So we know that reading a paper in the proper order, making full understand of the author's main points, and taking effective notes can be a effective way to do your research.
 
+好了，你可以启程了。
+
 ---
 
-好了，启程吧。
+## Q&A
+
+1. Q：为什么每篇笔记后面首先会跟一个笔记作者的信息的三级标题？
+
+   A：为了建立静态索引。这样你在搜索框里就能直接通过搜索笔记作者的名称来找到他/她写下的全部笔记。
+
+2. Q：为什么笔记的格式不统一？
+
+   A：因为本部分是又很多人一起写下的笔记。大家写笔记的风格都不一样。
+
+   Q：那怎样读到适合自己的笔记格式？
+
+   A：如果你更倾向于阅读某位笔记作者的笔记，可以在网页右上方的搜索框搜索其名称。
+
+3. Q：这些笔记的排列有什么顺序吗？
+
+   A：有，时间顺序。越新的笔记越靠下。将来unlimited-paper-works将会从ml.akasaki.space迁移出去，到时候会使用更合理的排列顺序。
+
+4. Q：读了这些笔记就一定懂了这些论文吗？
+
+   A：并不。有机会请阅读原论文。这些笔记并不保证完善，甚至可能出现错误。
+
