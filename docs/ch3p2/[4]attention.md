@@ -104,7 +104,7 @@ $$
 
 ### 硬注意力（**Hard** Attention）
 
-在软注意力中，选择的信息是所有输入向量在注 意力分布下的期望．此外，还有一种注意力是只关注某一个输入向量，叫作硬性 注意力（Hard Attention）。
+在软注意力中，选择的信息是所有输入向量在注 意力分布下的期望．此外，还有一种注意力是只关注某一个输入向量，叫作硬性注意力（Hard Attention）。
 
 硬注意力有两种实现方式：
 
@@ -117,7 +117,13 @@ $$
 
 在之前介绍中，我们假设所有的输入信息是同等重要的，是一种扁平（Flatterned） 结构，注意力分布实际上是在所有输入信息上的多项分布。但如果输入信息本身具有层次（Hierarchical）结构，比如文本可以分为词、句子、段落、篇章等不同 粒度的层次，我们可以使用层次化的注意力来进行更好的信息选择。此外，还可以假设注意力为上下文相关的二项分布，用一种图模型来构建 更复杂的结构化注意力分布。
 
-### 键值对注意力
+### 键值对实现注意力
+
+注意力模型可以宏观理解为一个查询（query）到一系列键值对（key-value）的映射。将Source中的构成元素想象成是由一系列的`<key,value>`数据对构成，此时给定Target中的某个元素query，通过计算query和各个key的相似性或者相关性，得到每个key对应value的权重系数，通过softmax归一化后，对权重和相应value进行加权求和，即得到最终attention数值。
+
+![image-20210603113656435](./src/attention/image-20210603113656435.png)
+
+所以**本质上attention机制是对source中元素的value值进行加权求和，而query和key用来计算对应value的权重系数**，在NLP领域中，往往key=value。
 
 更一般地，我们可以用键值对（key-value pair）格式来表示输入信息，其中 “键”用来计算注意力分布$\alpha_{n}$，“值”用来计算聚合信息。
 
@@ -138,6 +144,8 @@ $$
 
 这一部分讲的是一种承载在Encoder-Decoder上的注意力机制，但注意力机制和Encoder-Decoder并没有本质的关系，注意力模型可以看作一种通用的思想，本身并不依赖于特定框架。
 
+#### Encoder-Decoder框架
+
 要了解深度学习中的注意力模型，就不得不先谈Encoder-Decoder框架，因为目前大多数注意力模型附着在Encoder-Decoder框架下。例如，下图是自然语言处理的任务中经常出现的encoder-decoder模式：
 
 ![img](./src/attention/87906543576823654398.png)
@@ -146,7 +154,21 @@ $$
 
 可见，Encoder-Decoder结构的应用非常广泛。在不同的领域中，一般而言，文本处理和语音识别的Encoder部分通常采用RNN模型，图像处理的Encoder一般采用CNN模型。
 
-![img](./src/attention/3128a7c427f02dc0a8bbc300dd9a040b.png)
+#### 普通的Encoder-Decoder
+
+以下是没有引入注意力机制的RNN Encoder-Decoder框架：
+
+![img](./src/attention/fce275576e9f01468aebedf2b5a04f3e.png)
+
+下面就以Seq2Seq模型为例，来对比未加入注意力机制的模型和加入了注意力机制后的模型。未加入注意力机制的RNN Encoder-Decoder框架在处理序列数据时，可以做到先用编码器把长度不固定的序列X编码成长度固定的向量表示C，再用解码器把这个向量表示解码为另一个长度不固定的序列$y$，输入序列X和输出序列$y$的长度可能是不同的。
+
+#### 加入注意力的Encoder-Decoder
+
+在[Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/abs/1409.0473) 这篇论文在上面那篇论文的基础上，提出了一种新的神经网络翻译模型（NMT）结构，也就是在RNN Encoder-Decoder框架中加入了注意力机制。这篇论文中的编码器是一个双向GRU，解码器也是用RNN网络来生成句子。
+
+![img](./src/attention/83154e3668c89efefe4650ff41fe03b0.png)
+
+在加入了注意力之后，对于输出$y$中的每个元素，输入中的每个$x$都会对其产生影响。其影响的大小与该元素位置的attention值有关。
 
 ## 自注意力模型
 
@@ -160,5 +182,4 @@ $$
 
 ## 外部注意力（External Attention）
 
-
-
+//留坑，还没写
