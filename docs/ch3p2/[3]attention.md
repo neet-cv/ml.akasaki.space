@@ -140,13 +140,13 @@ $$
 
 要了解深度学习中的注意力模型，就不得不先谈Encoder-Decoder框架，因为目前大多数注意力模型附着在Encoder-Decoder框架下。例如，下图是自然语言处理的任务中经常出现的encoder-decoder模式：
 
-![img](./src/attention/87906543576823654398.png)
+![img](src/[3]attention/87906543576823654398.png)
 
 文本处理领域的Encoder-Decoder框架可以这么直观地去理解：可以把把一个句子（或篇章）生成另外一个句子（或篇章）的通用处理模型。和上图所示的一样，Encoder接收序列输入（Source）并编码为语义编码$c$，在这之后Decoder接收语义编码将其解码为目标序列（Target）。如果Source是中文句子，Target是英文句子，那么这就是解决机器翻译问题的Encoder-Decoder框架；如果Source是一篇文章，Target是概括性的几句描述语句，那么这是文本摘要的Encoder-Decoder框架；如果Source是一句问句，Target是一句回答，那么这是问答系统或者对话机器人的Encoder-Decoder框架；如果Source是一副图片，Target是能够描述图片语义内容的一句描述语，那么这是图片描述的Encoder-Decoder框架。
 
 可见，Encoder-Decoder结构的应用非常广泛。在不同的领域中，一般而言，文本处理和语音识别的Encoder部分通常采用RNN模型，图像处理的Encoder一般采用CNN模型。
 
-![img](./src/attention/3128a7c427f02dc0a8bbc300dd9a040b.png)
+![img](src/[3]attention/3128a7c427f02dc0a8bbc300dd9a040b.png)
 
 ## 自注意力模型
 
