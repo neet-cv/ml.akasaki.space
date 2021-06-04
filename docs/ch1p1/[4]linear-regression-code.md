@@ -343,4 +343,3 @@ print(true_w, next(model.parameters()))
     [2, -3.4] Parameter containing:
     tensor([[ 1.9263, -3.1823]], requires_grad=True)
 
-
