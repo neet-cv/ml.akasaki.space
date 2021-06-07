@@ -19,7 +19,7 @@
 
 - Transformer可以高效的并行训练，因此速度十分快，在8个GPU上训练了3.5天；
 - 对于长距离关系的学习，Transformer将时间复杂度降低到了常数，并且使用多头注意力来抵消位置信息的平均加权造成的有效分辨率降低
-- Transform是一种自编码（Auto-Encoding）模型，能够同时预测上下文
+- Transform是一种自编码（Auto-Encoding）模型，能够同时利用上下文
 
 ## 整体结构
 
@@ -55,9 +55,9 @@ Encoder-Decoder的内部结构如下图：
 
 - **Encoder**：编码块是由6个完全相同的layer组成的，每个layer有两个子层。
 
-  第一层包括一个$Multi-Head Self-Attention$、$Layer-Normalization$和残差连接，$FFN(x)=max(0,xW_1+b_1)W_2+b_2$,中间层的维度为2048
+  第一层包括一个$Multi-Head Self-Attention$、$Layer-Normalization$和残差连接
 
-  第二层包括一个二层的全连接前馈层（中间使用ReLU）、$Layer-Normalization$和残差连接，
+  第二层包括一个二层的全连接前馈层：$FFN(x)=max(0,xW_1+b_1)W_2+b_2$,中间层的维度为2048；同样包含一个$Layer-Normalization$和残差连接，
 
 - **Decoder**：解码块同样由6个完全相同的layer组成，每个子层同样有残差连接和$Layer-Normalization$
 
@@ -241,7 +241,7 @@ $$
 
 在机器翻译中，解码过程是一个顺序操作的过程，也就是当解码第$k$个特征向量时，我们只能看到第$k-1$及其之前的解码结果
 
-而微调阶段，不使用MASK，这会导致预训练和微调数据的不统一，从而引入了一些人为误差，因此提出了[XLNet](https://arxiv.org/pdf/1906.08237.pdf)[^6]
+然而微调阶段，不使用MASK，这会导致预训练和微调数据的不统一，从而引入了一些人为误差，因此提出了[XLNet](https://arxiv.org/pdf/1906.08237.pdf)[^6]，它拥有超过BERT的表现
 
 ### Endcoder-Decoder Attention
 
