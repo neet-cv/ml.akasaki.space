@@ -200,7 +200,7 @@ $$
 
 对于$PE_{pos}$，令$c_i=\frac{1}{10000^{\frac{2i}{d}}}$：
 $$
-\begin{array}
+\begin{align}
 PE_{pos}&=
 \left[\begin{array}
 {c}PE(pos,0)\\PE(pos,1)\\PE(pos,2)\\ \vdots\\PE(pos,d)
@@ -209,18 +209,18 @@ PE_{pos}&=
 \left[\begin{array}
 {c}sin(c_0pos)\\cos(c_0pos)\\sin(c_1pos)\\\vdots\\cos(c_{\frac{d}{2}-1}pos)
 \end{array}\right]
-\end{array}
+\end{align}
 $$
 内积可得：
 $$
-\begin{array}PE_{pos}^TPE_{pos+k}&=
+\begin{align}PE_{pos}^TPE_{pos+k}&=
 \sum_{i=0}^{\frac{d}{2}-1}{sin(c_ipos)PE(c_i(pos+k))+cos(c_ipos)cos(c_i(pos+k))}\\
 &=\sum_{i=0}^{\frac{d}{2}-1}
 {cos(c_i(pos+k-pos))}\\
 &=\sum_{i=0}^{\frac{d}{2}-1}cos(c_ik)
-\end{array}
+\end{align}
 $$
-而我们知道，余弦函数是一个**偶函数**，因此正余弦编仅能捕捉到两单词之间的距离关系，而无法判断其距离关系
+而我们知道，余弦函数是一个**偶函数**，因此正余弦位置编码仅能捕捉到两单词之间的距离关系，而无法判断其距离关系
 
 #### 自注意力对位置编码的影响
 
@@ -248,8 +248,6 @@ $$
 设计了一种解码块与编码块的交互模式
 
 解码块最终的输入会生成$K，V$，输入给所有的解码器，而$Q$则是来自于Masked Multi-Head Attention
-
-
 
 ## 附录
 
