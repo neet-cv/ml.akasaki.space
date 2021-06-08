@@ -94,6 +94,7 @@ module.exports = {
                 // 启用 TeX 支持
                 tex: true,
             },
+            "vuepress-plugin-element-tabs",
         ],
     ],
     locales: {
