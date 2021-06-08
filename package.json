@@ -7,7 +7,8 @@
   "license": "MIT",
   "devDependencies": {
     "vuepress": "^1.8.2",
-    "vuepress-plugin-md-enhance": "^1.18.0"
+    "vuepress-plugin-md-enhance": "^1.18.0",
+    "vuepress-plugin-tabs": "github:lideming/vuepress-plugin-tabs"
   },
   "scripts": {
     "dev": "vuepress dev docs",
