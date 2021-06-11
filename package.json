@@ -6,6 +6,7 @@
   "author": "Therainisme",
   "license": "MIT",
   "devDependencies": {
+    "markdown-it-footnote": "^3.0.3",
     "vuepress": "^1.8.2",
     "vuepress-plugin-md-enhance": "^1.15.3"
   },
