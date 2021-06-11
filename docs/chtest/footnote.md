@@ -34,23 +34,23 @@ This page is very long.
 
 This page is very long.
 
-This page is very long.
-
-This page is very long.
-
-This page is very long.
-
-
 [^1]: This is the footnote.
+
+This page is very long.
+
+This page is very long.
+
+This page is very long.
+
 
 [^2]: This is the footnote.
 
 [^3]: Long footnote
 
-with
-multiple
-lines.
+    with
+    multiple
+    lines.
 
 [^some-footnote]: Footnote name
 
-can be long.
+    can be long.
