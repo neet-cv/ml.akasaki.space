@@ -8884,6 +8884,14 @@ vuepress-plugin-container@^2.0.2, vuepress-plugin-container@^2.1.5:
     "@vuepress/shared-utils" "^1.2.0"
     markdown-it-container "^2.0.0"
 
+"vuepress-plugin-element-tabs@github:lideming/vuepress-plugin-tabs#8f42736":
+  version "0.2.8"
+  resolved "https://codeload.github.com/lideming/vuepress-plugin-tabs/tar.gz/8f42736a9be1dfc0c69deb08c7a692144f09055e"
+  dependencies:
+    node-sass "^6.0.0"
+    resize-observer-polyfill "^1.5.1"
+    sass-loader "^10.2.0"
+
 vuepress-plugin-md-enhance@^1.18.0:
   version "1.18.0"
   resolved "https://registry.yarnpkg.com/vuepress-plugin-md-enhance/-/vuepress-plugin-md-enhance-1.18.0.tgz#d18e5b5458d611088debf248ba92c85b95dba51a"
@@ -8911,14 +8919,6 @@ vuepress-plugin-smooth-scroll@^0.0.3:
   integrity sha512-qsQkDftLVFLe8BiviIHaLV0Ea38YLZKKonDGsNQy1IE0wllFpFIEldWD8frWZtDFdx6b/O3KDMgVQ0qp5NjJCg==
   dependencies:
     smoothscroll-polyfill "^0.4.3"
-
-"vuepress-plugin-tabs@github:lideming/vuepress-plugin-tabs#8f42736":
-  version "0.2.8"
-  resolved "https://codeload.github.com/lideming/vuepress-plugin-tabs/tar.gz/8f42736a9be1dfc0c69deb08c7a692144f09055e"
-  dependencies:
-    node-sass "^6.0.0"
-    resize-observer-polyfill "^1.5.1"
-    sass-loader "^10.2.0"
 
 vuepress@^1.8.2:
   version "1.8.2"
