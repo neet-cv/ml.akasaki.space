@@ -23,7 +23,7 @@ module.exports = {
     themeConfig: {
         lastUpdated: '上次更新时间', // 上次更新
         smoothScroll: true, // 页面滚动
-        sidebarDepth: 4,
+        sidebarDepth: 6,
         // 添加导航栏
         nav: [{
             text: 'View on Github',
