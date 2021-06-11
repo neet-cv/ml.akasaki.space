@@ -89,12 +89,12 @@ module.exports = {
     },
     plugins: [
         [
+            "vuepress-plugin-element-tabs",
             "md-enhance",
             {
                 // 启用 TeX 支持
                 tex: true,
             },
-            "vuepress-plugin-element-tabs",
         ],
     ],
     locales: {
