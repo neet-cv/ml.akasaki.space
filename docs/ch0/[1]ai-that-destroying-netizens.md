@@ -1,23 +1,5 @@
 # 毁灭网友的人工智能
 
-:::: tabs
-
-::: tab title
-__markdown content__
-:::
-
-
-::: tab javascript
-``` javascript
-() => {
-  console.log('Javascript code example')
-}
-```
-:::
-
-::::
-
-
 ​		前段时间看到了很多来自知乎的人工智能方面的梗，其中一个比较出名的是《锅炉设计转行 AI，可行吗？》。在网友的世界里，人工智能天天不是摧毁这个行业就是取代那个行业——或许再过一段时间它就要毁灭人类了。
 
 然而实际上的人工智能：
