@@ -1,6 +1,9 @@
 module.exports = {
     markdown: {
-        lineNumbers: false
+        lineNumbers: false,
+        extendMarkdown: md => {
+            md.use(require('markdown-it-footnote'))
+        }
     },
     title: '工具箱的深度学习记事簿',
     description: '这里包含了我从入门到依然在入门的过程中接触到的大部分知识。翻翻目录，也许能找到有用的',
