@@ -140,6 +140,14 @@ class External_attention(Module):
 
 感觉External Attention与Bottleneck有一定的相似程度，首尾通过1X1卷积实现残差连接，不过在连接的过程中加入了Softmax和l1norm起到一定信息交换的作用
 
+
+
+关于$Memory\quad Uion$:
+
+在之前就有工作把`position-wise ` 的前馈层当作一个`Memory`模块
+
+
+
 关于$Double\quad Normalization$：
 
 如果你看完了输入尺度对$Softmax$的影响，应该会思考，为什么要将l1norm添加在后面呢？
@@ -147,5 +155,7 @@ class External_attention(Module):
 当输入特征方差过大时，$Softmax$输出的会是一个接近于$One-hot$的向量，此时再做l1norm显然不会有什么变化吧
 
 或者说这里的$Softmax$可以提取的是全局信息？
+
+
 
 关于相似度：见上
