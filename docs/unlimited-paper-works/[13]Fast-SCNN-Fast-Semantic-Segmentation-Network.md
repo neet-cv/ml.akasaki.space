@@ -1,6 +1,6 @@
 # Fast-SCNN: Fast Semantic Segmentation Network
 
-#### 这篇笔记的写作者是[ZeroRains](https://github.com/zeroRains)。
+### 这篇笔记的写作者是[ZeroRains](https://github.com/zeroRains)。
 
 这是一篇讲解一种快速语义分割的论文。论文名:[Fast-SCNN: Fast Semantic Segmentation Network](https://arxiv.org/abs/1902.04502)
 
