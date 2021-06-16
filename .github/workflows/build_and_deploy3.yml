@@ -1,0 +1,61 @@
+name: Build and Deploy
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on: [ push, pull_request ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Cache node_modules
+        id: cache_node_modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+          key: runner.os−v16−{{ hashFiles('yarn.lock') }}
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: Install dependencies
+        if: steps.cache_node_modules.outputs.cache-hit != 'true'
+        run: |
+          yarn install --frozen-lockfile
+      - name: Build
+        run: yarn build
+
+      - name: Deploy to Github Pages
+        if: ${{ github.ref == 'refs/heads/master' }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/.vuepress/dist/
+          publish_branch: vuepress_pages
+          force_orphan: true
+          cname: 'ml.akasaki.space'
+
+  check_path:
+    name: Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Check file paths for Windows
+        run: |
+          find | grep '[\\\\<>:"|?*]' && exit 1 || exit 0
+      - name: Check image paths
+        run: |
+          grep -P '!\[.*\]\((?!(https?:|\.|/)).+\)' docs/**/*.md && exit 1 || exit 0
