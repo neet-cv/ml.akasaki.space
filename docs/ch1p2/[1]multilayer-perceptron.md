@@ -39,13 +39,13 @@ ReLU（rectified linear unit）函数提供了一个很简单的非线性变换�
 可以看出，ReLU函数只保留正数元素，并将负数元素清零。为了直观地观察这一非线性变换，我们先定义一个绘图函数`xyplot`。
 
 ```python
-import tensorflow as tf
+import torch
 import matplotlib.pyplot as plt
 
-x = tf.constant(range(-8, 8, 1))
-out = tf.nn.relu(x)
+x = torch.range(-8, 8)
+relu = torch.nn.ReLU()
+out = relu(x)
 plt.xlabel("x")
-plt.ylabel("reLU x")
 plt.plot(x, out)
 plt.show()
 ```
@@ -59,13 +59,15 @@ plt.show()
 接下来我们打出它的梯度：
 
 ```python
-x = tf.Variable(tf.cast(x, dtype=tf.float32))
-with tf.GradientTape() as tape:
-    y = tf.nn.relu(x)
+x = torch.range(-8, 8, device='cuda', requires_grad=True)
+relu = torch.nn.ReLU()
+out = relu(x)
+out.backward(torch.ones_like(out))
 plt.xlabel("x")
-plt.ylabel("(reLU x)\'")
-grad = tape.gradient(y, x)
-plt.plot(x.numpy(), grad)
+plt.ylabel("reLU x")
+x_cpu = x.detach().cpu().numpy()
+grad_cpu = x.grad.detach().cpu().numpy()
+plt.plot(x_cpu, grad_cpu)
 plt.show()
 ```
 
@@ -84,14 +86,14 @@ sigmoid函数在早期的神经网络中较为普遍，但它目前逐渐被更�
 我们绘制sigmoid的函数图像：
 
 ```python
-import tensorflow as tf
+import torch
 import matplotlib.pyplot as plt
 
-x = tf.constant(range(-20, 20, 1))
-x = tf.cast(x,dtype=tf.float32)
-out = tf.nn.sigmoid(x)
+x = torch.range(-20, 20)
+relu = torch.nn.Sigmoid()
+out = relu(x)
 plt.xlabel("x")
-plt.ylabel("reLU x")
+plt.ylabel("Sigmoid x")
 plt.plot(x, out)
 plt.show()
 ```
@@ -107,13 +109,15 @@ $$
 下面绘制了sigmoid函数的导数。当输入为0时，sigmoid函数的导数达到最大值0.25；当输入越偏离0时，sigmoid函数的导数越接近0。
 
 ```python
-x = tf.Variable(tf.cast(x, dtype=tf.float32))
-with tf.GradientTape() as tape:
-    y = tf.nn.sigmoid(x)
+x = torch.range(-20, 20, device='cuda', requires_grad=True)
+Sigmoid = torch.nn.Sigmoid()
+out = relu(x)
+out.backward(torch.ones_like(out))
 plt.xlabel("x")
-plt.ylabel("(reLU x)\'")
-grad = tape.gradient(y, x)
-plt.plot(x.numpy(), grad)
+plt.ylabel("sigmoid x")
+x_cpu = x.detach().cpu().numpy()
+grad_cpu = x.grad.detach().cpu().numpy()
+plt.plot(x_cpu, grad_cpu)
 plt.show()
 ```
 
@@ -132,14 +136,14 @@ $$
 这段代码将会打印tanh的图像：
 
 ```python
-import tensorflow as tf
+import torch
 import matplotlib.pyplot as plt
 
-x = tf.constant(range(-20, 20, 1))
-x = tf.cast(x,dtype=tf.float32)
-out = tf.nn.tanh(x)
+x = torch.range(-20, 20)
+Tanh = torch.nn.Tanh()
+out = Tanh(x)
 plt.xlabel("x")
-plt.ylabel("reLU x")
+plt.ylabel("Tanh x")
 plt.plot(x, out)
 plt.show()
 ```
@@ -149,13 +153,15 @@ plt.show()
 老规矩打印tanh梯度的图像：
 
 ```python
-x = tf.Variable(tf.cast(x, dtype=tf.float32))
-with tf.GradientTape() as tape:
-    y = tf.nn.tanh(x)
+x = torch.range(-20, 20, device='cuda', requires_grad=True)
+Tanh = torch.nn.Tanh()
+out = Tanh(x)
+out.backward(torch.ones_like(out))
 plt.xlabel("x")
-plt.ylabel("(reLU x)\'")
-grad = tape.gradient(y, x)
-plt.plot(x.numpy(), grad)
+plt.ylabel("Tanh x")
+x_cpu = x.detach().cpu().numpy()
+grad_cpu = x.grad.detach().cpu().numpy()
+plt.plot(x_cpu, grad_cpu)
 plt.show()
 ```
 

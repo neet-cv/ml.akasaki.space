@@ -5,3 +5,5 @@ others/
 deploy.sh
 yarn-error.log
 yarn.lock
+upload.sh
+.DS_sore

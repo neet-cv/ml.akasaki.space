@@ -3,13 +3,12 @@
 ```python
 import torch
 print(torch.__version__)
-
 ```
 
     1.7.0+cu110
 
 
-在深度学习中，我们经常需要对函数求梯度（gradient）。本节将介绍如何使用tensorflow2.0提供的GradientTape来自动求梯度。
+在深度学习中，我们经常需要对函数求梯度（gradient）。本节将介绍如何使用Pytorch的动态图机制来求梯度。
 
 ## 简单示例
 
