@@ -131,7 +131,7 @@ So we know that reading a paper in the proper order, making full understand of t
 
 
 
-## 如何写好一篇英文科技论文
+## 写作一篇科技类论文？
 
 注：这一部分是在听了陈关荣教授的分享后写下的。
 
@@ -158,25 +158,7 @@ So we know that reading a paper in the proper order, making full understand of t
 | References（参考文献）  | 这部分列表呈现写作时参考的文献。请注意严格使用标准格式。关于格式，请使用统一格式，或使用你打算投稿的那个杂志的格式。文献的多少要恰当：不要漏掉重要和必要的文献，又不要罗列多余且毫不相关的文章。 |
 | Appendix（附录）        | 附录通常可以放一些比较长的引理和定理的证明，方便读者在阅读简洁的原文后查阅。 |
 
-### Title（题目）
-
-### Author（作者）
-
-### Abstract（摘要）
-
-### Keywords（关键词）
-
-### Introduction（引言）
-
-### Sections（段落）
-
-### Conclusion（结论）
-
-### Acknowledgement（致谢）
-
-### References（参考文献）
-
-### Appendix（附录）
+你可以通过一些工具来规范你的写作。
 
 
 
@@ -203,4 +185,3 @@ So we know that reading a paper in the proper order, making full understand of t
 4. Q：读了这些笔记就一定懂了这些论文吗？
 
    A：并不。有机会请阅读原论文。这些笔记并不保证完善，甚至可能出现错误。
-
