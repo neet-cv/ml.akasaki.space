@@ -168,7 +168,7 @@ So we know that reading a paper in the proper order, making full understand of t
 
 1. Q：为什么每篇笔记后面首先会跟一个笔记作者的信息的三级标题？
 
-   A：为了建立静态索引。这样你在搜索框里就能直接通过搜索笔记作者的名称来找到他/她写下的全部笔记。
+   A：为了建立静态索引。这样你在搜索框里就能直接通过搜索笔记作者的名称来找到他/她写下的全部笔记。这样做只是临时的，新的办法还没有找到。
 
 2. Q：为什么笔记的格式不统一？
 
@@ -185,3 +185,44 @@ So we know that reading a paper in the proper order, making full understand of t
 4. Q：读了这些笔记就一定懂了这些论文吗？
 
    A：并不。有机会请阅读原论文。这些笔记并不保证完善，甚至可能出现错误。
+
+---
+
+## 随时会变的没什么用的内容
+
+这次的没什么用内容是我学习的过程中遇到一些困惑，以及我的牢骚。简述之就是：才疏学浅，领域又发展太快，感觉出现了泡沫，找不到方向。
+
+> 现在越看越觉得除了那些创新backbone的论文，其他这些论文新技术天天出，但是都感觉在哪似曾相识（似乎就是以前看过的哪几个论文东拼西凑一下），看完了感觉似乎自己也能想出来（但其实完全想不出来），论文效果似乎很好，结果跑了发现完全跑不到，等差不多快跑到了新技术又出了。
+
+我最近主要的学习方向是使用深度学习(deep learning)技术的计算机视觉(CV, computer vision)分割(segmentation)任务。可能是因为深度学习技术发展的太快了，尤其是卷积神经网络(CNN, convolutional neural network)之后，一直到不久前GAN(generative adversarial network)开始流行于各个任务，仅仅花了不到十年。
+
+在[Yizeng Han](https://arxiv.org/search/cs?searchtype=author&query=Han%2C+Y)等的综述论文[Dynamic Neural Networks: A Survey]([8]Dynamic-Neural-Networks-A-Survey.md)中，作者将视觉领域的神经网络近十年的发展分为这样几个阶段：
+
+1. 快速发展阶段（Fast developing stage），2012~2015
+
+   神经网络的设计变得多样化，出现了包括AlexNet、VGG、GoogLeNet在内的一系列代表性网络结构。
+
+2. 发展成熟阶段（Mature stage），2015~2017
+
+   这个阶段出现了很多至今都起到了很重要的影响的或是依然被大家经常使用的网络结构，例如ResNet、DenseNet等
+
+3. 繁荣发展阶段（Properous stage），2017~Now
+
+   人们设计了很多多样化的效果优秀的神经网络，并且大量出现了很多新型的神经网络，例如轻量级网络CondenseNet、ShuffleNet，利用自动搜索技术设计的模型NASNet、DARTS，还有这篇论文想要介绍的动态神经网络MSDNet、Block-Drop、Glance and Focus等，以及突然就火起来的Transformer。
+
+在之前几十年的AI发展中，大部分时候图像处理走的都很慢。但是在当前阶段，想要再做哪怕一点点improvement都很难。
+
+一些开创性的工作比如[Sergey Ioffe](https://arxiv.org/search/cs?searchtype=author&query=Ioffe%2C+S)等人的[Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://arxiv.org/abs/1502.03167)，或是一些非线性的激活函数，或是[Yann LeCun](http://yann.lecun.com/)等人在[Gradient-Based Learning Applied to Document Recognition](../ch2p2/LeNet.md)（LeNet）中第一次使用卷积神经网络进行手写数字识别，这些工作都要去从数学那一块找新东西，这些方法有的以前可能只在理论上出现过，并且难以被理解或证明有效性，投入实验后也不一定能work，上述这些工作通过实验证明了其有效性，后人就开始在其基础上开展工作了。很遗憾的是这些一旦出现就会产生巨大影响的工作不会经常出现。
+
+很多对后人具有重要且深远影响的工作例如[Karen Simonyan](https://arxiv.org/search/cs?searchtype=author&query=Simonyan%2C+K)等人的[Very Deep Convolutional Networks for Large-Scale Image Recognition](../ch2p2/VGGNet.md)（深度卷积网络的初步探索）以及[Kaiming He](https://arxiv.org/search/cs?searchtype=author&query=He%2C+K)等人的[Deep Residual Learning for Image Recognition](../ch2p2/ResNet.md)（首次提出残差网络结构）都具有巨大的创新：比如使用了全新的网络结构，或是全新的目标函数（loss function, 或称为损失函数），或者很新的正则化（regularizer）方法。最近也有一些具有重大影响的新结构，例如[Ashish Vaswani](https://arxiv.org/search/cs?searchtype=author&query=Vaswani%2C+A)等人的[Attention Is All You Need](https://arxiv.org/abs/1706.03762)也就是Transformer中，结合了最新的神经网络注意力(Attention)机制，抛弃了的CNN和RNN结构，整个网络结构完全是由Attention机制组成。这些方法往往需要大量的积累和实验，不可能经常做出。
+
+最新的工作它们之间往往具有很大的相关性，即便它们出自不同的作者。例如，[Changqian Yu](https://arxiv.org/search/cs?searchtype=author&query=Yu%2C+C)等人的论文[BiSeNet: Bilateral Segmentation Network for Real-time Semantic Segmentation](./[24]BiSeNet-Bilateral-Segmentation-Network-for-Real-time-Semantic-Segmentation.md)中，有许多思想参考了[Jie Hu](https://arxiv.org/search/cs?searchtype=author&query=Hu%2C+J)等人的[Squeeze-and-Excitation Networks](./[23]Squeeze-and-Excitation-Networks.md)。根据某项创新，可能会出现更多类似的创新，应用于同领域会应用于其他领域。这类工作的出现速度非常之快：研究者在阅读前人工作时发现不做或可以修改的点，就会进行实验并迅速发出一篇论文。在结果中，研究者往往会注明新的研究达到了多高的精度，有时还会附赠一份源代码。但是其他人尝试这份源代码时，却发现精度远远达不到论文中提及的水平。实际上，模型的表现不确定因素实在是太多。
+
+就中国人的数量来说，如果每个研究生都要水出一篇论文，可能会导致领域内论文平均质量的下降。这个领域再也回不到每篇论文都具有很大创新和影响的时代了。
+
+> 有研究者网友打趣地说：计算机视觉方面的论文可以分为以下几类：「只想浑个文凭」、「教电脑生成更多猫的照片」、「ImageNet上试验结果精度提升0.1%」、「手里有很棒的数据集但并不打算公开」、「3年过去了，代码还在赶来的路上」、「实验证明还是老的baseline更好」、「我们的数据集更大」、「花钱越多，效果越好」...
+
+本人是一个名不见经传大学的本科生，既没有卓越的能力，也没有远见的眼光。想研究一个方向，只能摸索着来。也许有的时候努力方向是错的，但是完全不能自知。可以阅读的文献是大量的，但其中包含的有用的信息总量却不高。对于当前这个方向会怎样继续发展、应该从哪里着手创新，既没有神明现身说法，也是才疏学浅的我所不能自己知晓的——这种具有独特风味的难受也许只有菜鸡才能深有体会吧。
+
+等一位贵人点名我的无知。我的邮箱：$miya@akasaki.space$。
+
