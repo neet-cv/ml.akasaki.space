@@ -72,7 +72,7 @@ $$
 
 （当然是用极限的形式），下图是比较形象的描述：
 
-![img](./src/periodic-signal/v2-f4443a9705e8b37c37c750dbd56c7268_b.webp)
+![image-20210709105629334](./src/periodic-signal/image-20210709105629334.png)
 
 ## 频谱分析
 
