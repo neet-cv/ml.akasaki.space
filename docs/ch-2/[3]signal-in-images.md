@@ -2,7 +2,7 @@
 
 对于二维的图像信号，
 
-![img](./src/signal-in-images/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xNzIyMTQ5OS1jZDhlZTYyMTY4ZmYzYTI5LnBuZw)
+![img](./src/signal-in-images/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5za.png)
 
 通过观察，可以发现图像的频域表示具有以下特征：
 
