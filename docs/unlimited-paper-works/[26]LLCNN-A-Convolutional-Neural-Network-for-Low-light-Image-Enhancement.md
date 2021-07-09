@@ -56,7 +56,7 @@
 
 虽然低照度图像增强属于低层次(low-level)的图像处理任务，但它与超分辨率和图像去噪有很大不同。对于这两个任务，劣质图像中的像素值都在真值附近，平均像素值几乎不变，这在我们的任务中是不同的。因此，我们设计了一个不同但有效的CNN网络来增强弱光图像。网络结构如下
 
-![image-20210709090203976](src/LLCNN-A-Convolutional-Neural-Network-for-Low-light-Image-Enhancement/image-20210709090203976.png)
+![image-20210709090203976](./src/LLCNN-A-Convolutional-Neural-Network-for-Low-light-Image-Enhancement/image-20210709090203976.png)
 
 具体流程如Fig2，可分为两个阶段。
 
@@ -64,7 +64,7 @@
 
 第二阶段，也有两种方式。第一种方式是使用两个3×3卷积层处理数据，而第二种方式是直接绕过输入数据，这是残差学习中使用残差连接。
 
-![image-20210709090435335](src/LLCNN-A-Convolutional-Neural-Network-for-Low-light-Image-Enhancement/image-20210709090435335.png)
+![image-20210709090435335](./src/LLCNN-A-Convolutional-Neural-Network-for-Low-light-Image-Enhancement/image-20210709090435335.png)
 
 对于VDSR和DnCNN，网络会生成一个残差图像，通过将残差图像与原始图像相加来计算最终图像。这是因为对于超分辨率和图像去噪，地面真实和劣化图像之间的差异不是很大。对于弱光图像增强，网络学习残留图像似乎比一点一点地增强图像更困难。因此，我们不使用这种在VDSR或DnCNN的架构。另一个原因是我们已经在模块中利用了残差学习。
 
@@ -90,6 +90,6 @@ $$
 
 详见原文
 
-![image-20210709091917127](src/LLCNN-A-Convolutional-Neural-Network-for-Low-light-Image-Enhancement/image-20210709091917127.png)
+![image-20210709091917127](./src/LLCNN-A-Convolutional-Neural-Network-for-Low-light-Image-Enhancement/image-20210709091917127.png)
 
-![image-20210709091927771](src/LLCNN-A-Convolutional-Neural-Network-for-Low-light-Image-Enhancement/image-20210709091927771.png)
+![image-20210709091927771](./src/LLCNN-A-Convolutional-Neural-Network-for-Low-light-Image-Enhancement/image-20210709091927771.png)
