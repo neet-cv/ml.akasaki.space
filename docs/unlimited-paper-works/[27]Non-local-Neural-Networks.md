@@ -2,6 +2,8 @@
 
 ### 这篇笔记的写作者是[VisualDust](https://github.com/visualDust)。
 
+Non-local旨在使用单个Layer实现长距离的像素关系构建，属于自注意力（self-attention）的一种。
+
 常见的CNN或是RNN结构基于局部区域进行操作。例如，卷积神经网络中，每次卷积试图建立一定区域内像素的关系。但这种关系的范围往往较小（由于卷积核不大）。
 
 为了建立像素之间的长距离依赖关系，也就是图像中非相邻像素点之间的关系，本文另辟蹊径，提出利用non-local operations构建non-local神经网络。这篇论文通过非局部操作解决深度神经网络核心问题：捕捉长距离依赖关系。
@@ -42,7 +44,7 @@ NL_u[i] = \frac{1}{C(i)}\sum_{j\in\Omega}{w(i,j)g(j)}
 $$
 其中$u$代表要处理的图片，$g(x)$表示$x$的某种线性变换，$w(i,j)$用于衡量为以$i,j$为中心的点的区块相似度（或者衡量i和j之间的关系），作为计算点$i$将早厚的值时点$j$对应的权重（常见的方法为计算欧几里得距离），$C(i)$为标准化因子（$C(i) = \sum_{i\in\Omega}{w(i,j)}$）。
 
-在这里为了方便理解我写下一个字面意思的公式：
+在这里为了方便理解我写下一个字面意思的公式：s
 $$
 NonLocal_{u}(i,j) = 标准化(\sum_{所有j\in原图} 点j\times 点i和点j的相似度)
 $$
@@ -63,7 +65,11 @@ Non-Local operations、卷积以及全连接的目的都是建立某种关系（
 3. 建模困难，尤其是对于那些多级依赖项，需要在不同距离位置传递信息。
 4. 不够通用，卷积操作只能捕获单张图像上的关系，而对视频等序列上的关系无计可施。
 
-所以建立长距离依赖关系需要更好的方法：
+有一句话非常好地总结了卷积层如何建立像素间关系：
+
+> convolution layer builds pixel relationship in a local neighborhood
+
+所以建立长距离依赖关系需要更好的、只需要一层的方法，也就是Non-Local：
 $$
 NL_u[i] = \frac{1}{C(i)}\sum_{j\in\Omega}{w(i,j)g(j)}
 $$
@@ -83,7 +89,9 @@ $NL_u$中的值是通过计算不同区域之间的关系得到的，而在全�
 
 在这篇论文中，作者将**非局部操作**（non-local operations）作为一种简洁高效且通用的组件，用于捕获深度神经网络的中的长距离依赖关系。
 
-non-local operations在计算某个位置$i$处的相关性时：
+>  For each query position, the non-local network first computes the pairwise relations between the query position and all positions to form an attention map, and then aggregates the features of all positions by weighted sum with the weights defined by the attention map.
+
+上文直接引用自GCNet的论文。这段话很好地总结了Non-Local Neural Network进行“非局部操作”的流程：对于每个位置，（在一张注意力图中）计算该位置和其他任何位置的相关性，形成一个权值，并用加权的方法计算当前区域的预测值。也就是，non-local operations在计算某个位置$i$处的相关性时，有：
 $$
 NL_u[i] = \frac{1}{C(i)}\sum_{j\in\Omega}{w(i,j)g(j)}
 $$
@@ -129,9 +137,7 @@ $$
 $$
 w(x_i,x_j) = {\theta(x_i)^T\phi(x_j)}
 $$
-在这里还是使用了"Embedded version"，也就是在$x$的外面套了一个线性变换。在这种情况下归一化因子$C(i)$被简单地描述为$N$（$N$是参与计算的点的个数），这样有助于简化梯度的计算。
-
-使用点积方法和使用Embedded Gaussian方法区别在于是否使用softmax函数进行激活。
+在这里还是使用了"Embedded sversion"，也就是在$x$的外面套了一个线性变换。在这种情况下归一化因子$C(i)$被简单地描述为$N$（$N$是参与计算的点的个数），这样有助于简化梯度的计算。
 
 ![image-20210712203856857](./src/Non-local-Neural-Networks/image-20210712203856857.png)
 
@@ -153,6 +159,8 @@ Y = softmax(x^TW_{\theta}^TW_{\phi}x)g(x)
 $$
 **这个就是目前常用的位置注意力机制的表达式。以上关于Non-Local的描述，在深度学习技术中可以归为自注意力机制自注意力机制（self-attention）**，即通过关注特征图中所有位置并在嵌入空间中取其加权平均值来表示图片中某位置处的响应。嵌入空间可以认为是一个更抽象的图片空间表达，目的是汇聚更多的信息，提高计算效率。
 
+`使用点积方法和使用Embedded Gaussian方法区别在于是否使用softmax函数进行激活。`
+
 
 ### Non-Local Block
 
@@ -162,7 +170,7 @@ $$
 
 上图中$\theta(x_i) = W_{\theta}x_i$和$\phi(x_i) = W_{\phi}x_i$，$w(x_i,x_j) = {\theta(x_i)^T\phi(x_j)}$。将上方提到的归一化处理之后的公式抄下来就有：
 $$
-Y = softmax(x^TW_{\theta}^TW_{\phi}x)g(x)
+Z = softmax(x^TW_{\theta}^TW_{\phi}x)g(x)
 $$
 和上方计算图中表示的过程完全一样。
 
@@ -174,4 +182,11 @@ $$
 
 ## Summary
 
-这篇论文的主要思想其实是（空间位置）自注意力机制的泛化表达。
+这篇论文的主要思想其实是（空间位置）自注意力机制的泛化表达。不过这篇论文只强调了空间注意力，并没有明显使用像[SENet](./[23]Squeeze-and-Excitation-Networks.md)那样的通道注意力。
+
+原论文中也没有进行对Non-Local生成的attention map进行可视化的实验。不过另一篇论文（GCNet）中进行了这样的实验：s
+
+![](./src/Non-local-Neural-Networks/image-20210712213203846.png)
+
+GCNet的作者从COCO数据集中随机选择6幅图，分别可视化3个不同位置和它们的attention maps。作者发现对于不同位置来说，它们的attention maps几乎是相同的。这说明，**虽然non-local block想要计算出每一个位置特定的全局上下文，但是经过训练之后，实际上形成的attention map受位置的影响非常低。**这也是这篇论文的一个缺陷。
+
