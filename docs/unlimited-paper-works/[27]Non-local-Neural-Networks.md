@@ -2,9 +2,9 @@
 
 ### 这篇笔记的写作者是[VisualDust](https://github.com/visualDust)。
 
-Non-local旨在使用单个Layer实现长距离的像素关系构建，属于自注意力（self-attention）的一种。
+> The non-local block is a popular module for strengthening the context modeling ability of a regular convolutional neural network.
 
-常见的CNN或是RNN结构基于局部区域进行操作。例如，卷积神经网络中，每次卷积试图建立一定区域内像素的关系。但这种关系的范围往往较小（由于卷积核不大）。
+Non-local旨在使用单个Layer实现长距离的像素关系构建，属于自注意力（self-attention）的一种。常见的CNN或是RNN结构基于局部区域进行操作。例如，卷积神经网络中，每次卷积试图建立一定区域内像素的关系。但这种关系的范围往往较小（由于卷积核不大）。
 
 为了建立像素之间的长距离依赖关系，也就是图像中非相邻像素点之间的关系，本文另辟蹊径，提出利用non-local operations构建non-local神经网络。这篇论文通过非局部操作解决深度神经网络核心问题：捕捉长距离依赖关系。
 
