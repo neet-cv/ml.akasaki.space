@@ -84,7 +84,7 @@ $\mathcal{L}(., .)$计算分类器的损失。我们注意到上式使得具有�
 
 ​    下面附上一张动图方便理解:
 
-![](src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/70-20210501181806130.gif)
+![](./src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/70-20210501181806130.gif)
 
 ​	通过图片我们可以看到.在X轴上取的点会随着迭代次数的增加而越来越接近函数的根.经过无限多次的迭代$x_n$,就等于函数f(x)的根.但牛顿法在实际应用的时候我们不会让算法就这么迭代下去,所以当$x_{k-1}$和$x_{k}$相同或者两个值的差小于一个阈值的时候,$x_{k}$就是函数$f(x)$的根.
 
