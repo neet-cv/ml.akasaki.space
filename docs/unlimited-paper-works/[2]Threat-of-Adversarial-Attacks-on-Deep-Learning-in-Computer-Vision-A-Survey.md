@@ -84,7 +84,7 @@ $\mathcal{L}(., .)$计算分类器的损失。我们注意到上式使得具有�
 
 ​    下面附上一张动图方便理解:
 
-![](src/[2]Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/70-20210501181806130.gif)
+![](src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/70-20210501181806130.gif)
 
 ​	通过图片我们可以看到.在X轴上取的点会随着迭代次数的增加而越来越接近函数的根.经过无限多次的迭代$x_n$,就等于函数f(x)的根.但牛顿法在实际应用的时候我们不会让算法就这么迭代下去,所以当$x_{k-1}$和$x_{k}$相同或者两个值的差小于一个阈值的时候,$x_{k}$就是函数$f(x)$的根.
 
@@ -267,7 +267,7 @@ model.fit(x_train, y_train, validation_data=(x_val, y_val),
 
 最终训练结果，损失值稳定在0.015左右，准确度为70% 左右；
 
-![在这里插入图片描述](./src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806123.png)
+![在这里插入图片描述](./src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/20210501181806123.png)
 
 ```python
 model.summary()
@@ -305,7 +305,7 @@ with tf.GradientTape(persistent=True) as g:
 gradient = g.gradient(y, x1) 
 ```
 
-![在这里插入图片描述](./src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806077.png)
+![在这里插入图片描述](./src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/20210501181806077.png)
 
 接下来跟着公式进行计算即可：
 
@@ -318,7 +318,7 @@ x_ = x1 + n * e
 print(model(x_))
 ```
 
-![在这里插入图片描述](./src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/20210125171419702-20210501181806027.png)
+![在这里插入图片描述](./src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/20210501181806027.png)
 
 可以看到预测的结果完全变了！
 
@@ -440,7 +440,7 @@ $$
 
 这里论文里列举的实在太多了，就以论文中的表格来概括吧；
 
-![在这里插入图片描述](./src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3B5dGhvbl9MQ19ub2h0eXA=,size_16,color_FFFFFF,t_70-20210501181806370.png)
+![在这里插入图片描述](./src/Threat-of-Adversarial-Attacks-on-Deep-Learning-in-Computer-Vision-A-Survey/20210501181806370.png)
 
 表格中4星以上的攻击方法，之后应该都会出专门的文章进行学习和介绍的，也包括学习过程中的代码实现；
 
