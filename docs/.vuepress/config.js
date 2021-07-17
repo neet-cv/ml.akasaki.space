@@ -1,8 +1,9 @@
-const { getSidebar } = require('../../js/utils');
-
 module.exports = {
     markdown: {
-        lineNumbers: false
+        lineNumbers: false,
+        extendMarkdown: md => {
+            md.use(require('markdown-it-footnote'))
+        }
     },
     title: '工具箱的深度学习记事簿',
     description: '这里包含了我从入门到依然在入门的过程中接触到的大部分知识。翻翻目录，也许能找到有用的',
@@ -36,55 +37,7 @@ module.exports = {
         }],
         // 为以下路由添加侧边栏
         sidebar: {
-            '/': [
-                {
-                    title: '第零章：在开始之前',
-                    children: getSidebar('ch0'),
-                },
-                {
-                    title: '第一章上：HelloWorld',
-                    children: getSidebar('ch1p1'),
-                },
-                {
-                    title: '第一章下：深度学习基础',
-                    children: getSidebar('ch1p2'),
-                },
-                {
-                    title: '第二章上：卷积神经网络',
-                    children: getSidebar('ch2p1'),
-                },
-                {
-                    title: '第二章下：经典卷积神经网络',
-                    children: getSidebar('ch2p2'),
-                },
-                {
-                    title: '第三章上：谈一些计算机视觉方向',
-                    children: getSidebar('ch3p1'),
-                },
-                {
-                    title: '第三章下：了解更高级的技术',
-                    children: getSidebar('ch3p2'),
-                },
-                {
-                    title: '附录：永远是你的好朋友',
-                    children: getSidebar('appendix'),
-                },{
-                    title: '第五章：Playground',
-                    children: getSidebar('ch5'),
-                },
-                {
-                    title: '第-1章：TensorFlow编程策略',
-                    children: getSidebar('ch-1'),
-                },
-                {
-                    title: '第-2章：数字信号处理（DSP）',
-                    children: getSidebar('ch-2'),
-                },
-                {
-                    title: '魔法部日志（又名论文阅读日志）',
-                    children: getSidebar('unlimited-paper-works'),
-                },
-            ]
+            '/': require('./theindex').getSidebarIndex()
         }
     },
     plugins: [

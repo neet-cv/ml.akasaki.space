@@ -6,6 +6,7 @@
   "author": "Therainisme",
   "license": "MIT",
   "devDependencies": {
+    "markdown-it-footnote": "^3.0.3",
     "vuepress": "^1.8.2",
     "vuepress-plugin-element-tabs": "github:lideming/vuepress-plugin-tabs#0082d86",
     "vuepress-plugin-md-enhance": "^1.18.0"
