@@ -8,11 +8,11 @@ const indexData = {
     "ch2p2": "第二章下：经典卷积神经网络",
     "ch3p1": "第三章上：谈一些计算机视觉方向",
     "ch3p2": "第三章下：了解更高级的技术",
-    "appendix": "附录：永远是你的好朋友",
-    "ch5": "第五章：杂七杂八的手记（暂存）",
-    "ch-1": "第-1章：TensorFlow编程策略",
-    "ch-2": "第-2章：数字信号处理（DSP）",
     "unlimited-paper-works": "魔法部日志（又名论文阅读日志）",
+    "appendix-1": "附录1：好朋友们",
+    "appendix-2": "附录2：数学是真正的圣经",
+    "appendix-3": "附录3：信号和采样的学问（DSP）",
+    "appendix-4": "附录4：TensorFlow编程策略",
 };
 
 exports.getSidebarIndex = function () {
