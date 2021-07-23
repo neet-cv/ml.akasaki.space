@@ -1,6 +1,6 @@
 # GCNet: Global Context Networks (Non-local Networks Meet Squeeze-Excitation Networks and Beyond)
 
-[Yue Cao](https://arxiv.org/search/cs?searchtype=author&query=Cao%2C+Y), [Jiarui Xu](https://arxiv.org/search/cs?searchtype=author&query=Xu%2C+J), [Stephen Lin](https://arxiv.org/search/cs?searchtype=author&query=Lin%2C+S), [Fangyun Wei](https://arxiv.org/search/cs?searchtype=author&query=Wei%2C+F), [Han Hu](https://arxiv.org/search/cs?searchtype=author&query=Hu%2C+H)*Submitted on 25 Apr 2019*
+[Yue Cao](https://arxiv.org/search/cs?searchtype=author&query=Cao%2C+Y), [Jiarui Xu](https://arxiv.org/search/cs?searchtype=author&query=Xu%2C+J), [Stephen Lin](https://arxiv.org/search/cs?searchtype=author&query=Lin%2C+S), [Fangyun Wei](https://arxiv.org/search/cs?searchtype=author&query=Wei%2C+F), [Han Hu](https://arxiv.org/search/cs?searchtype=author&query=Hu%2C+H)
 
 ### 这篇笔记的写作者是[VisualDust](https://github.com/visualDust)。
 
