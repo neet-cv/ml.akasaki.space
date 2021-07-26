@@ -46,36 +46,46 @@
 
 ## Short-Term Dense Concatenate network（STDC network）
 
-BiSeNet V1 利用轻量级主干，例如 ResNet18 和spatial path作为编码网络，形成双流分割架构。 然而，这种设计存在结构冗余，使整个编码网络效率低下。于是作者提出了STDC Network，也就是针对针对BiSeNet中的Context path中backbone的改进，本文作者设计了新的backbone即STDC网络，用于对输入进行编码。
+BiSeNet V1 利用轻量级主干，例如 ResNet18 和spatial path作为编码网络，形成双流分割架构。
+
+![image-20210726213138378](./src/Rethinking-BiSeNet-For-Real-time-Semantic-Segmentation/image-20210726213138378.png)
+
+作者提到，额外使用一个网络分支对low level的feature进行编码在设计上有冗余，使整个编码网络效率低下。所以，作者取消了Spatial path，使用一个Detail Guidance指导主干网络进行学习。而这个被指导的主干网络就是STDC Network。
 
 ![image-20210720115455260](./src/Rethinking-BiSeNet-For-Real-time-Semantic-Segmentation/image-20210720115455260.png)
 
-上图中(a)为这篇论文中Encoder的设计，(b)是BiSeNet中context path的设计。(a)中红色标注部分是STDC  Network的设计，其功能是代替(b)。STDC Network的基础组成是很多个Block：
+上图中(a)为这篇论文中Encoder的设计，(b)是BiSeNet中context path的设计。(a)中红色标注部分是STDC  Network的设计，其功能是代替(b)称为主干网络。
+
+下图是STDC Network的基本构成：
 
 ![image-20210720120046524](./src/Rethinking-BiSeNet-For-Real-time-Semantic-Segmentation/image-20210720120046524.png)
 
-其中，$M$表示输入的维度，$N$表示输出的维度。ConvX表示Conv-BN-ReLU的连续结构，每个网络的块是由不同kernal size的ConvX。
+上图中，(a)为STDC网络，可以看到它由很多个Stage组成，每个Stage又包含若干STDC Module；(b)为STDC Module；(c)为stride = 2的STDC Module。其中，$M$表示输入的维度，$N$​​​表示输出的维度。ConvX表示Conv-BN-ReLU的连续结构，每个网络的块是由不同kernal size的ConvX。
 
-第$i$个Block的输出可以表示成：
+对于STDC网络，Stage1~Stage5进行下采样和编码；Stage6用于分类。
+
+对于每个Stage，Stage1和Stage2使用单纯的卷积进行编码，而Stage3~Stage5使用STDC Module进行编码。
+
+对于每个STDC模块（STDC Module），其输入通道数为$M$，其输出通道数为$N$，其由若干个Block组成，第$i$​个Block的输出可以表示成：
 $$
 x_i = ConvX_i(x_{i-1},k_i)
 $$
-其中$X_{i-1}$表示$x_i$表示第$i$个块的输出，$x_{i-1}$表示第$i$个块的输入（也就是第$i-1$个块的输出），$k_i$表示卷积层的kernal size。
+其中$X_{i-1}$表示$x_i$表示第$i$个块的输出，$x_{i-1}$表示第$i$个块的输入（也就是第$i-1$个块的输出），$k_i$​表示卷积层的kernal size。
 
-STDC模块中，第一个block的kernel size为1，其余简单设置为3。在图像分类任务中，随着网络层数的增加逐渐增加特征图的通道数是一种常见做法。但是在语义分割任务中，我们专注于可扩展的感受野和多尺度信息。
+STDC模块中，第一个block的kernel size为1，其余简单设置为3。可以注意到，在网络的每个阶段，特征图的channel数量以$\frac{N}{2}$、$\frac{N}{4}$、$\frac{N}{8}$逐渐下降。作者认为在图像分类任务中，随着网络层数的增加逐渐增加特征图的通道数是一种常见做法。但是在语义分割任务中，在较浅的网络层，往往需要足够多的通道数保证感知的细粒度；而在感受野较大的深层网络中，应该更加注重高层级信息的归纳，一直增加通道的数量会导致信息的冗余。我们专注于可扩展的感受野和多尺度信息。
 
-对于语义分割任务，在较浅的网络层中，往往需要足够多的通道数保证感知的细粒度；而在感受野较大的深层网络中，应该更加注重高层级信息的归纳，一直增加通道的数量会导致信息的冗余。
-
-为了将低层级的细粒度特征转递至网络末端，STDC中存在多条skip-path。在图中最后的Fusion中，各个阶段的特征会通过concatenation进行特征拼接：
+为了将低层级的细粒度特征转递至网络末端STDC中仅有Block2中进行了下采样（stride=2）；并且STDC中存在多条skip-path。在图中最后的Fusion中，各个阶段的特征会通过concatenation进行特征拼接：
 $$
 X_{output} = F(x_1,x_2,.....,x_n)
 $$
-其中$F$是任何可以进行特征融合的方法。在拼接之前，会通过$3\times 3$平均池化下采样到相同的空间大小。下表中是STDC中各个阶段的感受野大小（不是卷积核大小！）。$X_{output}$是多尺度融合的特征。
+其中$F$是任何可以进行特征融合的方法。在拼接之前，会通过$3\times 3$平均池化下采样到相同的空间大小。
 
 | STDC module | Block1      | Block2      | Block3      | Block4        | Fusion                                             |
 | ----------- | ----------- | ----------- | ----------- | ------------- | -------------------------------------------------- |
 | RF(S = 1)   | $1\times 1$ | $3\times 3$ | $5\times 5$ | $7\times 7$   | $1\times 1$、$3\times 3$、$5\times 5$、$7\times 7$ |
 | RF(S = 2)   | $1\times 1$ | $3\times 3$ | $7\times 7$ | $11\times 11$ | $3\times 3$、$7\times 7$、$11\times 11$            |
+
+上表为STDC中各个阶段的感受野大小。$X_{output}$是多尺度融合的特征。
 
 这种STDC的设计有如下的优点：
 
@@ -88,11 +98,15 @@ S_{param} = M\times 1\times 1 \times \frac{N}{2^1} + \sum_{i=2}^{n-1}\frac{N}{2^
 =\frac{NM}{2}+\frac{9N^2}{2^3}\times \sum_{i=0}^{n-3}\frac{1}{2^{2i}}+\frac{9N^2}{2^{2n-2}}\\
 =\frac{NM}{2}+\frac{3N^2}{2}\times (1+\frac{1}{2^{2n-3}})
 $$
-对于给定的$M$和$N$，STDC的参数量几乎不受其他因素的影响。
+对于给定的$M$和$N$​，STDC的参数量几乎不受其他因素的影响。
+
+![image-20210726214508297](./src/Rethinking-BiSeNet-For-Real-time-Semantic-Segmentation/image-20210726214508297.png)
+
+上表是STDC每个Stage设计的细节。
 
 ## Detail Ground-truth Generation
 
-在这篇论文中，作者认为BiSeNet中的Spatial path产生了大量的冗余计算，因此作者设计Detail Ground-truth Generation替代Spatial path。
+在这篇论文中，作者认为BiSeNet中的Spatial path产生了大量的冗余计算，因此作者设计Detail Ground-truth Generation，将其作为网络学习的指导（Detail Guidance），替代Spatial path的作用。这样以来，Spatial path被移除，节约了大量的计算量。
 
 作者将参与训练的整个网络结构分为三部分：
 
