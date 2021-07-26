@@ -116,13 +116,99 @@ Loss_{GIoU} = 1-GIoU
 $$
 和IoU一样，GIoU也具有scale不敏感的特性，在两个框完全重合的情况下，$IoU = GIoU = 1$。不同的是，IoU的取值范围是$[0,1]$，而GIoU的取值是$[-1,1]$的对称区间。与IoU只关注重叠区域不同，**GIoU不仅关注重叠区域，还关注其他的非重合区域**，能更好的反映两者的重合度。
 
+### DIoU Loss
+
+DIoU即距离IoU损失，全称为Distance-IoU loss，由天津大学数学学院研究人员于AAAI2020所发表的这篇[论文](https://arxiv.org/abs/1911.08287)中首次提出。上面我们谈到GIoU通过引入最小闭合凸面来解决IoU无法对不重叠边框的优化问题。但是，其仍然存在两大局限性：
+
+- 边框回归还不够精确
+- 收敛速度缓慢
+
+考虑下图这种情况，当目标框**完全包含**预测框时，此时GIoU**退化**为IoU。
+
+![image-20210726184128613](./src/loss-functions/image-20210726184128613.png)
+
+显然，我们希望的预测是最右边这种情况。因此，作者通过计算两个边框之间的**中心点归一化距离**，从而更好的优化这种情况。
+
+下图表示的是GIoU损失（第一行）和DIoU损失（第二行）的一个训练过程收敛情况：
+
+![image-20210726184756931](./src/loss-functions/image-20210726184756931.png)
+
+其中绿色框为目标边框，黑色框为锚框，蓝色框和红色框则分别表示使用GIoU损失和DIoU损失所得到的预测框。可以发现，GIoU损失一般会增加预测框的大小使其能和目标框重叠，而DIoU损失则直接使目标框和预测框之间的中心点归一化距离最小，即让预测框的中心快速的向目标中心收敛。
+
+现给出三种IoU的公式对比：
+$$
+IoU = \frac{|B\cap B^{gt}|}{|B\cup B^{gt}|}\\
+GIoU = IoU - \frac{|C\setminus(B\cup B^{gt})|}{|C|}\\
+DIoU = IoU - \frac{\rho^2(b,b^{gt})}{c^2}
+$$
+同样地，DIoU Loss的值也是$1-DIoU$。
+
+对于DIoU来说，其惩罚项由两部分构成：分子为目标框和预测框中心点之间的欧式距离；分母为两个框最小外接矩形框的两个对角线距离：
+
+![image-20210726190106028](./src/loss-functions/image-20210726190106028.png)
+
+因此， 直接优化两个点之间的距离会使得模型**收敛得更快，同时又能够在两个边框不重叠的情况下给出一个优化的方向。**
+
 ### CIoU Loss
 
-### DIoU Loss
+即完整IoU损失，全称为Complete IoU loss，与DIoU出自同一篇论文。上面我们提到GIoU存在两个缺陷，DIoU的提出解决了其实一个缺陷，即收敛速度的问题。而一个好的边框回归损失应该同时考虑三个重要的几何因素，即重叠面积（**Overlap area**）、中心点距离（C**entral point distance**）和高宽比（**Aspect ratio**）。GIoU考虑到了重叠面积的问题，DIoU考虑到了重叠面积和中心点距离的问题，CIoU则在此基础上进一步的考虑到了高宽比的问题。
+$$
+CIoU = IoU - \frac{\rho^2(b,b^{gt})}{c^2} + \alpha v
+$$
+上式为CIoU的计算公式，可以看出，其在DIoU的基础上加多了一个惩罚项$\alpha v$​。其中$\alpha$​为权重为正数的重叠面积平衡因子，在回归中被赋与更高的优先级，特别是在两个边框不重叠的情况下；而$v$​​则用于测量宽高比的一致性。
+
+### F-EIoU Loss
+
+Focal and Efficient IoU Loss是由华南理工大学学者最近提出的一篇关于目标检测损失函数的论文，文章主要的贡献是提升网络收敛速度和目标定位精度。目前检测任务的损失函数主要有两个缺点：
+
+- 无法有效地描述边界框回归的目标，导致收敛速度慢以及回归结果不准确。
+- 忽略了边界框回归中不平衡的问题。
+
+F-EIou loss首先提出了一种有效的交并集（IOU）损失，它可以准确地测量边界框回归中的**重叠面积**、**中心点**和**边长**三个几何因素的差异：
+$$
+L_{EIoU} = L_{IoU} + L_{dis} + L_{asp}\\
+ = 1 - IoU + \frac{\rho^2(b,b^{gt})}{c^2} + \frac{\rho^2(w,w^{gt})}{C_w^2} + \frac{\rho^2(h,h^{gt})}{C_h^2}
+$$
+其次，基于对有效样本挖掘问题（EEM）的探讨，提出了Focal loss的回归版本，以使回归过程中专注于高质量的锚框：
+$$
+L_f(x)=
+\begin{cases}
+-\frac{\alpha x^2 (2\ln(\beta x)-1)}{4} & 0<x\leq1;1/e\leq\beta\leq1\\
+-\alpha\ln(\beta)x+C & x>1;1/2\leq\beta\leq1
+\end{cases}
+$$
+最后，将以上两个部分结合起来得到Focal-EIou Loss：
+$$
+L_{Focal-EIoU} = \frac{\sum_{i=1}^n W_i\cdot L_{EIOU}}{\sum_{i=1}^n W_i}
+$$
+其中，通过加入每个batch的权重和来避免网络在早期训练阶段收敛慢的问题。
 
 ### CDIoU Loss
 
-### F-EIoU Loss
+Control Distance IoU Loss是由同济大学学者提出的，文章的主要贡献是在几乎不增强计算量的前提下有效提升了边界框回归的精准度。目前检测领域主要两大问题：
+
+- SOTA算法虽然有效但计算成本高。
+- 边界框回归损失函数设计不够合理。
+
+![image-20210726203705056](./src/loss-functions/image-20210726203705056.png)
+
+文章首先提出了一种对于Region Propasl（RP）和Ground Truth（GT）之间的新评估方式，即CDIoU。可以发现，它虽然没有直接中心点距离和长宽比，但最终的计算结果是有反应出RP和GT的差异。计算公式如下：
+$$
+diou = \frac{||RP-GT||_2}{4MBR's diagonal}\\
+=\frac{AE+BF+CG+DH}{4WY}
+$$
+
+$$
+CDIoU = IoU + \lambda(1 - diou)
+$$
+
+对比以往直接计算中心点距离或是形状相似性的损失函数，CDIoU能更合理地评估RP和GT的差异并且有效地降低计算成本。然后，根据上述的公式，CDIoU Loss可以定义为：
+$$
+L_{CDIoU} = L_{IoU_s} + diou
+$$
+通过观察这个公式，可以直观地感受到，在权重迭代过程中，模型不断地将RP的四个顶点拉向GT的四个顶点，直到它们重叠为止，如下图所示：
+
+![image-20210726204000099](./src/loss-functions/image-20210726204000099.png)
 
 ## 分类损失（Classification Loss）
 
