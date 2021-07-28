@@ -61,38 +61,11 @@ conda create -n mxnet python=3.8
 
 ---
 
-## 安装apache mx-net
+## 安装Tensorflow
 
-- mx-net简介
+咳咳，百度。
 
-  Apache MXNet（孵化）是一个深度学习框架，旨在提高效率和灵活性。它允许您混合符号和命令式编程，以最大限度地提高效率和生产力。MXNet的核心是一个动态依赖调度程序，可以动态地自动并行化符号和命令操作。最重要的图形优化层使符号执行更快，内存效率更高。MXNet便携且轻巧，可有效扩展到多个GPU和多台机器。
-
-  更多的特点请参考[mx-net官网](https://mxnet.apache.org/versions/1.7.0/)。你也可以看到[mx-net的开源项目仓库](https://github.com/apache/incubator-mxnet)
-
-- CPU和GPU版本？
-
-  像mx-net、tensorflow、pytorch等框架都会有CPU版本和GPU版本。GPU是图形处理器，在矩阵运算性能上要优于CPU。使用GPU能够使你的框架加速。
-
-  选择版本时，应注意自己使用的计算机是否有一块GPU，如果有的话，那么推荐安装GPU版本。请注意，当你的电脑装有显卡时，将同时支持CPU和GPU版本。当你的电脑没有显卡时，将只支持CPU版本。
-
-  请注意，在一个虚拟环境下你只能从CPU版本和GPU版本中二选一，它们并不能在同个环境下共存。
-
-  选择安装CPU版本
-
-  ```bash
-  pip install mxnet
-  ```
-
-  选择安装GPU版本
-
-  `请注意，安装GPU版本需指定相应的CUDA型号。通常情况下，你需要在电脑上安装CUDA和cudnn。如果需要帮助，请查看`[`关于CUDA`]()
-
-  ```bash
-  # 当你的cuda版本是10.1时
-  pip install pip install mxnet-cu101
-  ```
-
-  其中，后面的-cu101是指对应cuda版本为10.1。如果你的cuda版本是10.2，那么你应该将它替换为-cu102，以此类推。其他情况请参考[mxnet官网](https://mxnet.apache.org/)获取确切的包名称。
+## 其他
 
 ### 有conda为什么要使用pip？
 
