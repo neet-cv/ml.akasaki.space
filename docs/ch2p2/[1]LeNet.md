@@ -63,7 +63,7 @@ testing_dataset = tf.data.Dataset.from_tensor_slices((testing_x, testing_y))
 testing_dataset = testing_dataset.batch(batch_size)
 ```
 
-上面这段你应该会对它越来越熟悉，因为它将被经常使用。整个过程的详细解释请参考[常见代码块](../appendix/[4]similar-codeblocks.md)中有关数据集的部分。
+上面这段你应该会对它越来越熟悉，因为它将被经常使用。整个过程的详细解释请参考[常见代码块](../appendix-1/[4]similar-codeblocks.md)中有关数据集的部分。
 
 ### 定义模型
 
