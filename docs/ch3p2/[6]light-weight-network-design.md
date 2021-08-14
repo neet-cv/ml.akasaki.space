@@ -55,7 +55,7 @@ VGG（在[这篇](../ch2p2/[7]VGGNet.html)文章中进行了讲解）在网络�
 
 ![img](./src/light-weight-network-design/v2-baf2aeff4dc500d4a6d257513c0b2b95_1440w.jpg)
 
-上图：分组卷积。假设卷积核尺寸为$K^2$，$H$和$W$用于表示输入的空间尺寸，$N$表示输入的通道数，$M$表示输出的通道数。则分组卷积将输入特征通道分为$G$组，并且对于每个分组的信道独立地执行卷积，分组卷积计算量是$HWNK²M/G$，为标准卷积计算量的$\frac{1}{G}$。
+上图：分组卷积。假设卷积核尺寸为$K^2$，$H$和$W$用于表示输入的空间尺寸，$N$表示输入的通道数，$M$表示输出的通道数。则分组卷积将输入特征通道分为$G$组，并且对于每个分组的信道独立地执行卷积，分组卷积计算量是$HWNK^2M/G$，为标准卷积计算量的$\frac{1}{G}$。
 
 ### 始于AlexNet
 
@@ -168,7 +168,7 @@ $$
 
 Inception V2学习了VGG使用$3\times 3$代替$5\times 5$卷积进一步减少计算量：
 
-![VGG的conv](./src/light-weight-network-design/format,f_auto)
+![VGG的conv](./src/light-weight-network-design/hfwdugufbwjdef.png)
 
 Inception V2 一方面了加入了BN层，减少了Internal Covariate Shift（内部neuron的数据分布发生变化），使每一层的输出都规范化到一个N(0, 1)的高斯；另外一方面学习VGG用2个3x3的conv替代inception模块中的5x5，降低了参数数量加速计算。
 
@@ -231,7 +231,7 @@ SqueezeNext是SqueezeNet实战升级版，直接和MobileNet对比性能。Squee
 
 ### 深度卷积（Depthwise convolution）
 
-深度卷积（Depthwise convolution）最早是由Google提出，是指将$N\times H\times W\times C$输入特征图分为$group=C$组（既Depthwise 是分组卷积的特殊简化形式），然后每一组做$k\times k$卷积，计算量为$HWK²M$（是普通卷积计算量的$\frac{1}{N}$，通过忽略通道维度的卷积显著降低计算量）。Depthwise相当于对于每个通道，单独使用一个仅属于该通道的卷积核。
+深度卷积（Depthwise convolution）最早是由Google提出，是指将$N\times H\times W\times C$输入特征图分为$group=C$组（既Depthwise 是分组卷积的特殊简化形式），然后每一组做$k\times k$卷积，计算量为$HWK^2M$（是普通卷积计算量的$\frac{1}{N}$，通过忽略通道维度的卷积显著降低计算量）。Depthwise相当于对于每个通道，单独使用一个仅属于该通道的卷积核。
 
 ![img](./src/light-weight-network-design/v2-2d777b5051846271ffce36228fdcc575_1440w.jpg)
 

@@ -4,12 +4,12 @@
 
 > We present a new, embarrassingly simple approach to instance segmentation in images. Compared to many other dense prediction tasks, e.g., semantic segmentation, it is the arbitrary number of instances that have made instance segmentation much more challenging. In order to predict a mask for each instance, mainstream approaches either follow the 'detect-thensegment' strategy as used by Mask R-CNN, or predict category masks first then use clustering techniques to group pixels into individual instances. We view the task of instance segmentation from a completely new perspective by introducing the notion of "instance categories", which assigns categories to each pixel within an instance according to the instance's location and size, thus nicely converting instance mask segmentation into a classification-solvable problem. Now instance segmentation is decomposed into two classification tasks. We demonstrate a much simpler and flexible instance segmentation framework with strong performance, achieving on par accuracy with Mask R-CNN and outperforming recent singleshot instance segmenters in accuracy. We hope that this very simple and strong framework can serve as a baseline for many instance-level recognition tasks besides instance segmentation.
 
-实力分割相比于语义分割，不仅需要预测出每一个像素点的语义类别，还要判断出该像素点属于哪一个实例。以往**二阶段**的方法主要是：
+实例分割相比于语义分割，不仅需要预测出每一个像素点的语义类别，还要判断出该像素点属于哪一个实例。以往**二阶段**的方法主要是：
 
 1. 先检测后分割：例如Mask R-CNN ，先用检测的方法到得每一个实例，然后对该实例进行语义分割，分割得到的像素都属于此实例。
 2. 先分割后分类：先采用语义分割的方法对整个图的所有像素点做语义类别的预测，然后学习一个嵌入向量，使用聚类方法拉近属于同一实例的像素点，使它们属于同一类（同个实体）。
 
-单阶段方法（Single Stage Instance Segmentation）方面的工作受到单阶段目标检测的影响大体上也分为两类：一种是受one-stage, anchot-based 检测模型如YOLO，RetinaNet启发，代表作有YOLACT和SOLO；一种是受anchor-free检测模型如 FCOS 启发，代表作有PolarMask和AdaptIS。上述这些实例分割的方法都不那么直接，也不那么简单。SOLO的出发点就是做更简单、更直接的实例分割。
+单阶段方法（Single Stage Instance Segmentation）方面的工作受到单阶段目标检测的影响大体上也分为两类：一种是受one-stage, anchot-based检测模型如YOLO，RetinaNet启发，代表作有YOLACT和SOLO；一种是受anchor-free检测模型如 FCOS 启发，代表作有PolarMask和AdaptIS。上述这些实例分割的方法都不那么直接，也不那么简单。SOLO的出发点就是做更简单、更直接的实例分割。
 
 基于对MSCOCO数据集的统计，作者提出，验证子集中总共有36780个对象，其中98.3％的对象对的中心距离大于30个像素。至于其余的1.7％的对象对，其中40.5％的大小比率大于1.5倍。在这里，我们不考虑像X形两个物体这样的少数情况。总之，**在大多数情况下，图像中的两个实例要么具有不同的中心位置，要么具有不同的对象大小**。
 
@@ -39,7 +39,7 @@ $$
 
 ## SOLO如何描述实例
 
-本文提出一种新的、非常简单的并且思路像极了YOLO的单阶段实例分割方法，首先对一幅图进行$S\times S$​​​个网格的划分，如果某个实例的中心点落入这个网格中，那么这个网格就需要负责这个实例的语义类别和实例类别。其主体思想在于利用图像中不同实例的位置和尺度信息的不同，来区分出不同的实例。
+本文提出一种新的、非常简单的并且思路像极了YOLO的单阶段实例分割方法，首先对一幅图进行$S\times S$​​​​个网格的划分，如果某个实例的中心点落入这个网格中，那么这个网格就需要负责这个实例的形状和实例类别。其主体思想在于利用图像中不同实例的位置和尺度信息的不同，来区分出不同的实例。
 
 **SOLO框架的中心思想是将实例分割重新表述为两个同时的、类别感知预测和实例感知掩码生成问题**：
 
