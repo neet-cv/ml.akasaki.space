@@ -8,7 +8,7 @@ YOLACT是You Only Look At CoefficienTs 的简写，其中 coefficients 是这个
 
 ![image-20210818180207356](./src/YOLACT-Real-time-Instance-Segmentation/image-20210818180207356.png)
 
-上图：YOLACT的网络结构图。**YOLACT的目标是将掩模分支添加到现有的一阶段（one-stage）目标检测模型**。我个人觉得这是夹在一阶段和二阶段中间的产物。将其分为一阶段的依据是其实现“将掩模分支添加到现有的一阶段目标检测模型”的方式与Mask R-CNN对 Faster-CNN 操作相同，但没有诸如feature repooling和ROI align等明确的目标定位步骤。也就是，定位-分类-分割的操作被变成了分割-剪裁。
+上图：YOLACT的网络结构图。**YOLACT的目标是将掩模分支添加到现有的一阶段（one-stage）目标检测模型**。我个人觉得这是夹在一阶段和二阶段中间的产物。将其分为一阶段的依据是其实现“将掩模分支添加到现有的一阶段目标检测模型”的方式与Mask R-CNN对 Faster-CNN 操作相同，但没有诸如feature repooling和ROI align等明确的目标定位步骤。也就是，`定位-分类-分割`的操作被变成了`分割-剪裁`。
 
 根据评估，当YOLACT 处理$550\times 550$​​​大小的图片时，其速度达到了 33FPS，而互联网上多数视频一般是 30FPS 的，这也就是实时的含义了。这是单阶段比较早的一份工作，虽然这个速度不快但也还行了。
 
