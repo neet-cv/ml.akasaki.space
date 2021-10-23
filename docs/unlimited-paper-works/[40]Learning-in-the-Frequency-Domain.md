@@ -14,7 +14,7 @@
 
 本文的作者受到HVS（human visual system，人类视觉系统）中的一些研究（[Deep Learning of Human Visual Sensitivity in Image Quality Assessment Framework](https://openaccess.thecvf.com/content_cvpr_2017/papers/Kim_Deep_Learning_of_CVPR_2017_paper.pdf)）以及数字信号处理中一些方法的启发，首先将图像通过某种方法映射到频域内（例如离散余弦变换（discrete cosine transform）或其他方式），获得频域上的特征图后，训练一种“选择器”，其功能是筛选出对最终结果影响较大的频域信息，并移除无关紧要的部分，作为输入后续网络的数据的一部分。
 
-![image-20211023123854207](./src/%5B40%5DLearning-in-the-Frequency-Domain/image-20211023123854207.png)
+![image-20211023123854207](./src/Learning-in-the-Frequency-Domain/image-20211023123854207.png)
 
 上图(a)：一般CNN模型处理图片的流程；上图(b)：本文的方法处理图片的流程（值得一提的是，该方法作为前处理加入网络时，不需要对原来使用RGB图像作为输入的CNN结构做出什么更改）。实验证明，在相同的输入图像精度下，加入该方法的神经网络比直接在空间域上卷积完成的逐层下采样的方法达到了更高的精度，并且在二分之一输入大小的图像上依然如此。	
 
@@ -47,7 +47,7 @@
 
 刚才提到“HVS中的一些研究”，作者在频域中对CNN的输入输出进行测试，通过实验分析发现，在分类、检测和分割任务中，CNN模型对低频率的channel更加敏感。这和HVS中的一些研究是贴合的。也就是说，在使用现在主流的数据集进行监督时，CNN在频域上表现出了和人类一样的“低频敏感性”。因此，对于RGB色域上的输入，并不是整个RGB空间内的所有值在CNN模型中都具有重要的作用。
 
-![image-20211023123921777](./src/%5B40%5DLearning-in-the-Frequency-Domain/image-20211023123921777.png)
+![image-20211023123921777](./src/Learning-in-the-Frequency-Domain/image-20211023123921777.png)
 
 上图：在本论文提出的方法中图像前处理的过程。该过程包含如下步骤：
 
@@ -65,7 +65,7 @@
 
 基于上述思考，我猜对于频域上的特征图这样做的理由也是相同存在的。还真猜对了，在经过前处理后，特征图上不同的channel堆叠了不同的频域信息。本篇论文中提出通过学习筛除一部分对最终的结果及误差影响不大的通道。在刚才的前处理中，图像变为了$W\times H\times C$（本文中$C=192$）的频域特征图，输入频率选择器。这篇文章在通道选择上直接使用了类似SE Block的结构：
 
-![image-20211023123801381](./src/%5B40%5DLearning-in-the-Frequency-Domain/image-20211023123801381.png)
+![image-20211023123801381](./src/Learning-in-the-Frequency-Domain/image-20211023123801381.png)
 
 上图：选择器结构（下，文中称之为 $Gate\ Module$）和SE Block（上）的结构对比图。可以看到，除了图中标号1和2，其余部分和两者结构基本相同（注：本文的$F_{ex}(\cdot,W)$过程是$1\times 1$卷积，而不是SE Block中全连接）。在Gate Module的输出中标记为白色的通道代表被过滤的通道（查看[Squeeze and Excitation Networks](./[23]Squeeze-and-Excitation-Networks.md) 以理解 SE Block ）。
 
@@ -75,7 +75,7 @@
 
 在原SE Block的设计中经过“$F_{ex}$”过程得到 $Tensor 3$ 后直接 $softmax$ 。但是在本文给出的Gate Module中产生了一个问题。上面描述的选择方法中使用了伯努利分布采样，这会产生离散的通道选择决策。当我们采用梯度下降优化时，能够直接优化的是连续量。对于离散量以及在中间过程中出现离散量的网络是难以直接进行梯度下降优化的。因此，在Gate Module中，然后再进行 $Gumbel\ softmax$（ Gumbel softmax distribution 可参考论文[Categorical Reparameterization with Gumbel-Softmax ](https://arxiv.org/abs/1611.01144)）。$Gumbel\ softmax$ 允许了在具有离散采样的过程中进行反向传播，解决了这个问题。
 
-![image-20211023123813633](./src/%5B40%5DLearning-in-the-Frequency-Domain/image-20211023123813633.png)
+![image-20211023123813633](./src/Learning-in-the-Frequency-Domain/image-20211023123813633.png)
 
 上图：通过类似 SE Block 的结构选取重要的通道。
 
@@ -83,11 +83,11 @@
 
 为了研究通道选择器的行为，作者使用相同数据集在图像分类和语义分割任务上进行训练，并对频域的选择器选出的channel信息进行了可视化：
 
-![image-20211023123725921](./src/%5B40%5DLearning-in-the-Frequency-Domain/image-20211023123725921.png)
+![image-20211023123725921](./src/Learning-in-the-Frequency-Domain/image-20211023123725921.png)
 
 上图：在 ImageNet（validation set）进行**分类**任务时对选出的通道 YCbCr 组成绘制可视化 heat map。
 
-![image-20211023123729829](./src/%5B40%5DLearning-in-the-Frequency-Domain/image-20211023123729829.png)
+![image-20211023123729829](./src/Learning-in-the-Frequency-Domain/image-20211023123729829.png)
 
 上图：在 COCO（validation set）进行**分割**任务时对选出的通道 YCbCr 组成绘制可视化 heat map。
 
@@ -106,10 +106,10 @@
 
 经过前处理得到频域特征图也并没有直接作为输入特征直接输入网络，而是与来自spatial-wise的特征图concatenate成为组合特征共同输入网络。这个过程可以表示为：
 
-![image-20211023124014543](./src/%5B40%5DLearning-in-the-Frequency-Domain/image-20211023124014543.png)
+![image-20211023124014543](./src/Learning-in-the-Frequency-Domain/image-20211023124014543.png)
 
 上图：前处理后的频域特征与直接来自图像的特征图拼接的方式。由于CNN中的卷积层对于spatial-wise的图像数据在设计上就表现出优化偏置，因此空域上的输入是必要的。上图中channel数量写为$64$仅为举例。根据论文描述，实际在代码中这个数字一般小等于$192$。在这片论文中，作者一直将这个数字写为$192$。
 
-![image-20211023123829531](./src/%5B40%5DLearning-in-the-Frequency-Domain/image-20211023123829531.png)
+![image-20211023123829531](./src/Learning-in-the-Frequency-Domain/image-20211023123829531.png)
 
 上图：真正被输入后续网络中的数据。在concatenate操作之后，空间域的特征图和频域的特征图被拼接。经过这样的前处理，使输入的特征包含了频域信息丰富了特征表达，并且降低了占用大量带宽的空域特征图大小。
