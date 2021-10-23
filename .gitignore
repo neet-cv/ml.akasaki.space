@@ -4,3 +4,4 @@ code/
 others/
 deploy.sh
 yarn-error.log
+pending.*
