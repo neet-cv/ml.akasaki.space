@@ -1,5 +1,3 @@
-const { getSidebar } = require("../../js/utils");
-
 const indexData = {
     "ch0": "第零章：在开始之前",
     "ch1p1": "第一章上：HelloWorld",
