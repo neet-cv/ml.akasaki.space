@@ -34,7 +34,7 @@ const config = {
           // editUrl: 'https://github.com/facebook/docusaurus/edit/main/website/',
           // routeBasePath: '/'
           remarkPlugins: [math],
-          rehypePlugins: [katex],
+          rehypePlugins: [[katex, { strict: false }]],
           id: 'docs',
           routeBasePath: '/',
         },
