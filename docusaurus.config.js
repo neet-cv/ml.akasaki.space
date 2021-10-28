@@ -13,7 +13,7 @@ const config = {
   tagline: 'Dinosaurs are cool',
   url: 'https://ml.akasaki.space/',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'neet-cv', // Usually your GitHub org/user name.
