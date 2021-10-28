@@ -19,6 +19,6 @@ exports.getSidebarIndex = function () {
     return Object.entries(indexData)
         .map(([folder, title]) => ({
             title,
-            children: getSidebar(folder)
+            folder,
         }));
 };

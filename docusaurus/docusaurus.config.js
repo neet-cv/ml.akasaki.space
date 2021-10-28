@@ -9,14 +9,14 @@ const katex = require('rehype-katex');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
+  title: '工具箱的深度学习记事簿',
   tagline: 'Dinosaurs are cool',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://ml.akasaki.space/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'visualDust', // Usually your GitHub org/user name.
+  organizationName: 'neet-cv', // Usually your GitHub org/user name.
   projectName: 'ml.akasaki.space', // Usually your repo name.
   i18n: {
     defaultLocale: 'zh-cn',
@@ -34,16 +34,12 @@ const config = {
           // editUrl: 'https://github.com/facebook/docusaurus/edit/main/website/',
           // routeBasePath: '/'
           remarkPlugins: [math],
-          rehypePlugins: [
-            [katex, 
-              /** @type {import('rehype-katex')} */
-              {
-
-            }]
-          ],
+          rehypePlugins: [katex],
           id: 'docs',
+          routeBasePath: '/',
         },
         blog: false,
+        pages: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -69,7 +65,7 @@ const config = {
           // },
           // {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/neet-cv/ml.akasaki.space',
             label: 'GitHub',
             position: 'right',
           },
@@ -118,7 +114,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} neet-cv. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
@@ -127,7 +123,7 @@ const config = {
     }),
   stylesheets: [
     {
-      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css',
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.20/dist/katex.min.css',
       integrity:
         'sha384-Um5gpz1odJg5Z4HAmzPtgZKdTBHZdw8S29IecapCSB31ligYPhHQZMIlWLYQGVoc',
       crossorigin: 'anonymous',
