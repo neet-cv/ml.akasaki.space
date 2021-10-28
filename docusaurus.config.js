@@ -57,12 +57,12 @@ const config = {
         //   src: 'img/logo.svg',
         // },
         items: [
-          // {
-          //   type: 'doc',
-          //   docId: 'README',
-          //   position: 'left',
-          //   label: 'Tutorial',
-          // },
+          {
+            label: '魔法部日志',
+            to: '/unlimited-paper-works/[0]unlimited-paper-works',
+            position: 'left',
+            activeBaseRegex: '/unlimited-paper-works/'
+          },
           // {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/neet-cv/ml.akasaki.space',
