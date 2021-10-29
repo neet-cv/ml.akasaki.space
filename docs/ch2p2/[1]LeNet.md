@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # LeNet：初试卷积神经网络
 
 你可以认为LeNet是第一个卷积神经网络成功的应该用。LeNet的原论文是[Gradient-Based Learning Applied to Document Recognition](http://yann.lecun.com/exdb/publis/pdf/lecun-01a.pdf)。

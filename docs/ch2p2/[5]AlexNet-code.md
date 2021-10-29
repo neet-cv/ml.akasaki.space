@@ -1,3 +1,7 @@
+---
+sidebar_position: 5
+---
+
 # AlexNet代码实现
 
 这里不会包含任何讲解的内容，讲解的内容请参考[AlexNet：更深的卷积神经网络](./[4]AlexNet.md)。
