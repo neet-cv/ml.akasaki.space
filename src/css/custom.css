@@ -13,8 +13,8 @@
   --ifm-color-primary-light: rgb(70, 203, 174);
   --ifm-color-primary-lighter: rgb(102, 212, 189);
   --ifm-color-primary-lightest: rgb(146, 224, 208);
-  --ifm-code-font-size: 95%;
-  --ifm-font-family-base: "黑体", "sans-serif";
+  --ifm-code-font-size: 100%;
+  --ifm-font-family-base: "sans-serif";
 }
 
 .docusaurus-highlight-code-line {
@@ -26,4 +26,10 @@
 
 html[data-theme='dark'] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+.theme-doc-sidebar-menu > li > a {
+  font-weight: 700;
+  padding: 0.8rem 0.5rem;
+  font-size: 1.1em;
 }
