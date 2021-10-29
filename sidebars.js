@@ -30,7 +30,7 @@ const sidebars = {
         ],
       }
     )),
-    { type: 'ref', id: 'unlimited-paper-works/[0]unlimited-paper-works', label: '魔法部日志（又名论文阅读日志）' },
+    { type: 'ref', id: 'unlimited-paper-works/index', label: '魔法部日志（又名论文阅读日志）' },
   ],
   upwSidebar: [
     { type: 'ref', id: 'README', label: '工具箱的深度学习记事簿' },

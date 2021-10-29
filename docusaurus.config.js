@@ -70,7 +70,7 @@ const config = {
         items: [
           {
             label: '魔法部日志',
-            to: '/unlimited-paper-works/[0]unlimited-paper-works',
+            to: '/unlimited-paper-works/',
             position: 'left',
             activeBaseRegex: '/unlimited-paper-works/'
           },
