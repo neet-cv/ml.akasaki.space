@@ -19,7 +19,7 @@ GAN，Generative Adversarial Networks的简称，译名为生成对抗网络。�
 
 学习过程中的第一个GAN是2014年提出的最原始的GAN，其运行效果如下图：
 
-![2021-04-26_15-58](/images/2021-04-26_15-58.png)
+![2021-04-26_15-58](https://breezeshane.github.io/images/2021-04-26_01-11.png)
 
  不难发现它表（GAN）现（de）糟（piào）糕（liàng），出现了严重的欠拟合和过拟合，实在让人大跌眼镜。
 
