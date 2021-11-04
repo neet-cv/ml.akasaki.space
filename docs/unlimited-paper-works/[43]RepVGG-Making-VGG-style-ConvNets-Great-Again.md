@@ -13,7 +13,7 @@
 1. 提出了一种简单强大的CNN，推理时其拥有VGG类似的plain结构，仅由卷积和ReLU组成；训练时拥有多分支的拓扑结构
 2. 得益于结构重参化（re-parameterization）技术，RepVGG运行速度比ResNet-50快83%，比ResNet-101快101%，并且具有更高的精度。
 
-<img src="https://i.loli.net/2021/09/14/H4NT17LA635BQgK.png" style="zoom:80%;" />
+<img src="https://i.loli.net/2021/09/14/H4NT17LA635BQgK.png"/>
 
 ## 介绍
 
@@ -74,7 +74,7 @@ Winogard 是一种加速$3\times 3$卷积（stride=1）的经典算法，其乘�
 
    对于多分支的网络拓扑结构，每个分支的输出都必须保留，直到addition或concatenation操作完成，这会大大提高内存占用，如下图：
 
-   <img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20210915135344621.png" alt="image-20210915135344621" style="zoom:80%;" />
+   <img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20210915135344621.png" alt="image-20210915135344621"/>
 
    而plain的网络结构能够及时释放内存，并且设计专门的硬件时可以将更多的计算单元集成到芯片上。
 
@@ -94,7 +94,7 @@ ResNet成功的一个解释是，这种多分支的结构使得网络成为各�
 
 ### Re-param for Plain Inference-time Model
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20210915185030692.png" alt="image-20210915185030692" style="zoom:67%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20210915185030692.png" alt="image-20210915185030692"/>
 
 
 

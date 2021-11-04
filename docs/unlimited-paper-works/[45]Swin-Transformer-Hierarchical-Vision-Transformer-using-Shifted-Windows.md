@@ -19,13 +19,13 @@ Transformer是为序列建模和转换任务而设计的，它以关注数据中
 1. 提出了一种分层Transformer，其可以作为计算机视觉的通用主干网络，并且在各类下游任务上取得SOTA；
 2. 通过Shift Windows实现了对输入图像尺寸的线性时间复杂度。
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211020204110669.png" alt="image-20211020204110669" style="zoom: 67%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211020204110669.png" alt="image-20211020204110669"/>
 
 ## Method
 
 ### 整体结构
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211018125415232.png" alt="image-20211018125415232" style="zoom:80%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211018125415232.png" alt="image-20211018125415232"/>
 
 上图是Swin Transformer中最小版本的可视化结构图，其主要流程如下：
 
@@ -36,7 +36,7 @@ Transformer是为序列建模和转换任务而设计的，它以关注数据中
 
 ###  Shifted Window based Self-Attention
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211018165411438.png" alt="image-20211018165411438" style="zoom:80%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211018165411438.png" alt="image-20211018165411438"/>
 
 连续的Swin Transformer如上图所示，其主要流程如下：
 
@@ -75,11 +75,11 @@ $$
 
 为了保持高效的同时进行有效建模，提出了Shifted Window：
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211019210948129.png" alt="image-20211019210948129" style="zoom:80%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211019210948129.png" alt="image-20211019210948129"/>
 
 通过控制不同框的大小，实现上一层不同Window之间的信息交流，但是这样较难实现，并且Window的数量会从$[\frac hM]\times[\frac wM]$增加到$([\frac hM]+1)\times([\frac wM]+1)$，并且某些Window的大小会小于$M\times M$，因此提出了一种更简单的方法来实现这个功能：
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211019230354019.png" alt="image-20211019230354019" style="zoom:80%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211019230354019.png" alt="image-20211019230354019"/>
 
 将原有的窗口以M/2的大小进行偏移，将多出的部分移动到相对的位置，这样就实现了不同Window之前的信息交流，不过需要注意的一点是，实际计算的过程中会使用Mask，将上图右侧移动过来的位置给盖住，原因是这部分的注意力没有意义。
 
@@ -97,7 +97,7 @@ $$
 
 Patch merging起到一个“下采样”的作用，具体实现方式是CNN中空间到深度的变换，将空间信息堆叠进通道中，这就相当于变相扩大了Window的大小
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211020114206242.png" alt="image-20211020114206242" style="zoom: 50%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211020114206242.png" alt="image-20211020114206242"/>
 
 ## 代码分析
 

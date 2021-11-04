@@ -53,7 +53,7 @@ CCNet可能是受到之前将卷积运算分解为水平和垂直的GCN以及建
 
 ### Criss-Cross Attention
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20210816135006656.png" alt="image-20210816135006656" style="zoom: 67%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20210816135006656.png" alt="image-20210816135006656"/>
 
 主要流程如下：
 
@@ -143,7 +143,7 @@ $$
 
 在2D注意力的基础上进行推广，提出3DCCA，其可以在时间维度上收集额外的上下文信息
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20210816184130138.png" alt="image-20210816184130138" style="zoom: 80%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20210816184130138.png" alt="image-20210816184130138"/>
 
 其流程与2DCCA大致相同，具体细节差异看论文。
 
@@ -224,7 +224,7 @@ class CrissCrossAttention(nn.Module):
 
 在Cityscapes上的结果：
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20210816184546419.png" alt="image-20210816184546419" style="zoom: 67%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20210816184546419.png" alt="image-20210816184546419"/>
 
 ### 消融实验
 
@@ -258,7 +258,7 @@ class CrissCrossAttention(nn.Module):
 
 同时，对Non Local使用了循环操作，可以看到，循环操作带来了超过一点的增益，然而其巨量的计算量和显存需求限制性能
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20210816214333065.png" alt="image-20210816214333065" style="zoom:67%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20210816214333065.png" alt="image-20210816214333065"/>
 
 #### 可视化注意力图
 

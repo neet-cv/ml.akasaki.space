@@ -13,7 +13,7 @@
 1. 总结了一些在延迟（latency）几乎不变的情况下精度提高的技术；
 2. 提出了一种基于MKLDNN加速策略的轻量级CPU网络，即PP-LCNet。
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007133525281.png" alt="image-20211007133525281" style="zoom:50%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007133525281.png" alt="image-20211007133525281"/>
 
 ## 介绍
 
@@ -27,11 +27,11 @@
 
 PP-LCNet使用深度可分离卷积作为基础结构，构建了一个类似MobileNetV1的BaseNet，并在其基础上结合现有的技术，从而得到了PP-LCNet
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007191050134.png" alt="image-20211007191050134" style="zoom:67%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007191050134.png" alt="image-20211007191050134"/>
 
 参数配置：
 
-<img src="C:\Users\11864\AppData\Roaming\Typora\typora-user-images\image-20211008131450331.png" alt="image-20211008131450331" style="zoom: 67%;" />
+<img src="C:\Users\11864\AppData\Roaming\Typora\typora-user-images\image-20211008131450331.png" alt="image-20211008131450331"/>
 
 ### Better activation function
 
@@ -47,7 +47,7 @@ f(x)&=\sum_{i=1}^{\infin}\sigma(x-i+0.5) &(stepped\ sigmoid)\\
 &\approx max(0,N(0,1)) &(ReLU\ function)
 \end{align}
 $$
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/606386-20180502160705206-923153087.png" alt="softplus" style="zoom: 80%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/606386-20180502160705206-923153087.png" alt="softplus"/>
 
 出于计算量的考虑和实验验证选择了ReLU
 
@@ -55,20 +55,20 @@ ReLU6：
 
 增加了上界
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007184950617.png" alt="image-20211007184950617" style="zoom: 50%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007184950617.png" alt="image-20211007184950617"/>
 
 [Swish](https://www.cnblogs.com/makefile/p/activation-function.html)：
 $$
 f(x)=x\cdot sigmoid(\beta x)
 $$
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/606386-20171102101521763-698600913.png" alt="swish" style="zoom:67%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/606386-20171102101521763-698600913.png" alt="swish"/>
 
 $\beta$是个常数或可训练的参数。Swish 具备无上界有下界、平滑、非单调的特性。
 Swish 在深层模型上的效果略优于 ReLU。仅仅使用 Swish 单元替换 ReLU 就能把 Mobile NASNetA 在 ImageNet 上的 top-1 分类准确率提高 0.9%，Inception-ResNet-v 的分类准确率提高 0.6%。
 
 导数：
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/606386-20171102101538013-1397340773.png" alt="swish-derivation" style="zoom: 67%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/606386-20171102101538013-1397340773.png" alt="swish-derivation"/>
 
 
 
@@ -82,23 +82,23 @@ Swish函数的计算量是很大的，因此提出了HSwish，H表示Hard，意�
 
 对ReLU6除以6再向左平移三个单位可以得到HSigmoid：
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007185106870.png" alt="image-20211007185106870" style="zoom: 50%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007185106870.png" alt="image-20211007185106870"/>
 
 HSwish的近似公式为$x\cdot h\sigma(x)=\frac{relu6(x+3)}{6}$，图像如下：
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007185403938.png" style="zoom:50%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007185403938.png"/>
 
 ### SE modules at appropriate positions
 
 注意力模块无疑是轻量级网络完美的选择，本文探究了SE模块放置的位置，发现在网络深层的效果较好。
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007190945690.png" alt="image-20211007190945690" style="zoom: 67%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007190945690.png" alt="image-20211007190945690"/>
 
 ###  Larger convolution kernels
 
 使用更大的卷积核尺寸，发现在网络深层效果较好
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007191200660.png" alt="image-20211007191200660" style="zoom: 67%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007191200660.png" alt="image-20211007191200660"/>
 
 ### Larger dimensional1×1conv layer after GAP
 
@@ -108,12 +108,12 @@ HSwish的近似公式为$x\cdot h\sigma(x)=\frac{relu6(x+3)}{6}$，图像如下�
 
 实验发现drop out可以提高性能
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007191715602.png" alt="image-20211007191715602" style="zoom: 67%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007191715602.png" alt="image-20211007191715602"/>
 
 ## 实验结果
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007192557037.png" alt="image-20211007192557037" style="zoom: 50%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007192557037.png" alt="image-20211007192557037"/>
 
 与其他网络进行对比
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007192635596.png" alt="image-20211007192635596" style="zoom: 50%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/image-20211007192635596.png" alt="image-20211007192635596"/>

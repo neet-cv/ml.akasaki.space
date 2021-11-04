@@ -24,7 +24,7 @@
 
 ## Understanding Local Attention
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/202110241956165.png" alt="image-20211024150706152" style="zoom: 67%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/202110241956165.png" alt="image-20211024150706152"/>
 
 上图分别表示了(a)convolution,(b) global attention and spatial mixing MLP,(c) local attention and depth-wise convolution, (d) point-wise MLP or $1×1$ convolution, (e) MLP (fully-connected layer)的连接模式。
 
@@ -109,7 +109,7 @@ $$
 
 ### 关系图
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/202110241956844.png" alt="image-20211024150634894" style="zoom: 67%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/202110241956844.png" alt="image-20211024150634894"/>
 
 提出了一个关系图，其包含了三种正则化方法——稀疏连接、动态权重和低秩。
 
@@ -139,25 +139,25 @@ $$
 
 **ImageNet classification**：深度卷积版本的参数量和计算量都下降了约15%，动态版本的参数量大量上升，但复杂度几乎相同，性能几乎持平，同时比较了其他方法的性能
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/202110241957911.png" alt="image-20211024160713613" style="zoom:50%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/202110241957911.png" alt="image-20211024160713613"/>
 
 **COCO object detection**、**ADE Semantic Segmentation**：
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/202110241957276.png" alt="image-20211024161120185" style="zoom:50%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/202110241957276.png" alt="image-20211024161120185"/>
 
 ###  Additional Studies
 
 **Weight sharing**：研究了在通道间共享权重对深度卷积和Swin Transformer的影响
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/202110241957956.png" alt="image-20211024162356897" style="zoom:80%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/202110241957956.png" alt="image-20211024162356897"/>
 
 **Dynamic weight**：
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/202110241957433.png" alt="image-20211024162523601" style="zoom:80%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/202110241957433.png" alt="image-20211024162523601"/>
 
 **Cooperating with SE**：SE是一个参数和计算效率较高的动态模块，DW可以从中受益，但是本身已是动态模块的Swin出现了掉点的情况。
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/202110241957683.png" alt="image-20211024162949608" style="zoom: 80%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/202110241957683.png" alt="image-20211024162949608"/>
 
 更多看论文
 
@@ -208,7 +208,7 @@ class DynamicDWConv(nn.Module):
 
 VOLO也是一种Local Attention，并且性能表现优异，将其中的Local Attention的部分分别替换为self attention和深度卷积，可得到如下结果：
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/202110242034232.png" alt="image-20211024203433183" style="zoom:80%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/202110242034232.png" alt="image-20211024203433183"/>
 
 同时替换了了SVT中的Local Attention部分，结果都是有所增加的。
 
