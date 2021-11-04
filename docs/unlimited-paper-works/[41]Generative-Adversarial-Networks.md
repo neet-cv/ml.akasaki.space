@@ -65,7 +65,7 @@ V(G,D)&=\int_xp_r(x)\log(D(x))dx+\int_zp_z(z)\log(1-D(G(z)))dz\\
 $$
 「注」：Pr(x)和Pg(x)在每一个确定的x中都有确定的常数，因此求导时被看作常量。
 
-![](/images/2021-04-24_20-10.png)
+![](https://breezeshane.github.io/images/2021-04-26_01-11.png)
 
 判别器的推导完成，需要做的是后续的损失函数的推导，用到了JS散度和KL散度的问题，这里给出相应定义：
 
@@ -79,7 +79,7 @@ $$
 
 这两者的图像如下：
 
-![](/images/2021-04-24_21-04.png)
+![](https://breezeshane.github.io/images/2021-04-26_01-11.png)
 
 需要的损失函数是关于JS散度的，确定这一表达式，损失函数才能真正落实使用。
 
@@ -332,7 +332,7 @@ if __name__ == '__main__':
 
 其实起初在照着原作者所写的写代码，结果一个比较奇怪的问题发生了：
 
-![](/images/2021-04-26_02-34.png)
+![](https://breezeshane.github.io/images/2021-04-26_01-11.png)
 
 ```
 TypeError: can't convert cuda:0 device type tensor to numpy. Use Tensor.cpu() to copy the tensor to host memory first.
