@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # LeNet代码实现
 
 这里不会包含任何讲解的内容，讲解的内容请参考[LeNet：初试卷积神经网络](./LeNet.md)。

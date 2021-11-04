@@ -1,3 +1,7 @@
+---
+sidebar_position: 7
+---
+
 # VGG：可复用的网络块
 
 VGGNet是2014年ILSVRC图像分类竞赛的第二名，其top-5错误率仅为7.3%，具有140M参数。这次竞赛的第一是之后会写到的GoogLeNet，不过事实证明了VGGNet在泛化性方面比GoogLeNet做的更好。此外，VGGNet是特征提取网络的选择中经常出现的选项。作为一个较为早期的工作，VGG的表现很有研究和学习的价值。

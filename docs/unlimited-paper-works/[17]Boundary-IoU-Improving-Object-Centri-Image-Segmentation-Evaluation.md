@@ -54,7 +54,7 @@
 
 4. 三分图（Trimap）：对给定图像的一种粗略划分将给定图像划分为前景、背景和待求未知区域。
 
-   <img src="https://gitee.com/Thedeadleaf/images/raw/master/20210509151808.png" alt="img" style="zoom: 150%;" />
+   <img src="https://gitee.com/Thedeadleaf/images/raw/master/20210509151808.png" alt="img" />
 
 5. Mask-based Measure：考虑物体的所有像素
 
@@ -70,13 +70,13 @@
 
 Mask IoU计算方式示意图：
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/20210510161356.png" alt="image-20210510161350211" style="zoom:150%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/20210510161356.png" alt="image-20210510161350211" />
 
 ## Trimap IoU
 
 基于边界的分割指标，其计算距离GT和pred边界d像素窄带内的IoU，计算方式示意图如下（方便起见，简化为矩形且只显示边界部分）：
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/20210509163907.png" alt="image-20210509163853163" style="zoom:150%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/20210509163907.png" alt="image-20210509163853163" />
 
 **需要注意分母的**$G_d\cap G$。
 
@@ -88,7 +88,7 @@ F-Measure最初被提出用于边缘检测，但它也被用于评价分割质�
 
 Precision和Recall计算方式示意图如下（可能）：
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/20210510153516.png" alt="image-20210510152547915" style="zoom:150%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/20210510153516.png" alt="image-20210510152547915" />
 
 ## Boundary  IoU
 
@@ -104,7 +104,7 @@ Boundary IoU对大物体边界误差更加敏感，并且不会过分惩罚小�
 
 我画的：
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/20210510154514.png" alt="image-20210510154509338" style="zoom:150%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/20210510154514.png" alt="image-20210510154509338" />
 
 # 敏感性分析
 
@@ -350,13 +350,13 @@ Boundary IoU不评估距离轮廓超过d的像素，例如一个圆形Mask和一
 
 下图为标准PQ的公式
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/20210511115040.png" alt="image-20210511115032369" style="zoom:150%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/20210511115040.png" alt="image-20210511115032369" />
 
 将其中的Mask IoU替换为Mask IoU与Boundary IoU的组合，取其最小值。
 
 ### 合成预测
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/20210511122826.png" alt="image-20210511120047274" style="zoom:150%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/20210511122826.png" alt="image-20210511120047274" />
 
 ### 真实预测
 

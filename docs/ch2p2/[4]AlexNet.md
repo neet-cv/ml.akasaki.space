@@ -1,3 +1,7 @@
+---
+sidebar_position: 4
+---
+
 # AlexNet：更深的卷积神经网络
 
 AlexNet是在LeNet的思想基础上将卷积神经网络变得更深的应用。其原论文是[ImageNet Classification with Deep Convolutional Neural Networks](https://papers.nips.cc/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf)。

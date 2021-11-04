@@ -14,7 +14,7 @@
 - 与此同时，我们发现限制$ViTs$在$ImageNet$分类中的性能的主要因素是其在将细粒度级别的特征编码乘$Token$表示过程中比较低效，为了解决这个问题，我们引入了一种新的$outlook$注意力，并提出了一个简单而通用的架构，称为$Vision$ $outlooker$ ($VOLO$)。$outlook$注意力主要将$fine$​-$level$级别的特征和上下文信息更高效地编码到$token$表示中，这些$token$对识别性能至关重要，但往往被自注意力所忽视。
 - 实验表明，在不使用任何额外训练数据的情况下，$VOLO$在$ImageNet$-$1K$分类任务上达到了87.1%的$top$-$1$准确率，这是第一个超过87%的模型。此外，预训练好的VOLO模型还可以很好地迁移到下游任务，如语义分割。我们在$Cityscapes$验证集上获得了84.3% $mIoU$，在$ADE20K$验证集上获得了54.3%的$mIoU$，均创下了最新记录。
 
-<img src="https://gitee.com/Thedeadleaf/images/raw/master/20210730004322.png" style="zoom: 50%;" />
+<img src="https://gitee.com/Thedeadleaf/images/raw/master/20210730004322.png" />
 
 **总结**：本文提出了一种新型的注意力机制——$Outlook\ Attention$，与粗略建模全局长距离关系的$Self\ Attention$不同，$Outlook$能在邻域上更精细地编码领域特征，弥补了$Self\ Attention$对更精细特征编码的不足。
 
