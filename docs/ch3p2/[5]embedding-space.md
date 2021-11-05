@@ -31,7 +31,7 @@
 
 在数学上，**嵌入**是指一个[数学结构](https://zh.wikipedia.org/wiki/数学结构)经[映射](https://zh.wikipedia.org/wiki/映射)包含到另一个结构中。某个物件*X*称为嵌入到另一个物件*Y*中，是指有一个保持结构的[单射](https://zh.wikipedia.org/wiki/单射)*f*: *X*→*Y*，这个[映射](https://zh.wikipedia.org/wiki/映射)*f*就给出了一个嵌入。上述“保持结构”的准确意思，需由所讨论的结构而定。一个保持结构的映射，在[范畴论](https://zh.wikipedia.org/wiki/範疇論)中称为[态射](https://zh.wikipedia.org/wiki/态射)。
 
-既然是数学概念，就应该能用于各个领域而不仅仅是NLP。事实确实如此，在基于深度学习的CV领域，很多工作（本文于2021年8月撰）中都使用了Embedding。例如，在[Non-local Neural Networks](../unlimited-paper-works/[27]Non-local-Neural-Networks.md)中，Non-Local就被表示为：
+既然是数学概念，就应该能用于各个领域而不仅仅是NLP。事实确实如此，在基于深度学习的CV领域，很多工作（本文于2021年8月撰）中都使用了Embedding。例如，在[Non-local Neural Networks](../unlimited-paper-works/[27]Non-local-Neural-Networks)中，Non-Local就被表示为：
 $$
 NL_u[i] = \frac{1}{C(i)}\sum_{j\in\Omega}{w(i,j)g(j)}
 $$

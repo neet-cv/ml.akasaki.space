@@ -27,9 +27,9 @@ import numpy as np
 
 在这里首先对一些常用的函数进行说明：
 
-如果你对matplotlib和cv2的一些基本函数不是很熟悉，可以先参阅[工地matplotlib](../appendix-1/[2]introducing-matplotlib.md)。
+如果你对matplotlib和cv2的一些基本函数不是很熟悉，可以先参阅[工地matplotlib](../appendix-1/[5]introducing-matplotlib)。
 
-接下来我们准备一段可以用来显示一些图片的函数（这个函数在[总是用到的代码块](../[1]appendix-1/similar-codeblocks.md)有记录。）：
+接下来我们准备一段可以用来显示一些图片的函数（这个函数在[总是用到的代码块](../appendix-1/[4]similar-codeblocks)有记录。）：
 
 ```python
 import matplotlib.pyplot as plt

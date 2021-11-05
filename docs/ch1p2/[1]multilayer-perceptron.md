@@ -1,6 +1,6 @@
 # 多层感知机
 
-我们已经介绍了包括[线性回归](../ch1p1/linear-regression.md)和[softmax回归](../ch1p1/softmax-regression.md)在内的单层神经网络。然而深度学习主要关注多层模型。在本节中，我们将以多层感知机（multilayer perceptron，MLP）为例，介绍多层神经网络的概念。
+我们已经介绍了包括[线性回归](../ch1p1/[3]linear-regression)和[softmax回归](../ch1p1/[5]softmax-regression)在内的单层神经网络。然而深度学习主要关注多层模型。在本节中，我们将以多层感知机（multilayer perceptron，MLP）为例，介绍多层神经网络的概念。
 
 
 
@@ -161,7 +161,7 @@ plt.show()
 
 ![](./src/multilayer-perceptron/tanhgrad.png)
 
-关于激活函数的更多信息，在之后单独的一节[激活函数](./[3]activation-functions.md)中会有更多介绍。
+关于激活函数的更多信息，在之后单独的一节[激活函数](./[3]activation-functions)中会有更多介绍。
 
 
 

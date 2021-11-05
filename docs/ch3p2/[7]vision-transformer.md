@@ -2,7 +2,7 @@
 
 > 这篇文章中大量使用李宏毅教授讲课的PPT图片。
 
-[注意力（Attention）机制](./[4]attention.md)由Bengio团队与**2014年**提出并在近年广泛的应用在深度学习中的各个领域，例如在计算机视觉方向用于捕捉图像上的感受野，或者NLP中用于定位关键token或者特征。
+[注意力（Attention）机制](./[4]attention)由Bengio团队与**2014年**提出并在近年广泛的应用在深度学习中的各个领域，例如在计算机视觉方向用于捕捉图像上的感受野，或者NLP中用于定位关键token或者特征。
 
 2018年，谷歌团队近期提出的用于生成词向量的BERT算法在NLP的11项任务中取得了效果的大幅提升。而BERT算法的最重要的部分便是本文中提出的Transformer的概念。
 
@@ -35,7 +35,7 @@ Transformer中抛弃了传统的CNN和RNN，整个网络结构完全是由Attent
 Transformer中采用Attention取代了传统RNN结构的原因是考虑到RNN（LSTM，GRU等）的计算限制为是顺序的，也就是说RNN相关算法只能从左向右依次计算或者从右向左依次计算，这种机制带来了两个问题：
 
 1. 时间片$t$的计算依赖$t-1$时刻的计算结果，这样限制了模型的并行能力。
-2. 顺序计算的过程中信息会丢失，尽管LSTM等门机制的结构一定程度上缓解了长期依赖的问题，但是对于长距离依赖（在CNN上，也有人试图解决长距离依赖的问题。可以参考[Non-Local Neural Networks](../unlimited-paper-works/[27]Non-local-Neural-Networks.md)）的建立LSTM依旧无能为力。
+2. 顺序计算的过程中信息会丢失，尽管LSTM等门机制的结构一定程度上缓解了长期依赖的问题，但是对于长距离依赖（在CNN上，也有人试图解决长距离依赖的问题。可以参考[Non-Local Neural Networks](../unlimited-paper-works/[27]Non-local-Neural-Networks)）的建立LSTM依旧无能为力。
 
 ### CNN可以具有RNN的功能
 

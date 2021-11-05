@@ -21,4 +21,4 @@ sidebar_position: 3
 
 ![img](./src/write-code-with-keras/640.png)
 
-就如同在[LeNet代码实现](./[2]LeNet-code.md)中提到的两种等效的写法，在代码中大面积使用Keras API能让你的代码变得短小精悍、易读、易于维护。所以，在研究过程中你应该尽量多使用Keras API。在接下来的所有章节中，我也将尽量使用Keras API完成功能。
+就如同在[LeNet代码实现](./[2]LeNet-code)中提到的两种等效的写法，在代码中大面积使用Keras API能让你的代码变得短小精悍、易读、易于维护。所以，在研究过程中你应该尽量多使用Keras API。在接下来的所有章节中，我也将尽量使用Keras API完成功能。

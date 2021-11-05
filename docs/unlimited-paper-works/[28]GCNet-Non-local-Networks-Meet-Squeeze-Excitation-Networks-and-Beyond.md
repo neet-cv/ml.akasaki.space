@@ -12,11 +12,11 @@ GCNet（原论文：[GCNet: Non-local Networks Meet Squeeze-Excitation Networks 
 
 GCNet提出一种模块框架称为Global context modeling framework（上图中(a)），并将其分为三步：Context modeling、Transform、Fusion。
 
-这篇论文选用[Non-Local Neural Networks](./[27]Non-local-Neural-Networks.md)（上图中(b)是其简化版）的Context modeling 和 [Squeeze and Excitation Networks ](./[23]Squeeze-and-Excitation-Networks.md)（上图中(c)是其一种形式）的 Transform过程组成新的模块Global Context (GC) block，同时训练spacial和channel-wise上的注意力。这是一篇很好的论文，有兴趣请阅读[原文](https://arxiv.org/abs/1904.11492)。
+这篇论文选用[Non-Local Neural Networks](./[27]Non-local-Neural-Networks)（上图中(b)是其简化版）的Context modeling 和 [Squeeze and Excitation Networks ](./[23]Squeeze-and-Excitation-Networks)（上图中(c)是其一种形式）的 Transform过程组成新的模块Global Context (GC) block，同时训练spacial和channel-wise上的注意力。这是一篇很好的论文，有兴趣请阅读[原文](https://arxiv.org/abs/1904.11492)。
 
 ## Non-Local在实践中的缺陷
 
-这篇论文提出，NLNet（[Non-Local Neural Networks](./[27]Non-local-Neural-Networks.md)）在长距离注意力方面作出了开创性的工作。在这里作者提出，为了建立长距离的注意力，有两种办法：
+这篇论文提出，NLNet（[Non-Local Neural Networks](./[27]Non-local-Neural-Networks)）在长距离注意力方面作出了开创性的工作。在这里作者提出，为了建立长距离的注意力，有两种办法：
 
 1. 采用**自注意力机制**来建模query对的关系（也就是Non-Local的做法）。
 2. 第二种是对query-independent（可以理解为无query依赖）的**全局上下文**建模。
@@ -31,7 +31,7 @@ NLNet就是典型的采用自注意力机制来建模像素对关系。但是，
 
 ## 简化Non-Local block
 
-如果你不知道什么是Non-Local block，请先阅读[Non-Local Neural Networks](./[27]Non-local-Neural-Networks.md)。
+如果你不知道什么是Non-Local block，请先阅读[Non-Local Neural Networks](./[27]Non-local-Neural-Networks)。
 
 刚才说到通过严格的实验分析，作者发现non-local network的全局上下文上造成了大量的计算浪费。作者取其精华去其糟粕设计了简化的Non-Local block：
 
@@ -41,7 +41,7 @@ NLNet就是典型的采用自注意力机制来建模像素对关系。但是，
 
 ### 原版Non-Local block
 
-**原版Non-Local block**（上图中（a））（如果不知道这是什么，请先阅读请先阅读[Non-Local Neural Networks](./[27]Non-local-Neural-Networks.md)）可以描述为：
+**原版Non-Local block**（上图中（a））（如果不知道这是什么，请先阅读请先阅读[Non-Local Neural Networks](./[27]Non-local-Neural-Networks)）可以描述为：
 $$
 z_i = x_i + \sum_{j=1}^{N_p}\frac{f(x_i,x_j)}{C(x)}(W_v\cdot x_i)
 $$

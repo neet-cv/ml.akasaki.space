@@ -182,7 +182,7 @@ $$
 
 ## Summary
 
-这篇论文的主要思想其实是（空间位置）自注意力机制的泛化表达。不过这篇论文只强调了空间注意力，并没有明显使用像[SENet](./[23]Squeeze-and-Excitation-Networks.md)那样的通道注意力。
+这篇论文的主要思想其实是（空间位置）自注意力机制的泛化表达。不过这篇论文只强调了空间注意力，并没有明显使用像[SENet](./[23]Squeeze-and-Excitation-Networks)那样的通道注意力。
 
 原论文中也没有进行对Non-Local生成的attention map进行可视化的实验。不过另一篇论文（GCNet）中进行了这样的实验：s
 

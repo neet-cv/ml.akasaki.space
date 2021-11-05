@@ -6,7 +6,7 @@ sidebar_position: 1
 
 你可以认为LeNet是第一个卷积神经网络成功的应该用。LeNet的原论文是[Gradient-Based Learning Applied to Document Recognition](http://yann.lecun.com/exdb/publis/pdf/lecun-01a.pdf)。
 
-在[“多层感知机”](../ch1p2/[1]multilayer-perceptron.md)一节里我们构造了一个含单隐藏层的多层感知机模型来对Fashion-MNIST数据集中的图像进行分类。每张图像高和宽均是28像素。我们将图像中的像素逐行展开，得到长度为784的向量，并输入进全连接层中。然而，这种分类方法有一定的局限性。
+在[“多层感知机”](../ch1p2/[1]multilayer-perceptron)一节里我们构造了一个含单隐藏层的多层感知机模型来对Fashion-MNIST数据集中的图像进行分类。每张图像高和宽均是28像素。我们将图像中的像素逐行展开，得到长度为784的向量，并输入进全连接层中。然而，这种分类方法有一定的局限性。
 
 1. 图像在同一列邻近的像素在这个向量中可能相距较远。它们构成的模式可能难以被模型识别。
 2. 对于大尺寸的输入图像，使用全连接层容易导致模型过大。假设输入是高和宽均为1,0001,000像素的彩色照片（含3个通道）。即使全连接层输出个数仍是256，该层权重参数的形状也是3,000,000×2563,000,000×256：它占用了大约3 GB的内存或显存。这会带来过于复杂的模型和过高的存储开销。
@@ -67,7 +67,7 @@ testing_dataset = tf.data.Dataset.from_tensor_slices((testing_x, testing_y))
 testing_dataset = testing_dataset.batch(batch_size)
 ```
 
-上面这段你应该会对它越来越熟悉，因为它将被经常使用。整个过程的详细解释请参考[常见代码块](../appendix-1/[4]similar-codeblocks.md)中有关数据集的部分。
+上面这段你应该会对它越来越熟悉，因为它将被经常使用。整个过程的详细解释请参考[常见代码块](../appendix-1/[4]similar-codeblocks)中有关数据集的部分。
 
 ### 定义模型
 
@@ -127,7 +127,7 @@ class LeNetModel(tf.keras.Model):
 model = LeNetModel()
 ```
 
-这两段代码具有相同效果。你只需要选择其中一段。不难看出，这两段代码的主要区别就是低一段中Keras API的使用率更高，它使用了`Sequential`，省去了很多代码量。在研究过程中，我更推荐你提高Keras API的使用率，这样会让你的代码简洁、易读、维护性强。你可以在之后的一篇叫做[新玩具：Keras API](./[3]write-code-with-keras.md)的文章中大致了解Keras。
+这两段代码具有相同效果。你只需要选择其中一段。不难看出，这两段代码的主要区别就是低一段中Keras API的使用率更高，它使用了`Sequential`，省去了很多代码量。在研究过程中，我更推荐你提高Keras API的使用率，这样会让你的代码简洁、易读、维护性强。你可以在之后的一篇叫做[新玩具：Keras API](./[3]write-code-with-keras)的文章中大致了解Keras。
 
 ### 定义损失函数和优化器
 
@@ -186,7 +186,7 @@ for ep in range(epochs):
                           test_acc.result() * 100.))
 ```
 
-你可以使用`Keras API`在几行之内完成损失函数和优化器的声名、模型的训练和测试。这里把这几部分展开来写，是为了让读者了解整个过程。如果你想立即了解使用`Keras API`的写法，请参考[LeNet代码实现](./LeNet-code.md)。
+你可以使用`Keras API`在几行之内完成损失函数和优化器的声名、模型的训练和测试。这里把这几部分展开来写，是为了让读者了解整个过程。如果你想立即了解使用`Keras API`的写法，请参考[LeNet代码实现](./[2]LeNet-code)。
 
 ### 输出的内容
 
@@ -260,5 +260,5 @@ Epoch10, loss:0.191986545920372, Acc:94.149169921875%, test_loss:0.0999863892793
 
 ### 整个Pure代码
 
-请参考[LeNet代码实现](./[2]LeNet-code.md)
+请参考[LeNet代码实现](./[2]LeNet-code)
 

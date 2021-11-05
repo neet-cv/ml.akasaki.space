@@ -293,7 +293,7 @@ Submit the original manuscript showing clearly all textual changes using track c
 
 我最近主要的学习方向是使用深度学习(deep learning)技术的计算机视觉(CV, computer vision)分割(segmentation)任务。可能是因为深度学习技术发展的太快了，尤其是卷积神经网络(CNN, convolutional neural network)之后，一直到不久前GAN(generative adversarial network)开始流行于各个任务，仅仅花了不到十年。
 
-在[Yizeng Han](https://arxiv.org/search/cs?searchtype=author&query=Han%2C+Y)等的综述论文[Dynamic Neural Networks: A Survey]([8]Dynamic-Neural-Networks-A-Survey.md)中，作者将视觉领域的神经网络近十年的发展分为这样几个阶段：
+在[Yizeng Han](https://arxiv.org/search/cs?searchtype=author&query=Han%2C+Y)等的综述论文[Dynamic Neural Networks: A Survey]([08]Dynamic-Neural-Networks-A-Survey)中，作者将视觉领域的神经网络近十年的发展分为这样几个阶段：
 
 1. 快速发展阶段（Fast developing stage），2012~2015
 
@@ -309,11 +309,11 @@ Submit the original manuscript showing clearly all textual changes using track c
 
 在之前几十年的AI发展中，大部分时候图像处理走的都很慢。但是在当前阶段，想要再做哪怕一点点improvement都很难。
 
-一些开创性的工作比如[Sergey Ioffe](https://arxiv.org/search/cs?searchtype=author&query=Ioffe%2C+S)等人的[Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://arxiv.org/abs/1502.03167)，或是一些非线性的激活函数，或是[Yann LeCun](http://yann.lecun.com/)等人在[Gradient-Based Learning Applied to Document Recognition](../ch2p2/LeNet.md)（LeNet）中第一次使用卷积神经网络进行手写数字识别，这些工作都要去从数学那一块找新东西，这些方法有的以前可能只在理论上出现过，并且难以被理解或证明有效性，投入实验后也不一定能work，上述这些工作通过实验证明了其有效性，后人就开始在其基础上开展工作了。很遗憾的是这些一旦出现就会产生巨大影响的工作不会经常出现。
+一些开创性的工作比如[Sergey Ioffe](https://arxiv.org/search/cs?searchtype=author&query=Ioffe%2C+S)等人的[Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift](https://arxiv.org/abs/1502.03167)，或是一些非线性的激活函数，或是[Yann LeCun](http://yann.lecun.com/)等人在[Gradient-Based Learning Applied to Document Recognition](../ch2p2/[1]LeNet)（LeNet）中第一次使用卷积神经网络进行手写数字识别，这些工作都要去从数学那一块找新东西，这些方法有的以前可能只在理论上出现过，并且难以被理解或证明有效性，投入实验后也不一定能work，上述这些工作通过实验证明了其有效性，后人就开始在其基础上开展工作了。很遗憾的是这些一旦出现就会产生巨大影响的工作不会经常出现。
 
-很多对后人具有重要且深远影响的工作例如[Karen Simonyan](https://arxiv.org/search/cs?searchtype=author&query=Simonyan%2C+K)等人的[Very Deep Convolutional Networks for Large-Scale Image Recognition](../ch2p2/VGGNet.md)（深度卷积网络的初步探索）以及[Kaiming He](https://arxiv.org/search/cs?searchtype=author&query=He%2C+K)等人的[Deep Residual Learning for Image Recognition](../ch2p2/ResNet.md)（首次提出残差网络结构）都具有巨大的创新：比如使用了全新的网络结构，或是全新的目标函数（loss function, 或称为损失函数），或者很新的正则化（regularizer）方法。最近也有一些具有重大影响的新结构，例如[Ashish Vaswani](https://arxiv.org/search/cs?searchtype=author&query=Vaswani%2C+A)等人的[Attention Is All You Need](https://arxiv.org/abs/1706.03762)也就是Transformer中，结合了最新的神经网络注意力(Attention)机制，抛弃了的CNN和RNN结构，整个网络结构完全是由Attention机制组成。这些方法往往需要大量的积累和实验，不可能经常做出。
+很多对后人具有重要且深远影响的工作例如[Karen Simonyan](https://arxiv.org/search/cs?searchtype=author&query=Simonyan%2C+K)等人的[Very Deep Convolutional Networks for Large-Scale Image Recognition](../ch2p2/[7]VGGNet)（深度卷积网络的初步探索）以及[Kaiming He](https://arxiv.org/search/cs?searchtype=author&query=He%2C+K)等人的[Deep Residual Learning for Image Recognition](../ch2p2/[11]ResNet)（首次提出残差网络结构）都具有巨大的创新：比如使用了全新的网络结构，或是全新的目标函数（loss function, 或称为损失函数），或者很新的正则化（regularizer）方法。最近也有一些具有重大影响的新结构，例如[Ashish Vaswani](https://arxiv.org/search/cs?searchtype=author&query=Vaswani%2C+A)等人的[Attention Is All You Need](https://arxiv.org/abs/1706.03762)也就是Transformer中，结合了最新的神经网络注意力(Attention)机制，抛弃了的CNN和RNN结构，整个网络结构完全是由Attention机制组成。这些方法往往需要大量的积累和实验，不可能经常做出。
 
-最新的工作它们之间往往具有很大的相关性，即便它们出自不同的作者。例如，[Changqian Yu](https://arxiv.org/search/cs?searchtype=author&query=Yu%2C+C)等人的论文[BiSeNet: Bilateral Segmentation Network for Real-time Semantic Segmentation](./[24]BiSeNet-Bilateral-Segmentation-Network-for-Real-time-Semantic-Segmentation.md)中，有许多思想参考了[Jie Hu](https://arxiv.org/search/cs?searchtype=author&query=Hu%2C+J)等人的[Squeeze-and-Excitation Networks](./[23]Squeeze-and-Excitation-Networks.md)。根据某项创新，可能会出现更多类似的创新，应用于同领域会应用于其他领域。这类工作的出现速度非常之快：研究者在阅读前人工作时发现不做或可以修改的点，就会进行实验并迅速发出一篇论文。在结果中，研究者往往会注明新的研究达到了多高的精度，有时还会附赠一份源代码。但是其他人尝试这份源代码时，却发现精度远远达不到论文中提及的水平。实际上，模型的表现不确定因素实在是太多。
+最新的工作它们之间往往具有很大的相关性，即便它们出自不同的作者。例如，[Changqian Yu](https://arxiv.org/search/cs?searchtype=author&query=Yu%2C+C)等人的论文[BiSeNet: Bilateral Segmentation Network for Real-time Semantic Segmentation](./[24]BiSeNet-Bilateral-Segmentation-Network-for-Real-time-Semantic-Segmentation)中，有许多思想参考了[Jie Hu](https://arxiv.org/search/cs?searchtype=author&query=Hu%2C+J)等人的[Squeeze-and-Excitation Networks](./[23]Squeeze-and-Excitation-Networks)。根据某项创新，可能会出现更多类似的创新，应用于同领域会应用于其他领域。这类工作的出现速度非常之快：研究者在阅读前人工作时发现不做或可以修改的点，就会进行实验并迅速发出一篇论文。在结果中，研究者往往会注明新的研究达到了多高的精度，有时还会附赠一份源代码。但是其他人尝试这份源代码时，却发现精度远远达不到论文中提及的水平。实际上，模型的表现不确定因素实在是太多。
 
 就中国人的数量来说，如果每个研究生都要水出一篇论文，可能会导致领域内论文平均质量的下降。这个领域再也回不到每篇论文都具有很大创新和影响的时代了。
 

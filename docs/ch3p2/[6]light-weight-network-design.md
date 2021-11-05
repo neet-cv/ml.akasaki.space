@@ -37,7 +37,7 @@ Bottleneck layer又称之为瓶颈层，使用的是$1\times 1$的卷积神经�
 
 ## VGG：使用$3\times 3$代替$5\times 5$
 
-VGG（在[这篇](../ch2p2/[7]VGGNet.html)文章中进行了讲解）在网络中有一个有趣的设计，就是使用两个$3\times 3$卷积取代$5\times 5$卷积：
+VGG（在[这篇](../ch2p2/[7]VGGNet)文章中进行了讲解）在网络中有一个有趣的设计，就是使用两个$3\times 3$卷积取代$5\times 5$卷积：
 
 ![image-20210513192807322](./src/light-weight-network-design/image-20210513192807322.a57676e9.png)
 
@@ -59,7 +59,7 @@ VGG（在[这篇](../ch2p2/[7]VGGNet.html)文章中进行了讲解）在网络�
 
 ### 始于AlexNet
 
-Grouped Convlution最早源于AlexNet（在[这篇](../ch2p2/[4]AlexNet.md)文章中进行了讲解）。AlexNet在ImageNet LSVRC-2012挑战赛上以绝对优势取得了冠军，不过当时AlexNet训练时所用GPU GTX 580显存太小，无法对整个模型训练，所以Alex采用Group convolution将整个网络分成两组后，分别放入一张GPU卡进行训练：
+Grouped Convlution最早源于AlexNet（在[这篇](../ch2p2/[4]AlexNet)文章中进行了讲解）。AlexNet在ImageNet LSVRC-2012挑战赛上以绝对优势取得了冠军，不过当时AlexNet训练时所用GPU GTX 580显存太小，无法对整个模型训练，所以Alex采用Group convolution将整个网络分成两组后，分别放入一张GPU卡进行训练：
 
 ![image-20210805210526004](./src/light-weight-network-design/image-20210805210526004.png)
 
@@ -182,7 +182,7 @@ Inception V2 一方面了加入了BN层，减少了Internal Covariate Shift（�
 
 ### SqueezeNet
 
-SqueezeNet是Han等提出的一种轻量且高效的CNN模型，它能够在ImageNet数据集上达到[AlexNet](../ch2p2/[4]AlexNet.md)近似的效果，但是参数比AlexNet少50倍。如果结合他们的模型压缩技术 Deep Compression，模型文件可比AlexNet小510倍。
+SqueezeNet是Han等提出的一种轻量且高效的CNN模型，它能够在ImageNet数据集上达到[AlexNet](../ch2p2/[4]AlexNet)近似的效果，但是参数比AlexNet少50倍。如果结合他们的模型压缩技术 Deep Compression，模型文件可比AlexNet小510倍。
 
 SqueezeNet在设计上使用了以下三个理念：
 
@@ -192,7 +192,7 @@ SqueezeNet在设计上使用了以下三个理念：
 
 SqueezeNet是由若干个Fire模块（Fire Module）结合卷积网络中卷积层，降采样层，全连接等层组成的。
 
-Fire模块由Squeeze部分和Expand部分组成（注意区分和[SENet](../unlimited-paper-works/[23]Squeeze-and-Excitation-Networks.md)中Squeeze过程的区别）。Squeeze部分是一组连续的$1\times 1$​卷积组成，Squeeze的目的是为了降低宽度上网络模块的输入量。Expand部分则是由一组连续的$1\times 1$​卷积和一组连续的$3\times 3$​卷积cancatnate组成，因此$3\times 3$​卷积需要使用$padding = same$​的卷积。Fire模块的结构见下图：
+Fire模块由Squeeze部分和Expand部分组成（注意区分和[SENet](../unlimited-paper-works/[23]Squeeze-and-Excitation-Networks)中Squeeze过程的区别）。Squeeze部分是一组连续的$1\times 1$​卷积组成，Squeeze的目的是为了降低宽度上网络模块的输入量。Expand部分则是由一组连续的$1\times 1$​卷积和一组连续的$3\times 3$​卷积cancatnate组成，因此$3\times 3$​卷积需要使用$padding = same$​的卷积。Fire模块的结构见下图：
 
 ![CNN模型之SqueezeNet](./src/light-weight-network-design/fjhdsfgsdfjdksgfjsdfdsf.jpg)
 
@@ -368,7 +368,7 @@ MobileNetV1既能较少不小的参数量、计算量，提高网络运算速度
 
 ![img](./src/light-weight-network-design/v2-08319b99a57812c2ebcfdad9d74a3cd9_1440w.png)
 
-上图：将低维流形的ReLU变换embeding到高维空间中的的例子（如果你不了解Embedding，可以查看[这篇](./[5]embedding-space.md)文章）。如图所示，Input是一个2维数据，其中兴趣流形是其中的蓝色螺旋线。本例使用矩阵$T$将数据嵌入到n维空间中，后接ReLU，再使用其逆矩阵$T^{-1}$将其投影回原空间。
+上图：将低维流形的ReLU变换embeding到高维空间中的的例子（如果你不了解Embedding，可以查看[这篇](./[5]embedding-space)文章）。如图所示，Input是一个2维数据，其中兴趣流形是其中的蓝色螺旋线。本例使用矩阵$T$将数据嵌入到n维空间中，后接ReLU，再使用其逆矩阵$T^{-1}$将其投影回原空间。
 
 可以观察到，当$n = 2,3$时，与Input相比有很大一部分的信息已经丢失了。而当$n = 15,30$，还是有相当多的分布信息被恢复回来。
 
@@ -380,7 +380,7 @@ MobileNetV1既能较少不小的参数量、计算量，提高网络运算速度
 
 瓶颈（Bottleneck）层来源于ResNet，其设计本源是为了避免在残差网络中巨大的计算量。线性瓶颈（Linear Bottleneck）层的设计则源于MobileNet V2，目的是为了解决在MobileNet V1中出现的训练时崩坏问题。
 
-线性瓶颈是使用$1\times 1$卷积实现的。其目的是为了在网络进入深度卷积（Depthwise Convolution）之前对特征先进行升维，之后再进行降维恢复其原通道数。升维的$1\times 1$卷积被称为“Expantion Layer”，降维的$1\times 1$卷积被称为“Projection Layer”。这样叫大概就是因为想表示这是在做[Embedding](./[5]embedding-space.md)吧。
+线性瓶颈是使用$1\times 1$卷积实现的。其目的是为了在网络进入深度卷积（Depthwise Convolution）之前对特征先进行升维，之后再进行降维恢复其原通道数。升维的$1\times 1$卷积被称为“Expantion Layer”，降维的$1\times 1$卷积被称为“Projection Layer”。这样叫大概就是因为想表示这是在做[Embedding](./[5]embedding-space)吧。
 
 ![image-20210806003427956](./src/light-weight-network-design/image-20210806003427956.png)
 
@@ -427,7 +427,7 @@ MobileNet V2 网络块的结构为：
 
 MobileNet V3的论文名称为“Searching for MobileNetV3”。“searching”一词就把V3的论文的核心观点展示了出来——用**神经结构搜索（NAS）**来完成V3。
 
-MobileNetV3先基于AutoML构建网络，然后进行人工微调优化，搜索方法使用了platform-aware NAS以及NetAdapt，分别用于全局搜索以及局部搜索，而人工微调则调整了网络前后几层的结构、bottleneck加入[SE模块](../unlimited-paper-works/[23]Squeeze-and-Excitation-Networks.md)以及提出计算高效的h-swish非线性激活。
+MobileNetV3先基于AutoML构建网络，然后进行人工微调优化，搜索方法使用了platform-aware NAS以及NetAdapt，分别用于全局搜索以及局部搜索，而人工微调则调整了网络前后几层的结构、bottleneck加入[SE模块](../unlimited-paper-works/[23]Squeeze-and-Excitation-Networks)以及提出计算高效的h-swish非线性激活。
 
 > "抱歉，有钱真的可以为..."
 

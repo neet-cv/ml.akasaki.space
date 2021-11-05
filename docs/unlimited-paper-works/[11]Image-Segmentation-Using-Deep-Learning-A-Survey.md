@@ -2,7 +2,7 @@
 
 ### 这篇笔记的写作者是[VisualDust](https://github.com/visualDust)。
 
-之前读过一篇[图像语义分割综述](./[10]overview-of-semantic-segmentation.md)，不过那一篇比较老了（是2017年的），这次来读一篇2020年的。
+之前读过一篇[图像语义分割综述](./[10]overview-of-semantic-segmentation)，不过那一篇比较老了（是2017年的），这次来读一篇2020年的。
 
 这篇论文的原文是[Image Segmentation Using Deep Learning: A Survey](https://arxiv.org/abs/2001.05566)。
 

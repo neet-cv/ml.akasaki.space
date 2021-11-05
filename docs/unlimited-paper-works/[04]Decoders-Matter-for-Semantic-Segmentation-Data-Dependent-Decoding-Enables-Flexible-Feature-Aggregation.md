@@ -24,9 +24,9 @@
 
 ## Introduction（介绍）
 
-现阶段，基于FCN的稠密预测方法在语义分割领域内取得了巨大的成功，事实证明，CNN组成的编码器的特征提取功能非常强大。很重要的一点是，卷积运算所具有的参数共享特性让训练和预测变得高效（卷积运算的一些特性可以参考[这篇文章](../ch2p1/[1]convolutional-nn-and-ops.md)）。
+现阶段，基于FCN的稠密预测方法在语义分割领域内取得了巨大的成功，事实证明，CNN组成的编码器的特征提取功能非常强大。很重要的一点是，卷积运算所具有的参数共享特性让训练和预测变得高效（卷积运算的一些特性可以参考[这篇文章](../ch2p1/[1]convolutional-nn-and-ops)）。
 
-在原始的FCN方法中，编码器在提取高级特征的过程中往往会导致原图的分辨率被降低很多倍，从而导致精细的像素空间信息部分丢失，这使在原图分辨率上的预测（尤其是在对象边界上的预测）往往不够准确。DeepLab中引入了空洞卷积（空洞卷积的大致概念可以参考[这篇文章](./[1]The-Devil-is-in-the-Decoder-Classification-Regression-and-GANs.md)中关于空洞卷积方法的部分）实现了在不降低原图大小的情况下扩大感受野（接收场）的效果。
+在原始的FCN方法中，编码器在提取高级特征的过程中往往会导致原图的分辨率被降低很多倍，从而导致精细的像素空间信息部分丢失，这使在原图分辨率上的预测（尤其是在对象边界上的预测）往往不够准确。DeepLab中引入了空洞卷积（空洞卷积的大致概念可以参考[这篇文章](./[01]The-Devil-is-in-the-Decoder-Classification-Regression-and-GANs)中关于空洞卷积方法的部分）实现了在不降低原图大小的情况下扩大感受野（接收场）的效果。
 
 ![image-20210503104215395](./src/Decoders-Matter-for-Semantic-Segmentation-Data-Dependent-Decoding-Enables-Flexible-Feature-Aggregation/image-20210503104215395.png)
 
@@ -109,7 +109,7 @@ $$
 
 #### 本方法之于Depth-to-space和Sub-pixel方法的讨论
 
-Depth-to-space和Sub-pixel的方法在[这篇](./[1]The-Devil-is-in-the-Decoder-Classification-Regression-and-GANs.md)文章中有过概述，可以参考其中的相关部分进行简要了解。
+Depth-to-space和Sub-pixel的方法在[这篇](./[01]The-Devil-is-in-the-Decoder-Classification-Regression-and-GANs)文章中有过概述，可以参考其中的相关部分进行简要了解。
 
 DUpsample的最简单的线性形式可以看作是Depth-to-space和Sub-pixel的带有预训练的上采样卷积核的改进版本。为了避免可训练参数（trainable variables）过多导致优化困难，通常情况下Depth-to-space和Sub-pixel方法会控制上采样的次数或比率（比如控制上采样率为4）。但是由于本方法使用预训练的上采样，所以理论上可以很大程度上提高上采样率。
 

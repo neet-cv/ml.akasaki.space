@@ -119,7 +119,7 @@ model.compile(optimizer='adam',
 model.fit(training_x, training_y, batch_size=32, epochs=5, validation_data=(testing_x, testing_y))
 ```
 
-与[之前的LeNet](./[1]LeNet.md)不同的是，AlexNet在训练的时候使用`Cifar10`数据集，图像较大，所以这里将batch size设置为32而不是LeNet中的上百。
+与[之前的LeNet](./[1]LeNet)不同的是，AlexNet在训练的时候使用`Cifar10`数据集，图像较大，所以这里将batch size设置为32而不是LeNet中的上百。
 
 训练输出：
 

@@ -26,7 +26,7 @@ YOLACT是You Only Look At CoefficienTs 的简写，其中 coefficients 是这个
 
 在YOLACT中，输入经过backbone+FPN结构处理后才进入两个分支。或者换句话说，两个分支共享这个backbone。
 
-Backbone+FPN（neck）是需要获得不同level特征图时常用的提取结构，在很多其他网络中也见得着。例如，在[SOLO: Segmenting Objects by Locations](./[36]SOLO-Segmenting-Objects-by-Locations.md)中，前序网络也是类似的结构。以resnet101为例：
+Backbone+FPN（neck）是需要获得不同level特征图时常用的提取结构，在很多其他网络中也见得着。例如，在[SOLO: Segmenting Objects by Locations](./[36]SOLO-Segmenting-Objects-by-Locations)中，前序网络也是类似的结构。以resnet101为例：
 
 ![image-20210818200548063](./src/YOLACT-Real-time-Instance-Segmentation/image-20210818200548063.png)
 
