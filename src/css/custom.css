@@ -31,5 +31,5 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
 .theme-doc-sidebar-menu > li > a {
   /* font-weight: 700; */
   padding: 0.5rem 1rem;
-  font-size: 1.1em;
+  /* font-size: 1.1em; */
 }
