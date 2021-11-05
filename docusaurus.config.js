@@ -15,7 +15,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/logo.svg',
   organizationName: 'neet-cv', // Usually your GitHub org/user name.
   projectName: 'ml.akasaki.space', // Usually your repo name.
   i18n: {
@@ -63,10 +63,10 @@ const config = {
     ({
       navbar: {
         title: '工具箱的深度学习记事簿',
-        // logo: {
-        //   alt: 'My Site Logo',
-        //   src: 'img/logo.svg',
-        // },
+        logo: {
+          alt: 'Logo',
+          src: 'img/logo.svg',
+        },
         items: [
           {
             label: '魔法部日志',
