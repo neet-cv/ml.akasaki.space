@@ -1,3 +1,5 @@
+# CCNet: Criss-Cross Attention for Semantic Segmentation
+
 提出十字交叉注意力模块，使用循环稀疏连接代替密集连接，实现性能SOTA
 
 这篇笔记的写作者是[AsTheStarsFall](https://github.com/asthestarsfalll)。
