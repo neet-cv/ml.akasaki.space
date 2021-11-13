@@ -12,9 +12,7 @@
 
 $Binary\; grid\; mask$ 广泛用于实例分割。就例如 $Mask\ R-CNN$[<sup>1</sup>](#references)，如下图所示，网络在 $28\times 28$ 的网格中预测 $Mask$ 。
 
-<div align=center>
 <img src="./src/Discrete-Cosine-Transform-Mask-Representation-for-Instance-Segmentation/mask.jpg" style="width:90%;" />
-</div>
 
 但是一般来说，低分辨率的网格不足以捕捉细节，而高分辨率会大大增加训练的复杂性，为解决此问题，这篇论文提出一种新的 $Mask$ 表达方式，利用离散余弦变换（$DCT$）将高分辨率的$Binary\; grid\; mask$编码成一个紧凑的向量，这种方法称为 $DCT-Mask$。
 
@@ -24,25 +22,19 @@ $Binary\; grid\; mask$ 广泛用于实例分割。就例如 $Mask\ R-CNN$[<sup>1
 
 就如上图所示，$Mask\ R-CNN$ 将 $GT$ 采样到 $28\times 28$ ，然后上采样重构它，如下图所示，低分辨率的 $Binary\; grid\; mask$ 不足以捕获细节特征，并在上采样过程中产生偏差。
 
-<div align=center>
 <img src="./src/Discrete-Cosine-Transform-Mask-Representation-for-Instance-Segmentation/vs.jpg" />
-</div>
 
 如上图为使用 $DCT$ 和未使用 $DCT$ 方法的比较，左边为 $GT$ ；之后是 $Resize$ 后的 $GT$ ；再是基于 $Resize$ 后的重建图；最后是重建图与原来的$GT$图的误差值。
 
 所以就算预测 $Mask$ 是正确的，重建的 $Mask$ 也有一定的系统误差。解决方式之一是提高 $Binary\; grid\; mask$ 的分辨率，但是实验显示提高分辨率后平均精度（$AP$）比 $28\times 28$ 要差，具体见下图。
 
-<div align=center>
 <img src="./src/Discrete-Cosine-Transform-Mask-Representation-for-Instance-Segmentation/mask_size.jpg" style="width:60%" />
-</div>
 
 ## Method
 
 作者给出的方法是 $DCT\ mask$ ，如下图是该 $DCT\ mask$ 的 $pipline$。
 
-<div align=center>
 <img src="./src/Discrete-Cosine-Transform-Mask-Representation-for-Instance-Segmentation/pipline.jpg" />
-</div>
 
 该处理方式是受 $JPEG$ 标准的启发，$pipline$ 将二进制掩码转化为紧凑的向量。首先将 $GT\ Resize$到 $K\times K$ 大小，然后对其进行二维 $DCT-II$ (假装是罗马 2)变换，在重构时利用二维逆 $DCT$ 变换，最后利用双线性插值 $Resize$ 到 $H\times W$。数学表达如下（先看[离散余弦变换](#离散余弦变换dct)）：
 
@@ -64,9 +56,7 @@ $$
 
 ## DCT-Mask in Mask R-CNN
 
-<div align=center>
 <img src="./src/Discrete-Cosine-Transform-Mask-Representation-for-Instance-Segmentation/net.jpg" style="width:60%" />
-</div>
 
 如上图 $DCT-Mask$ 在$Mask\ R-CNN$ 的应用，在$Mask\; head$ 中使用 4 个卷积层，提取$Mask$ 特征，然后用三个线性归回层回归$DCT$向量
 
@@ -80,25 +70,19 @@ $$
 
 如下图为对$N$的取值的探究
 
-<div align=center>
 <img src="./src/Discrete-Cosine-Transform-Mask-Representation-for-Instance-Segmentation/exc.jpg" style="width:60%" />
-</div>
 
 其中$None$表示为使用的二进制掩码。
 
 ## 效果
 
-<div align=center>
 <img src="./src/Discrete-Cosine-Transform-Mask-Representation-for-Instance-Segmentation/than.jpg"  />
-</div>
 
 ## Zig-Zag 编码
 
 下图为$Zig-Zag$ 编码方式
 
-<div align=center>
 <img src="./src/Discrete-Cosine-Transform-Mask-Representation-for-Instance-Segmentation/zig-zag.jpg" />
-</div>
 
 ## 离散余弦变换 DCT
 
@@ -173,17 +157,14 @@ $$
 
 可视化一下：
 
-<div align=center>
+
 <img src="./src/Discrete-Cosine-Transform-Mask-Representation-for-Instance-Segmentation/th.jpg" style="width:60%" />
-</div>
 
 其中红色为原始信号，红色为延拓后的信号，这样我们就将一个实信号变成了一个实偶信号，显然信号的区间已经变化为 $[-N,N-1]$
 
 但是这样插值之后也随之带来问题，这个信号并不关于 $m=0$ 偶对称，所以为了让信号关于原点对称，把整个延拓信号向右平移 $\frac{1}{2}$ 个单位
 
-<div align=center>
 <img src="./src/Discrete-Cosine-Transform-Mask-Representation-for-Instance-Segmentation/0.5.png" style="width:60%" />
-</div>
 
 因此上面 $DFT$ 公式变化为
 
@@ -221,9 +202,8 @@ $$
 
 上面推导了 $DCT$ 公式，这里尝试对其能量聚集性进行解释。
 
-<div align=center>
 <img src="./src/Discrete-Cosine-Transform-Mask-Representation-for-Instance-Segmentation/dct.jpg" style="width:60%" />
-</div>
+
 
 回想我们如何得到傅里叶变换公式，我们先对原信号进行**周期**延拓，而在$DCT$中我们先对信号进行**镜像**延拓，如上面的图可以看出$DFT$直接进行周期变换会造成跳变，对应与频率里的高频。而$DCT$对信号进行镜像，其过度更加平滑，同时会弱化高频信号（高频决定细节，低频决定轮廓）。而根本原因是对一般的周期函数展开成 fourier 级数的性质问题，这里不在深入探究。
 
