@@ -1,11 +1,31 @@
-# 数据操作
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-```python
+# 数据操作
+<Tabs groupId="language">
+  <TabItem value="tf" default>
+
+  ```py
 import tensorflow as tf
 print(tf.__version__)
-```
+  ```
+ ```
+ 2.0.0
+ ```
+  </TabItem>
+  <TabItem value="torch">
 
-    2.0.0
+  ```py
+import torch
+print(torch.__version__)
+```
+```
+1.7.0+cu110
+```
+  </TabItem>
+</Tabs>
+
+
 
 在深度学习中，我们通常会频繁地对数据进行操作。作为动手学深度学习的基础，本节将介绍如何对内存中的数据进行操作。
 
