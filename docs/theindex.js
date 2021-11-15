@@ -9,7 +9,7 @@ const indexData = {
     "appendix-1": "附录1：好朋友们",
     "appendix-2": "附录2：数学是真正的圣经",
     "appendix-3": "附录3：信号和采样的学问（DSP）",
-    "appendix-4": "附录4：TensorFlow编程策略",
+    "appendix-4": "附录4：TF与Pytorch编程策略",
 };
 
 exports.getSidebarIndex = function () {
