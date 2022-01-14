@@ -75,12 +75,17 @@ const config = {
             position: 'left',
             activeBaseRegex: '/unlimited-paper-works/'
           },
-          // {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/neet-cv/ml.akasaki.space',
             label: 'GitHub',
-            position: 'right',
+            position: 'left',
           },
+          // {to: '/blog', label: 'Blog', position: 'left'},
+          {
+            href: 'https://focus.akasaki.space',
+            label: 'Akasaki\'s blogs',
+            position: 'right',
+          }
         ],
       },
       footer: {
