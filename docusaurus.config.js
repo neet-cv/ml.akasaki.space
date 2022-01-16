@@ -48,7 +48,6 @@ const config = {
   ],
 
   plugins: [
-    // ... Your other plugins.
     [
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {
@@ -58,6 +57,9 @@ const config = {
         // For Docs using Chinese, The `language` is recommended to set to:
         // ```
         language: ["en", "zh"],
+        indexDocs:true,
+        docsRouteBasePath:"/",
+        docsDir:"docs",
         // ```
         // When applying `zh` in language, please install `nodejieba` in your project.
         translations:{
