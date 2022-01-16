@@ -1,59 +1,76 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require("prism-react-renderer/themes/github");
+const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
-const math = require('remark-math');
-const katex = require('rehype-katex');
+const math = require("remark-math");
+const katex = require("rehype-katex");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: '工具箱的深度学习记事簿',
-  tagline: 'Dinosaurs are cool',
-  url: 'https://ml.akasaki.space/',
-  baseUrl: '/',
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/logo.svg',
-  organizationName: 'neet-cv', // Usually your GitHub org/user name.
-  projectName: 'ml.akasaki.space', // Usually your repo name.
+  title: "工具箱的深度学习记事簿",
+  tagline: "Dinosaurs are cool",
+  url: "https://ml.akasaki.space/",
+  baseUrl: "/",
+  onBrokenLinks: "warn",
+  onBrokenMarkdownLinks: "warn",
+  favicon: "img/logo.svg",
+  organizationName: "neet-cv", // Usually your GitHub org/user name.
+  projectName: "ml.akasaki.space", // Usually your repo name.
   i18n: {
-    defaultLocale: 'zh-cn',
-    locales: ['zh-cn'],
+    defaultLocale: "zh-cn",
+    locales: ["zh-cn"],
   },
 
   presets: [
     [
-      '@docusaurus/preset-classic',
+      "@docusaurus/preset-classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           // editUrl: 'https://github.com/facebook/docusaurus/edit/main/website/',
           // routeBasePath: '/'
           remarkPlugins: [math],
           rehypePlugins: [[katex, { strict: false }]],
-          id: 'docs',
-          routeBasePath: '/',
+          id: "docs",
+          routeBasePath: "/",
         },
         blog: false,
         pages: false,
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: require.resolve("./src/css/custom.css"),
         },
       }),
     ],
   ],
 
+  plugins: [
+    // ... Your other plugins.
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        // ... Your options.
+        // `hashed` is recommended as long-term-cache of index file is possible.
+        hashed: true,
+        // For Docs using Chinese, The `language` is recommended to set to:
+        // ```
+        language: ["en", "zh"],
+        // ```
+        // When applying `zh` in language, please install `nodejieba` in your project.
+      },
+    ],
+  ],
+
   webpack: {
     jsLoader: (isServer) => ({
-      loader: require.resolve('esbuild-loader'),
+      loader: require.resolve("esbuild-loader"),
       options: {
-        loader: 'tsx',
-        format: isServer ? 'cjs' : undefined,
-        target: isServer ? 'node12' : 'es2017',
+        loader: "tsx",
+        format: isServer ? "cjs" : undefined,
+        target: isServer ? "node12" : "es2017",
       },
     }),
   },
@@ -63,33 +80,33 @@ const config = {
     ({
       hideableSidebar: true,
       navbar: {
-        title: '工具箱的深度学习记事簿',
+        title: "工具箱的深度学习记事簿",
         logo: {
-          alt: 'Logo',
-          src: 'img/logo.svg',
+          alt: "Logo",
+          src: "img/logo.svg",
         },
         items: [
           {
-            label: '魔法部日志',
-            to: '/unlimited-paper-works/',
-            position: 'left',
-            activeBaseRegex: '/unlimited-paper-works/'
+            label: "魔法部日志",
+            to: "/unlimited-paper-works/",
+            position: "left",
+            activeBaseRegex: "/unlimited-paper-works/",
           },
           {
-            href: 'https://github.com/neet-cv/ml.akasaki.space',
-            label: 'GitHub',
-            position: 'left',
+            href: "https://github.com/neet-cv/ml.akasaki.space",
+            label: "GitHub",
+            position: "left",
           },
           // {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://focus.akasaki.space',
-            label: 'Akasaki\'s blogs',
-            position: 'right',
-          }
+            href: "https://focus.akasaki.space",
+            label: "Akasaki's blogs",
+            position: "right",
+          },
         ],
       },
       footer: {
-        style: 'dark',
+        style: "dark",
         links: [
           // {
           //   title: 'Docs',
@@ -140,8 +157,8 @@ const config = {
     }),
   stylesheets: [
     {
-      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.20/dist/katex.min.css',
-      crossorigin: 'anonymous',
+      href: "https://cdn.jsdelivr.net/npm/katex@0.13.20/dist/katex.min.css",
+      crossorigin: "anonymous",
     },
   ],
 };
