@@ -2931,6 +2931,11 @@ array-flatten@^2.1.0:
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-2.1.2.tgz#24ef80a28c1a893617e2149b0c6d0d788293b099"
   integrity sha512-hNfzcOV8W4NdualtqBFPyVO+54DSJuZGY9qT4pRroB6S9e3iiido2ISIC5h9R2sPJ8H3FHCIiEnsv1lPXO3KtQ==
 
+array-shuffle@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.nlark.com/array-shuffle/download/array-shuffle-3.0.0.tgz#9a927cc2ca4c8ef4d71cddef7c9ee7b3b733d54b"
+  integrity sha1-mpJ8wspMjvTXHN3vfJ7ns7cz1Us=
+
 array-union@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/array-union/-/array-union-2.1.0.tgz#b798420adbeb1de828d84acd8a2e23d3efe85e8d"

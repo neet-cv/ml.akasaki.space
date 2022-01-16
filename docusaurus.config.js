@@ -39,7 +39,7 @@ const config = {
           routeBasePath: "/",
         },
         blog: false,
-        pages: false,
+        // pages: false,
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
@@ -108,6 +108,11 @@ const config = {
             href: "https://github.com/neet-cv/ml.akasaki.space",
             label: "GitHub",
             position: "left",
+          },
+          {
+            label: "Authors & About",
+            to: "/about",
+            position: "right",
           },
           // {to: '/blog', label: 'Blog', position: 'left'},
           {
