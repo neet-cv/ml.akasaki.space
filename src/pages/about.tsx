@@ -89,7 +89,7 @@ var friendsData: FriendData[] = [
     name: "AsTheStarsFall",
     intro: "None",
     url: "https://github.com/AsTheStarsFalll",
-    note: "Focusing on semantic segmentation. Some kind of nihilist.",
+    note: "Focusing on semantic segmentation & attention mechanism. Some kind of nihilist.",
   },
   {
     pic: githubPic("breezeshane"),
@@ -97,6 +97,13 @@ var friendsData: FriendData[] = [
     intro: "一个专注理论但学不懂学不会的锈钢废物，但是他很擅长产出Bug，可能是因为他体表有源石结晶分布，但也可能仅仅是因为他是Bug本体。",
     url: "https://breezeshane.github.io/",
     note: "GANer, sometimes paranoid, we call him Old Shan.",
+  },
+  {
+    pic: githubPic("AndPuQing"),
+    name: "PuQing",
+    intro: "intro * new",
+    url: "https://github.com/AndPuQing",
+    note: "Focusing on semantic segmentation, and a little frequency domain image processing.",
   },
 ];
 
