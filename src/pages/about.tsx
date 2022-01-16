@@ -7,7 +7,9 @@ function About() {
   return (
     <Layout>
       <Friends />
-      <p style={{ paddingLeft: '20px' }}>The list is random. try to refresh the page.</p>
+      <p style={{ paddingLeft: "20px" }}>
+        The list is random. try to refresh the page.
+      </p>
     </Layout>
   );
 }
@@ -28,7 +30,8 @@ var friendsData: FriendData[] = [
   {
     pic: githubPic("visualDust"),
     name: "Gavin Gong",
-    intro: "Rubbish CVer | Poor LaTex speaker | Half stack developer | 键圈躺尸砖家",
+    intro:
+      "Rubbish CVer | Poor LaTex speaker | Half stack developer | 键圈躺尸砖家",
     url: "https://focus.akasaki.space/",
     note: "Project Launcher & Maintainer, focusing on applied deep learning techniques. Also know him as VisualDust or MiyaAkasaki.",
   },
@@ -73,13 +76,34 @@ var friendsData: FriendData[] = [
     intro: "I want to be strong. But it seems so hard.",
     url: "https://blog.pommespeter.com/",
     note: "Focusing on low-light image enhancement and image processing.",
-  }
+  },
+  {
+    pic: "https://xiaomai-aliyunoss.oss-cn-shenzhen.aliyuncs.com/img/20220116171846.jpg",
+    name: "RuoMengAwA",
+    intro: "一个喜欢摸鱼的菜狗，目前主要做低照度增强方向的研究",
+    url: "https://github.com/RuoMengAwA",
+    note: "Focusing on low-light image enhancement and image processing. Also call him xiaomai.",
+  },
+  {
+    pic: githubPic("AsTheStarsFalll"),
+    name: "AsTheStarsFall",
+    intro: "None",
+    url: "https://github.com/AsTheStarsFalll",
+    note: "Focusing on semantic segmentation. Some kind of nihilist.",
+  },
+  {
+    pic: githubPic("breezeshane"),
+    name: "Breeze Shane",
+    intro: "一个专注理论但学不懂学不会的锈钢废物，但是他很擅长产出Bug，可能是因为他体表有源石结晶分布，但也可能仅仅是因为他是Bug本体。",
+    url: "https://breezeshane.github.io/",
+    note: "GANer, sometimes paranoid, we call him Old Shan.",
+  },
 ];
 
 function Friends() {
   const [friends, setFriends] = useState<FriendData[]>(friendsData);
   useEffect(() => {
-    setFriends(arrayShuffle(friends))
+    setFriends(arrayShuffle(friends));
   }, []);
   const [current, setCurrent] = useState(0);
   const [previous, setPrevious] = useState(0);
