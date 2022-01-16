@@ -32,7 +32,9 @@
 >
 > 随着深度神经网络的快速发展，CNN在低级别图像处理中得到了广泛的应用，包括super-resolution，rain removal等。Lore等人的使用堆叠稀疏去噪自动编码器来同时进行微光增强和降噪(LLNet)。
 
-### 3.Retinex-Net的预计网络框架![image-20210720205844362](https://gitee.com/ruomengawa/pic-go/raw/master/img/20210720205844.png)
+### 3.Retinex-Net的预计网络框架
+
+![image-20210720205844362](https://gitee.com/ruomengawa/pic-go/raw/master/img/20210720205844.png)
 
 > 增强过程分为三步:分解、调整和重构。在分解步骤中，子网Decom-Net将输入图像分解为反射率和照度。在接下
 >
