@@ -51,7 +51,7 @@ testing_dataset = tf.data.Dataset.from_tensor_slices((testing_x, testing_y))
 
 #### 1.1.3 标准化和前处理
 
-如果你不知道什么是标准化，请参考[附录-常见名词](../appendix/similar-vocabularies.md)中有关标准化、去量纲的词条。``
+如果你不知道什么是标准化，请参考[附录-常见名词](../appendix-1/[1]similar-vocabularies)中有关标准化、去量纲的词条。``
 
 在训练图像数据时，特征图一般是float32的，并且要标准化。而对应的标签一般是整数（索引）。所以，我们一般对x和y做以下前处理：
 
@@ -62,7 +62,7 @@ testing_x = (testing_x.astype('float32') / 255.)
 
 #### 1.1.4 指定batch大小以及将数据集打乱
 
-在你经常看到各种SGD（参阅[附录-常见名词](../appendix/similar-vocabularies.md)中关于随机梯度下降的词条）方法中，需要批量取用数据集，也就是我们经常指定的batch。tensorflow也提供了指定`Dataset`对象batch size的方法：
+在你经常看到各种SGD（参阅[附录-常见名词](../appendix-1/[1]similar-vocabularies)中关于随机梯度下降的词条）方法中，需要批量取用数据集，也就是我们经常指定的batch。tensorflow也提供了指定`Dataset`对象batch size的方法：
 
 ```python
 training_dataset = training_dataset.batch(128)

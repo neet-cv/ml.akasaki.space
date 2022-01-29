@@ -21,7 +21,8 @@ jobs:
         with:
           path: |
             node_modules
-          key: ${{ runner.os }}-v16-${{ hashFiles('yarn.lock') }}
+          key: ${{ runner.os }}-node16-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-node16-
 
       - name: Use Node.js 16.x
         uses: actions/setup-node@v2
@@ -29,7 +30,6 @@ jobs:
           node-version: 16.x
 
       - name: Install dependencies
-        if: steps.cache_node_modules.outputs.cache-hit != 'true'
         run: |
           yarn install --frozen-lockfile
 
@@ -41,8 +41,8 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/.vuepress/dist/
-          publish_branch: vuepress_pages
+          publish_dir: build/
+          publish_branch: gh-pages
           force_orphan: true
           cname: 'ml.akasaki.space'
 

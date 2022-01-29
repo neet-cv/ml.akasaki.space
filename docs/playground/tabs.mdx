@@ -1,0 +1,102 @@
+# Tabs
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+### 代码
+
+在 `*.md` 或 `*.mdx` 文件中 import 并使用 `Tabs` 和 `TabItem`。
+
+:::caution
+`<TabItem>` 标签与代码之间必须有一个空行。（[MDX v1 语法](https://mdxjs.com/guides/markdown-in-components/)）
+:::
+
+````html
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs groupId="language">
+  <TabItem value="tf" default>
+
+  ```py
+  import tensorflow as tf
+  # TensorFlow code
+  # TensorFlow code
+  # TensorFlow code
+  # TensorFlow code
+  # TensorFlow code
+  ```
+
+  </TabItem>
+  <TabItem value="torch">
+
+  ```py
+  import torch
+  # PyTorch code
+  # PyTorch code
+  # PyTorch code
+  # PyTorch code
+  ```
+
+  </TabItem>
+</Tabs>
+````
+
+### 效果
+
+<Tabs groupId="language">
+  <TabItem value="tf" default>
+
+  ```py
+  import tensorflow as tf
+  # TensorFlow code
+  # TensorFlow code
+  # TensorFlow code
+  # TensorFlow code
+  # TensorFlow code
+  ```
+
+  </TabItem>
+  <TabItem value="torch">
+
+  ```py
+  import torch
+  # PyTorch code
+  # PyTorch code
+  # PyTorch code
+  # PyTorch code
+  ```
+
+  </TabItem>
+</Tabs>
+
+:::tip
+另外，多个具有相同 `groupId` 的 `Tabs` 会同时切换：
+
+<Tabs groupId="language">
+  <TabItem value="tf" default>
+
+  ```py
+  import tensorflow as tf
+  # TensorFlow code 2
+  # TensorFlow code 2
+  # TensorFlow code 2
+  # TensorFlow code 2
+  ```
+
+  </TabItem>
+  <TabItem value="torch">
+
+  ```py
+  import torch
+  # PyTorch code 2
+  # PyTorch code 2
+  # PyTorch code 2
+  # PyTorch code 2
+  ```
+
+  </TabItem>
+</Tabs>
+
+:::

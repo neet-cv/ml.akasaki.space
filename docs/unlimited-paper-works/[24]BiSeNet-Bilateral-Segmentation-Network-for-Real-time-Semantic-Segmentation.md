@@ -6,7 +6,7 @@ BiSeNet的目标是更快速的实时语义分割。在语义分割任务中，�
 
 > Semantic segmentation requires both rich spatial information and sizeable receptive field. However, modern approaches usually compromise spatial resolution to achieve real-time inference speed, which leads to poor performance. In this paper, we address this dilemma with a novel Bilateral Segmentation Network (BiSeNet). We first design a Spatial Path with a small stride to preserve the spatial information and generate high-resolution features. Meanwhile, a Context Path with a fast downsampling strategy is employed to obtain sufficient receptive field. On top of the two paths, we introduce a new Feature Fusion Module to combine features efficiently. The proposed architecture makes a right balance between the speed and segmentation performance on Cityscapes, CamVid, and COCO-Stuff datasets. Specifically, for a 2048x1024 input, we achieve 68.4% Mean IOU on the Cityscapes test dataset with speed of 105 FPS on one NVIDIA Titan XP card, which is significantly faster than the existing methods with comparable performance.
 
-论文原文：[BiSeNet: Bilateral Segmentation Network for Real-time Semantic Segmentation](https://arxiv.org/abs/1808.00897)。阅读后你会发现，这篇论文有很多思路受到[SENet（Squeeze-and-Excitation Networks）](./Squeeze-and-Excitation-Networks.md)的启发。
+论文原文：[BiSeNet: Bilateral Segmentation Network for Real-time Semantic Segmentation](https://arxiv.org/abs/1808.00897)。阅读后你会发现，这篇论文有很多思路受到[SENet（Squeeze-and-Excitation Networks）](./[23]Squeeze-and-Excitation-Networks)的启发。
 
 ---
 
@@ -83,7 +83,7 @@ BiSeNet的目标是更快速的实时语义分割。在语义分割任务中，�
 
 ![image-20210704150819590](./src/BiSeNet-Bilateral-Segmentation-Network-for-Real-time-Semantic-Segmentation/image-20210704150819590.png)
 
-在特征的不同层级给定的情况下，本文首先连接 Spatial Path 和 Context Path 的输出特征；接着，通过批归一化平衡特征的尺度。下一步，像[SENet](./[23]Squeeze-and-Excitation-Networks.md)一样，把相连接的特征池化为一个特征向量，并计算一个权重向量。这一权重向量可以重新加权特征，起到特征选择和结合的作用。上图展示了这一设计的细节。
+在特征的不同层级给定的情况下，本文首先连接 Spatial Path 和 Context Path 的输出特征；接着，通过批归一化平衡特征的尺度。下一步，像[SENet](./[23]Squeeze-and-Excitation-Networks)一样，把相连接的特征池化为一个特征向量，并计算一个权重向量。这一权重向量可以重新加权特征，起到特征选择和结合的作用。上图展示了这一设计的细节。
 
 ## 实验
 

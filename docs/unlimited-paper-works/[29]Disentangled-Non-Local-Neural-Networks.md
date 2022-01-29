@@ -6,11 +6,11 @@
 
 > The non-local block is a popular module for strengthening the context modeling ability of a regular convolutional neural network. This paper first studies the non-local block in depth, where we find that its attention computation can be split into two terms, a whitened pairwise term accounting for the relationship between two pixels and a unary term representing the saliency of every pixel. We also observe that the two terms trained alone tend to model different visual clues, e.g. the whitened pairwise term learns within-region relationships while the unary term learns salient boundaries. However, the two terms are tightly coupled in the non-local block, which hinders the learning of each. Based on these findings, we present the disentangled non-local block, where the two terms are decoupled to facilitate learning for both terms. We demonstrate the effectiveness of the decoupled design on various tasks, such as semantic segmentation on Cityscapes, ADE20K and PASCAL Context, object detection on COCO, and action recognition on Kinetics.
 
-从论文名称上来看，这篇论文分析了[Non-Local Neural Networks](./[27]Non-local-Neural-Networks.md)中的Non-Local模块中所存在的注意力机制，并对其设计进行了解耦。解耦后该注意力分为两部分：成对项（pairwise term）用于表示像素之间的关系，一元项（unary term）用于表示像素自身的某种显著性。这两项在Non-Local块中是紧密耦合的。这篇论文发现当着两部分被分开训练后，会分别对不同的视觉线索进行建模，并达到不错的效果。
+从论文名称上来看，这篇论文分析了[Non-Local Neural Networks](./[27]Non-local-Neural-Networks)中的Non-Local模块中所存在的注意力机制，并对其设计进行了解耦。解耦后该注意力分为两部分：成对项（pairwise term）用于表示像素之间的关系，一元项（unary term）用于表示像素自身的某种显著性。这两项在Non-Local块中是紧密耦合的。这篇论文发现当着两部分被分开训练后，会分别对不同的视觉线索进行建模，并达到不错的效果。
 
 整篇论文从对Non-Local分析到新的方法提出都非常地有调理。有时间请阅读原论文[Disentangled Non-Local Neural Networks](https://arxiv.org/abs/2006.06668)。
 
-> 在阅读本文之前请先阅读[Non-Local Neural Networks](./[27]Non-local-Neural-Networks.md)。
+> 在阅读本文之前请先阅读[Non-Local Neural Networks](./[27]Non-local-Neural-Networks)。
 
 ## Non-Local的深入分析
 
@@ -20,17 +20,17 @@ Non-Local块用于在单层内建立像素之间的长距离依赖关系，是�
 $$
 y_i = \sum_{j\in\Omega}w(x_i,x_j)g(x_j)
 $$
-其中$y_i$表示在位置$i$上的输出，$\Omega$表示所有像素对应的特征的集合，$g(\cdot)$是一个emedding函数，$w(x_i,x_j)$是在嵌套（Embedded）空间内计算$x_i,x_j$相关性的函数（忘记了这个公式的话可以复习一下[Non-Local Neural Networks](./[27]Non-local-Neural-Networks.md)）。当$w(x_i,x_j)$是Embedded Gaussian时，$w(x_i,x_j)$可以展开为：
+其中$y_i$表示在位置$i$上的输出，$\Omega$表示所有像素对应的特征的集合，$g(\cdot)$是一个emedding函数，$w(x_i,x_j)$是在嵌套（Embedded）空间内计算$x_i,x_j$相关性的函数（忘记了这个公式的话可以复习一下[Non-Local Neural Networks](./[27]Non-local-Neural-Networks)）。当$w(x_i,x_j)$是Embedded Gaussian时，$w(x_i,x_j)$可以展开为：
 $$
 w(x_i,x_j) = \sigma(q_i^Tk_j) = \frac{exp(q_i^Tk_j)}{\sum_{t\in\Omega}exp(q_i^Tk_t)}
 $$
-其中$q_i=W_qx_i$，$k_i=W_kx_i$，分别表示$x_i$的查询值（query）和键（key）（如有疑惑请查阅[注意力机制](../ch3pw/[4]attention.md)中有关键值注意力的部分），$\sigma(\cdot)$表示$softmax$函数。
+其中$q_i=W_qx_i$，$k_i=W_kx_i$，分别表示$x_i$的查询值（query）和键（key）（如有疑惑请查阅[注意力机制](../ch3p2/[4]attention)中有关键值注意力的部分），$\sigma(\cdot)$表示$softmax$函数。
 
-第一眼看上去，该公式建立了一种成对（pairwise）的关系，即每个像素都会和其他像素建立一对一的关系。但是，作者同是发现该公式会同时编码像素的显著性信息。考虑如下特殊情况：当整张图片上的所有像素使用同个常量作为其query值时，每个像素的key就会对其他所有像素的位置上的输出产生影响（原文为`Considering a special case where the query vector is a constant over all image pixels, a key pixel will have global impact on all query pixels.`）。在[GCNet](./[28]GCNet-Non-local-Networks-Meet-Squeeze-Excitation-Networks-and-Beyond.md)中，作者通过一系列实验展现了在一些视觉任务中，Non-Local块常常退化为一种仅包含一元项（unary term）的注意力：
+第一眼看上去，该公式建立了一种成对（pairwise）的关系，即每个像素都会和其他像素建立一对一的关系。但是，作者同是发现该公式会同时编码像素的显著性信息。考虑如下特殊情况：当整张图片上的所有像素使用同个常量作为其query值时，每个像素的key就会对其他所有像素的位置上的输出产生影响（原文为`Considering a special case where the query vector is a constant over all image pixels, a key pixel will have global impact on all query pixels.`）。在[GCNet](./[28]GCNet-Non-local-Networks-Meet-Squeeze-Excitation-Networks-and-Beyond)中，作者通过一系列实验展现了在一些视觉任务中，Non-Local块常常退化为一种仅包含一元项（unary term）的注意力：
 
 ![](./src/Disentangled-Non-Local-Neural-Networks/image-20210712213203846.png)
 
-上图表示Non-Local块在不同的query位置（图片中的红点位置）产生的attention map可视化（详见[Non-local Networks Meet Squeeze-Excitation Networks and Beyond](./[28]GCNet-Non-local-Networks-Meet-Squeeze-Excitation-Networks-and-Beyond.md)）。可以看出，当每个像素的key和所有的query具有类似的相似度时，Non-Local块就会退化成一个仅包含一元项（unary term）的注意力，表达像素之间特殊关系的能力降低了。这些现象都说明了，除了第一眼看上去的成对（pairwise）关系，一元（unary）的关系（也就是像素的显著性关系）也被Non-Local块编码。
+上图表示Non-Local块在不同的query位置（图片中的红点位置）产生的attention map可视化（详见[Non-local Networks Meet Squeeze-Excitation Networks and Beyond](./[28]GCNet-Non-local-Networks-Meet-Squeeze-Excitation-Networks-and-Beyond)）。可以看出，当每个像素的key和所有的query具有类似的相似度时，Non-Local块就会退化成一个仅包含一元项（unary term）的注意力，表达像素之间特殊关系的能力降低了。这些现象都说明了，除了第一眼看上去的成对（pairwise）关系，一元（unary）的关系（也就是像素的显著性关系）也被Non-Local块编码。
 
 所以，接下来作者将Non-Local块中所产生的注意力**拆分为两个项（分量）：**
 

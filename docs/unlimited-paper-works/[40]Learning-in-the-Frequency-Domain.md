@@ -20,7 +20,7 @@
 
 从代码上看，本篇论文的贡献主要是一个频域的前处理过程。作者在论文中说明了，将输入转换进频域的前处理几乎可以直接用于任何CNN模型。
 
->   关注到本文，是因为最近研究分割比较多，并且我觉得分割作为一个逐像素的密集预测问题，其所需的编码方式和类别数量巨大的分类问题以及目标检测问题可以分开来讲。抛开实例分割这种除了分类还需要区分实体的人物不谈，在单纯的语义分割中，分类图像的方式基本是通过编码后特征图每个像素对应channel上解码出的概率分布。在分类数量较少时，我认为所需要的编码复杂度并不需要很高。降低编码的复杂度，一方面能够加快参数收敛的速度，另一方面能够降低网络参数两。自从拜读了一些通道注意力相关的文章（例如[Squeeze and Excitation Networks](./[23]Squeeze-and-Excitation-Networks.md)），我就隐约感到CNN在较长的channel上可能会隐式地编码一些频率信息，只是由于在网络的监督上没有针对这一点进行优化，所以表现得并不明显。此篇文章提出在频域上选择必要的信息，并不是像我想的那样在直接在监督上使网络显式编码频率信息，而是通过前处理使网络在输入上就表现出对频域的偏置。这和我一开始的想法有些出入，非常具有启发意义。
+>   关注到本文，是因为最近研究分割比较多，并且我觉得分割作为一个逐像素的密集预测问题，其所需的编码方式和类别数量巨大的分类问题以及目标检测问题可以分开来讲。抛开实例分割这种除了分类还需要区分实体的人物不谈，在单纯的语义分割中，分类图像的方式基本是通过编码后特征图每个像素对应channel上解码出的概率分布。在分类数量较少时，我认为所需要的编码复杂度并不需要很高。降低编码的复杂度，一方面能够加快参数收敛的速度，另一方面能够降低网络参数两。自从拜读了一些通道注意力相关的文章（例如[Squeeze and Excitation Networks](./[23]Squeeze-and-Excitation-Networks)），我就隐约感到CNN在较长的channel上可能会隐式地编码一些频率信息，只是由于在网络的监督上没有针对这一点进行优化，所以表现得并不明显。此篇文章提出在频域上选择必要的信息，并不是像我想的那样在直接在监督上使网络显式编码频率信息，而是通过前处理使网络在输入上就表现出对频域的偏置。这和我一开始的想法有些出入，非常具有启发意义。
 
 本文的主要贡献如下：
 
@@ -59,7 +59,7 @@
 
 ## 提出频域的通道选择器
 
-在聊频域通道的选择（原文：Frequency Channel Selection）之前，先回忆起 [Squeeze and Excitation Networks](./[23]Squeeze-and-Excitation-Networks.md) 中使用Excitation的过程选择channel，在频域的选择问题上，也许可以使用相似的思路。例如，将不同的频域信息堆叠在channel中，使用类似Squeeze的过程产生一组等于channel长度的选择器，决定某个channel是否进入输出。在CNN中是存在对光谱的偏置的（主要体现为输入为RGB图像），因此对于编码好的特征图，可以在channel中选出“比较重要的部分”。
+在聊频域通道的选择（原文：Frequency Channel Selection）之前，先回忆起 [Squeeze and Excitation Networks](./[23]Squeeze-and-Excitation-Networks) 中使用Excitation的过程选择channel，在频域的选择问题上，也许可以使用相似的思路。例如，将不同的频域信息堆叠在channel中，使用类似Squeeze的过程产生一组等于channel长度的选择器，决定某个channel是否进入输出。在CNN中是存在对光谱的偏置的（主要体现为输入为RGB图像），因此对于编码好的特征图，可以在channel中选出“比较重要的部分”。
 
 >   刚才提到“HVS中的一些研究”，作者在频域中对CNN的输入输出进行测试，通过实验分析发现，在分类、检测和分割任务中，CNN模型对低频率的channel更加敏感。这和HVS中的一些研究是贴合的。也就是说，在使用现在主流的数据集进行监督时，CNN在频域上表现出了和人类一样的“低频敏感性”。
 
@@ -67,7 +67,7 @@
 
 ![image-20211023123801381](./src/Learning-in-the-Frequency-Domain/image-20211023123801381.png)
 
-上图：选择器结构（下，文中称之为 $Gate\ Module$）和SE Block（上）的结构对比图。可以看到，除了图中标号1和2，其余部分和两者结构基本相同（注：本文的$F_{ex}(\cdot,W)$过程是$1\times 1$卷积，而不是SE Block中全连接）。在Gate Module的输出中标记为白色的通道代表被过滤的通道（查看[Squeeze and Excitation Networks](./[23]Squeeze-and-Excitation-Networks.md) 以理解 SE Block ）。
+上图：选择器结构（下，文中称之为 $Gate\ Module$）和SE Block（上）的结构对比图。可以看到，除了图中标号1和2，其余部分和两者结构基本相同（注：本文的$F_{ex}(\cdot,W)$过程是$1\times 1$卷积，而不是SE Block中全连接）。在Gate Module的输出中标记为白色的通道代表被过滤的通道（查看[Squeeze and Excitation Networks](./[23]Squeeze-and-Excitation-Networks) 以理解 SE Block ）。
 
 论文的作者在文中说明了该结构与SE Block的不同之处：在 SE Block 中，对channel的采样是数值的，每个channel会得到一个数值的权重。而本文的Gate Module则对channel进行 $0-1$ 采样。采样的方式是 $Tensor 3$ 通过两套参数变为 $Tensor 4$（shape为$1\times 1\times C\times 2$），然后再进行伯努利分布的采样。原文中是这样描述的：
 

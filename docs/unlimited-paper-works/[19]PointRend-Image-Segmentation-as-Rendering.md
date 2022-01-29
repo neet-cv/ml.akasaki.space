@@ -6,7 +6,7 @@
 
 > “我们希望预测分割图的边界区域更加准确，我们就不应该使用均匀采样，而应该更加倾向于图像边界区域。”
 
-这是一篇用于改善图像分割问题中边缘分割效果的方法的论文的阅读笔记。该方法“将分割问题看作渲染问题”，达到了较好的效果。论文原文：[PointRend: Image Segmentation as Rendering](https://arxiv.org/abs/1912.08193)。在阅读这篇笔记之前，请确保先了解图像分割技术。对分割的技术进行简要的了解，可以参考[另一篇笔记](./[10]Overview-Of-Semantic-Segmentation.md)。
+这是一篇用于改善图像分割问题中边缘分割效果的方法的论文的阅读笔记。该方法“将分割问题看作渲染问题”，达到了较好的效果。论文原文：[PointRend: Image Segmentation as Rendering](https://arxiv.org/abs/1912.08193)。在阅读这篇笔记之前，请确保先了解图像分割技术。对分割的技术进行简要的了解，可以参考[另一篇笔记](./[10]Overview-Of-Semantic-Segmentation)。
 
 ## Abstract（摘要）
 
@@ -44,7 +44,7 @@ PointRend 可以合并到流行的元架构中，用于实例分割（例如，M
 
 PointRend模块接受一个或多个典型的$C$通道的CNN特征图（$f\in \R^{C\times H\times W}$）作为输入，这些输入特征图往往比需要预测的图像的实际尺寸要小4~16倍。PointRend模块会输出一个大小为$p\in \R^{k\times H' \times W'}$的对K个类别的预测。通常输出的大小会大于输入的大小。
 
-（如果读不懂了请先参考[另一篇笔记](./[10]Overview-Of-Semantic-Segmentation.md)了解图像的分割技术）
+（如果读不懂了请先参考[另一篇笔记](./[10]Overview-Of-Semantic-Segmentation)了解图像的分割技术）
 
 ### PointRend模块的组成
 

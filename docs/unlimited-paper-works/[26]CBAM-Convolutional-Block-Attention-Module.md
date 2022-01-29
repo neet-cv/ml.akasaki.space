@@ -14,13 +14,13 @@ CBAM是一篇结合了通道注意力和空间注意力的论文。它通过在�
 
 ## Channel Attention Module（通道注意力）
 
-关于通道注意力的相关设计细节请参考[Squeeze-and-Excitation Networks (SENet)](./[23]Squeeze-and-Excitation-Networks.md)。在这里不进行非常详细的设计。特征的每一个通道都代表着一个专门的检测器，因此，通道注意力是关注什么样的特征是有意义的。为了汇总空间特征，作者采用了全局平均池化和最大池化两种方式来分别利用不同的信息。
+关于通道注意力的相关设计细节请参考[Squeeze-and-Excitation Networks (SENet)](./[23]Squeeze-and-Excitation-Networks)。在这里不进行非常详细的设计。特征的每一个通道都代表着一个专门的检测器，因此，通道注意力是关注什么样的特征是有意义的。为了汇总空间特征，作者采用了全局平均池化和最大池化两种方式来分别利用不同的信息。
 
 ![image-20210723194442312](./src/CBAM-Convolutional-Block-Attention-Module/image-20210723194442312.png)
 
 在这篇论文中，作者使用Global Average Pool和Max Pool共用构造Channel wise的注意力。如上图所示，输入是一个 $H\times W\times C$的特征 $F$，我们先分别进行一个空间的全局平均池化和最大池化得到两个$1\times 1\times C$的通道描述。接着，再将它们分别送入一个两层的神经网络，第一层神经元个数为$C/r$，激活函数为 $ReLU$，第二层神经元个数为。注意，它们使用共享的参数建立通道相关性。将得到的通道描述乘以输入特征$F$即可得到加入了通道相关性的特征。
 
-相较于原本的[SENet](./[23]Squeeze-and-Excitation-Networks.md)，本文同时使用Global Average Pooling和Max Pooling。在后续的实验结果中可以看到，在通道注意力模块中，同时引入最大池化和平均池化可以得到最好的效果。
+相较于原本的[SENet](./[23]Squeeze-and-Excitation-Networks)，本文同时使用Global Average Pooling和Max Pooling。在后续的实验结果中可以看到，在通道注意力模块中，同时引入最大池化和平均池化可以得到最好的效果。
 
 ## Spatial Attention Module（空间注意力）
 
