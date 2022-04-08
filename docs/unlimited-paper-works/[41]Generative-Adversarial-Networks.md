@@ -19,7 +19,7 @@ GAN，Generative Adversarial Networks的简称，译名为生成对抗网络。�
 
 学习过程中的第一个GAN是2014年提出的最原始的GAN，其运行效果如下图：
 
-![2021-04-26_15-58](https://breezeshane.github.io/images/2021-04-26_01-11.png)
+![2021-04-26_15-58](./src/Generative-Adversarial-Networks/2021-04-26_15-58.png)
 
  不难发现它表（GAN）现（de）糟（piào）糕（liàng），出现了严重的欠拟合和过拟合，实在让人大跌眼镜。
 
@@ -37,12 +37,63 @@ GAN的基本思路和形式是生成器和判别器之间的博弈。为了能�
 
 根据2014年最初的GAN论文，目标函数的定义如下：
 $$
-\begin{align*}
+\begin{aligned}
 \underset{G}{\min} \underset{D}{\max}L(G,D)&=E_{x\sim P_r(x)}[\log D(x)]+E_{z\sim P_z(z)}[\log (1-D(G(z)))]\\
 &=E_{x\sim P_r(x)}[\log D(x)]+E_{x\sim P_g(x)}[\log (1-D(x))]
-\end{align*}
+\end{aligned}
 $$
-注意：图中的$ E_{x\sim P_r(x)} $是指识别真实图像符合标准的期望，而$ E_{x\sim P_g(x)} $是指生成图像符合标准的期望
+注意：图中的$E_{x \sim {P}_{r}(x)}$是指识别真实图像符合标准的期望，而$E_{x\sim P_{g}(x)}$是指生成图像符合标准的期望
+
+::: tip 为什么要这样设计目标函数？
+
+这里我们就要再重新审视一下GAN，它的本质究竟是什么？
+
+鉴别器和生成器的根本任务分别是：使用鉴别器来学习训练数据集所服从的高维概率分布，并能够给出任意一个样本服从该分布的概率值；使用生成器生成随机样本，将其输入到鉴别器内来计算概率。如果得到的概率越大，说明该样本来自该分布的可能性越高，这意味着生成的数据也越接近逼真。
+
+那么鉴别器要如何确定训练数据集所服从的高维概率分布呢？
+
+概率论上有这样的一种方法，给定$n$个采样和它所对应的某种观测下的结果，我们可以为它们附加一个参数$\theta$，通过联立这些方程组，我们可以确定$\theta$的可能值所组成的集合，并从中选取可能性最大的参数值来确定似然函数的形式，这种方法就称作最大似然估计方法。
+
+若随机变量$X$服从某种分布，则对应的概率分布的形式可以隐式确定，我们可以使用一个参数来隐式表示。这样我们就可以得到$P(X;\theta)$，通过计算采样和其对应的结果可以确定参数的最大可能值。
+
+回到GAN这里，我们已经设定生成器和鉴别器的对抗性关系，因此我们可以这样设计目标函数：
+
+对于任意一个样本$x$，其对应的似然函数为：
+
+$$
+f_d(x)=[D_w(x)]^y[1-D_w(x)]^{1-y}
+$$
+
+取所有样本可以得到总似然函数为：
+
+$$
+f_D^*(x)=\prod^{n_1}_{i=1}[D_w(x_{data})^i]\prod^{n_2}_{j=1}[1-D_w(x_g)]^j
+$$
+
+其中$n_1$表示训练数据集的样本容量，$n_2$表示生成数据集的样本容量。
+
+为了便于进行线性运算我们需要做相应的处理，首先取对数，将乘法运算更换为加法运算，得到：
+
+$$
+\begin{aligned}
+f_D^{**}(x)&=\log\big\{\prod^{n_1}_{i=1}[D_w(x_{data})^i]\prod^{n_2}_{j=1}[1-D_w(x_g)]^j\big\} \\
+&=\sum^{n_1}_{i=1}\log[D_w(x_{data})^i]+\sum^{n_2}_{j=1}\log[1-D_w(x_g)]^j
+\end{aligned}
+$$
+
+接着我们将总似然函数最大化得到：
+
+$$
+f_D^{***}(x)=\max_w\big\{ \sum^{n_1}_{i=1}\log[D_w(x_{data})^i]+\sum^{n_2}_{j=1}\log[1-D_w(x_g)]^j \big\}
+$$
+
+最后我们选取其等价形式，就可以得到最终的目标函数：
+
+$$
+f_D(x)=\max_w \mathbb{E}_{x\sim P_{data}(x)}\log[D_w(x_{data})^i]+\mathbb{E}_{x\sim P_{g}(x)}\log[1-D_w(x_g)]^j
+$$
+
+:::
 
 并且针对期望的求法有这个公式（后面推导要用到）：
 $$
@@ -65,7 +116,7 @@ V(G,D)&=\int_xp_r(x)\log(D(x))dx+\int_zp_z(z)\log(1-D(G(z)))dz\\
 $$
 「注」：Pr(x)和Pg(x)在每一个确定的x中都有确定的常数，因此求导时被看作常量。
 
-![](https://breezeshane.github.io/images/2021-04-26_01-11.png)
+![](./src/Generative-Adversarial-Networks/2021-04-24_20-10.png)
 
 判别器的推导完成，需要做的是后续的损失函数的推导，用到了JS散度和KL散度的问题，这里给出相应定义：
 
@@ -79,7 +130,7 @@ $$
 
 这两者的图像如下：
 
-![](https://breezeshane.github.io/images/2021-04-26_01-11.png)
+![](./src/Generative-Adversarial-Networks/2021-04-24_21-04.png)
 
 需要的损失函数是关于JS散度的，确定这一表达式，损失函数才能真正落实使用。
 
@@ -332,7 +383,7 @@ if __name__ == '__main__':
 
 其实起初在照着原作者所写的写代码，结果一个比较奇怪的问题发生了：
 
-![](https://breezeshane.github.io/images/2021-04-26_01-11.png)
+![](https://breezeshane.github.io/images/2021-04-26_02-34.png)
 
 ```
 TypeError: can't convert cuda:0 device type tensor to numpy. Use Tensor.cpu() to copy the tensor to host memory first.
