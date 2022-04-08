@@ -33,6 +33,14 @@ tags:
 
 </details>
 
+:::info 作者及来源
+
+**作者**: Breeze Shane
+
+**来源**: [Breeze Shane Blog](https://breezeshane.github.io/ArtificialIntelligence/Mathematics/Convex/)
+
+:::
+
 ## 基础知识
 
 ### 梯度(Gradient)
