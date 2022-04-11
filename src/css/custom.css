@@ -149,3 +149,19 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
     min-height: 600px;
   }
 }
+
+.math-display {
+  /* Enable a thin scrollbar if overflow... */
+  overflow-x: auto;
+  scrollbar-width: thin;
+
+  /* ...but make it transparent... */
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color .3s;
+}
+
+/* ...until the mouse hover it */
+.math-display:hover {
+  scrollbar-color: rgba(128,128,128,.5) transparent;
+  transition: scrollbar-color .1s;
+}
