@@ -165,3 +165,28 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
   scrollbar-color: rgba(128,128,128,.5) transparent;
   transition: scrollbar-color .1s;
 }
+
+.blog-list-page article {
+  box-shadow: 3px 3px 10px #7777;
+  border-radius: 19px;
+  padding: 20px;
+  margin-bottom: 20px !important;
+}
+
+.blog-list-page article .markdown h2 {
+  font-size: 26px;
+}
+
+.blog-list-page article > header > h2 {
+  font-size: 30px;
+}
+
+.blog-list-page main {
+  --ifm-col-width: calc(9 / 12 * 100%)!important;
+}
+
+@media (max-width: 996px) {
+  .blog-list-page main {
+    --ifm-col-width: 100%!important;
+  }
+}

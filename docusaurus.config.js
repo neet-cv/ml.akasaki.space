@@ -38,7 +38,14 @@ const config = {
           id: "docs",
           routeBasePath: "/",
         },
-        blog: false,
+        blog: {
+          showReadingTime: true,
+          editUrl: "https://github.dev/neet-cv/ml.akasaki.space/blob/master/",
+          blogSidebarTitle: "All posts",
+          blogSidebarCount: "ALL",
+          remarkPlugins: [math],
+          rehypePlugins: [katex],
+        },
         // pages: false,
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -98,11 +105,16 @@ const config = {
           src: "img/logo.svg",
         },
         items: [
+          // {
+          //   label: "魔法部日志",
+          //   to: "/unlimited-paper-works/",
+          //   position: "left",
+          //   activeBaseRegex: "/unlimited-paper-works/",
+          // },
           {
+            to: "/blog",
             label: "魔法部日志",
-            to: "/unlimited-paper-works/",
-            position: "left",
-            activeBaseRegex: "/unlimited-paper-works/",
+            position: "left"
           },
           {
             href: "https://github.com/neet-cv/ml.akasaki.space",
@@ -116,8 +128,8 @@ const config = {
           },
           // {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: "https://focus.akasaki.space",
-            label: "Akasaki's blogs",
+            href: "https://gong.host",
+            label: "YetAnotherAkasaki",
             position: "right",
           },
         ],

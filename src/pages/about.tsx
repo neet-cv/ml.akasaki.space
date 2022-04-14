@@ -57,8 +57,8 @@ var friendsData: FriendData[] = [
     note: "Used to help us with frontend issues.",
   },
   {
-    pic: githubPic("coronaPolvo"),
-    name: "coronaPolvo",
+    pic: githubPic("AndSonder"),
+    name: "Sonder",
     intro: "life is but a span, I use python",
     url: "https://blog.keter.top/",
     note: "Focusing on neural network adversial attacks and related things.",
