@@ -66,7 +66,7 @@ S是源图像，R为反射率，I为照度，$ \circ$为逐元素相乘，其中
 
 在实际使用中，作者先使用一个3 x 3卷积提取图像特征，而后再使用多个3 x 3卷积加上ReLU激活函数将RGB图像映射为反射和照明，而3 x 3卷积都是从特征空间投影R和I，并且使用sigmoid函数将 R 和 I 都投影在【0 , 1】的范围中
 
-损失$L$ 被分为三个部分: Reconstruction loss(重建损失) $L_{recon}$ ，Invariable reflectance loss（恒定反射损失）$L_{ir}$ , illumination smoothness loss(照明平滑度损失) $L_{is}$​ :
+损失 $L$ 被分为三个部分: Reconstruction loss(重建损失) $L_{recon}$ ，Invariable reflectance loss（恒定反射损失）$L_{ir}$ , illumination smoothness loss(照明平滑度损失) $L_{is}$​ :
 $$
 L = L_{recon} + \lambda_{ir}L_{ir} +\lambda_{is}L_{is}
 $$
@@ -105,7 +105,7 @@ $$
 
 下采样块由步长为2的卷积层和ReLU组成。在上采样块中，使用了大小调整卷积层。它可以避免形成棋盘模式化的人工产物。调整大小卷积层由最近邻插值操作、步长为1的卷积层和ReLU组成。
 
-增强函数中的损失$L$由重建损失$ L_{recon}$和照明平滑度损失)$L_{is}$组成，$L_{recon}$​目的是制造正常光$\hat{S}$其公式为
+增强函数中的损失 $L$ 由重建损失 $L_{recon}$ 和照明平滑度损失 $L_{is}$ 组成， $L_{recon}$​ 目的是制造正常光 $\hat{S}$ 其公式为
 $$
 L_{recon}=||R_{low}\circ\hat{I}-S_{normal}||_1
 $$

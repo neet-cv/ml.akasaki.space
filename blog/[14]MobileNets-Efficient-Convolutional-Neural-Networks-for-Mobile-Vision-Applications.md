@@ -54,7 +54,7 @@ tags: [detection, backbone, light-weight]
 
     ![image-20210518103843290](./src/MobileNets-Efficient-Convolutional-Neural-Networks-for-Mobile-Vision-Applications/image-20210518103843290.png)
 
-    而对于DSC来说，因为卷积的过程可以被分成两步，一步是滤波，另一步是组合，将这两步分离的卷积就是本文提出的DSC。下面对其计算进行分析。DSC主要分成两层，深度卷积层(Depthwise Convolution,以下简称DW)和点卷积层(Pointwise Convolution,以下简称PW)。用单个卷积对输入图片每一个通道都进行一次深度卷积DW，然后再对深度卷积的输出结果使用$1\times1$的卷积，对DW之后的层进行线性组合。经过计算，进行DW时的计算量为$D_K\times D_K\times M\times D_F\times D_F$，因为对第$m$个通道进行DW之后生产特征图$\bold F$中对应第$m$个通道的特征图$\bold G$。但这样目前只是把通道进行滤波，但还没有进行组合产生新的特征，对DW产生的特征图使用PW，一个$1\times1$的卷积产生新的特征。
+    而对于DSC来说，因为卷积的过程可以被分成两步，一步是滤波，另一步是组合，将这两步分离的卷积就是本文提出的DSC。下面对其计算进行分析。DSC主要分成两层，深度卷积层(Depthwise Convolution,以下简称DW)和点卷积层(Pointwise Convolution,以下简称PW)。用单个卷积对输入图片每一个通道都进行一次深度卷积DW，然后再对深度卷积的输出结果使用$1\times1$的卷积，对DW之后的层进行线性组合。经过计算，进行DW时的计算量为$D_K\times D_K\times M\times D_F\times D_F$，因为对第 $m$ 个通道进行DW之后生产特征图 $\bold F$ 中对应第 $m$ 个通道的特征图$\bold G$。但这样目前只是把通道进行滤波，但还没有进行组合产生新的特征，对DW产生的特征图使用PW，一个$1\times1$的卷积产生新的特征。
 
     ![image-20210518105644144](./src/MobileNets-Efficient-Convolutional-Neural-Networks-for-Mobile-Vision-Applications/image-20210518105644144.png)
 
