@@ -190,3 +190,9 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
     --ifm-col-width: 100%!important;
   }
 }
+
+.markdown p img {
+  max-width: 100%;
+  margin:0 auto;
+  display:block;
+}
