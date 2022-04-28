@@ -190,3 +190,10 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
     --ifm-col-width: 100%!important;
   }
 }
+
+/* Centers every image that is the only child in a paragraph. */
+.markdown p img:only-child {
+  max-width: 100%;
+  margin:0 auto;
+  display:block;
+}
