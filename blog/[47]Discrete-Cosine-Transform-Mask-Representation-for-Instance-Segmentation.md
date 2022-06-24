@@ -211,4 +211,4 @@ $$
 
 ## References
 
-[1] [mask r-cnn](https://arxiv.org/pdf/1703.06870.pdf)
+- [1] [mask r-cnn](https://arxiv.org/pdf/1703.06870.pdf)
