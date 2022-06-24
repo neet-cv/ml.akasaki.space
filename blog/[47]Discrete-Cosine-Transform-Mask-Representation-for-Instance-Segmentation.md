@@ -1,6 +1,6 @@
 ---
 title: DCT-Mask - Discrete Cosine Transform Mask Representation for Instance Segmentation
-authors: [PuQing]
+authors: [puqing]
 tags: [frequency-domain, inductive-bias, segmentation]
 ---
 

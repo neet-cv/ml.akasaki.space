@@ -1,6 +1,6 @@
 ---
 title: Axiomatic Attribution for Deep Networks
-authors: [PuQing]
+authors: [puqing]
 tags: [attribution, visualization]
 ---
 
@@ -158,3 +158,9 @@ $$
 在自然语言中的效果
 
 ![image](./src/Axiomatic-Attribution-for-Deep-Networks/Snipaste_2022-06-23_18-40-31.png)
+
+## 附录
+
+[integrated_gradients](https://tensorflow.google.cn/tutorials/interpretability/integrated_gradients?hl=zh-cn)
+
+[Saliency Maps Picture](https://github.com/wmn7/ML_Practice/blob/master/2019_07_08/Saliency%20Maps/Saliency%20Maps%20Picture.ipynb)
