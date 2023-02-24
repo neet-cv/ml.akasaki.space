@@ -14,17 +14,15 @@ slug: /
 
 - 本仓库的功能：`入门深度学习`、`参考常用代码`、`阅读论文笔记`。请注意，本仓库后半部分主要讨论计算机视觉领域的基于深度学习的方法。
 - 本仓库中的第一章直接引用[d2l.ai](http://d2l.ai)原书内容，并稍作修改；后面是自己学习、阅读书籍、阅读书籍、阅读博文后整理的内容，很多内容在各大书籍和各大搜索引擎都能找到，我所做的是用自己的想法整理或书写这些内容。也有很多内容是我自己的理解以及夹带的私货。
-- 本仓库的很多代码主要使用[Tensorflow](https://www.tensorflow.org/)等实现。[我的朋友们](https://github.com/PaperFormulaIV)正在翻译出一份[pytorch版本](https://ml.keter.top)。之后我们会试图将其合并。
+- 此外，本仓库包含了许多论文阅读笔记，内容在 [魔法部日志](/blog)。每篇笔记标注了论文原文和笔记来源，欢迎阅读和交流。
 
-## 可能的学习过程
+## 关于计算机视觉，可能的学习过程
 
 ![](./src/README/roadmap.svg)
 
-## 捐助
+## 捐助（并没有）
 
 如果这个仓库有用的话请在[github](https://github.com/visualDust/ml.akasaki.space)为[本仓库](https://github.com/visualDust/ml.akasaki.space)施舍一个star，这便是最好的捐助，是我继续写笔记的动力。
-
-![image-20210427212743443](./src/README/image-20210427212743443.png)
 
 ![_](https://jwenjian-visitor-badge-5.glitch.me/badge?page_id=VisualDust.anything)
 ![_](https://img.shields.io/github/stars/VisualDust/talkischeap.svg?style=flat)
