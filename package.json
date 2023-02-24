@@ -15,7 +15,6 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@cmfcmf/docusaurus-search-local": "^0.11.0",
     "@docusaurus/core": "^2.3.1",
     "@docusaurus/preset-classic": "^2.3.1",
     "@easyops-cn/docusaurus-search-local": "^0.34.0",
