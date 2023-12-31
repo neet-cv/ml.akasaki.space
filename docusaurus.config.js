@@ -170,7 +170,7 @@ const config = {
           //   ],
           // },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} neet-cv. Built with Docusaurus.`,
+        copyright: `鲁ICP备2021025239号-2 Copyright © ${new Date().getFullYear()} neet-cv.`,
       },
       prism: {
         theme: lightCodeTheme,
