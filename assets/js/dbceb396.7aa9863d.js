@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkml_notebook=self.webpackChunkml_notebook||[]).push([[8222],{13825:e=>{e.exports=JSON.parse('{"label":"segmentation","permalink":"/blog/tags/segmentation","allTagsPath":"/blog/tags","count":15}')}}]);

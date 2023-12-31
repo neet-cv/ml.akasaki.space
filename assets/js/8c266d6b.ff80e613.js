@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkml_notebook=self.webpackChunkml_notebook||[]).push([[9355],{96516:a=>{a.exports=JSON.parse('{"label":"param-less","permalink":"/blog/tags/param-less","allTagsPath":"/blog/tags","count":1}')}}]);

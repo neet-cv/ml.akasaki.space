@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkml_notebook=self.webpackChunkml_notebook||[]).push([[9405],{18554:e=>{e.exports=JSON.parse('{"label":"FPN","permalink":"/blog/tags/fpn","allTagsPath":"/blog/tags","count":2}')}}]);

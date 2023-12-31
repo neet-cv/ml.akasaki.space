@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkml_notebook=self.webpackChunkml_notebook||[]).push([[2581],{65352:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/backbone/page/2","page":2,"postsPerPage":10,"totalPages":2,"totalCount":11,"previousPage":"/blog/tags/backbone","blogDescription":"Blog","blogTitle":"Blog"}')}}]);

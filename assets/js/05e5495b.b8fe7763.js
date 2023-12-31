@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkml_notebook=self.webpackChunkml_notebook||[]).push([[5936],{13448:e=>{e.exports=JSON.parse('{"label":"fcn","permalink":"/blog/tags/fcn","allTagsPath":"/blog/tags","count":1}')}}]);

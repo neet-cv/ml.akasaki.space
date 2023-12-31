@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkml_notebook=self.webpackChunkml_notebook||[]).push([[7083],{44095:e=>{e.exports=JSON.parse('{"label":"attention-mechanism","permalink":"/blog/tags/attention-mechanism","allTagsPath":"/blog/tags","count":16}')}}]);

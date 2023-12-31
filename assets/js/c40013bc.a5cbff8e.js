@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkml_notebook=self.webpackChunkml_notebook||[]).push([[2805],{88074:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/segmentation/page/2","page":2,"postsPerPage":10,"totalPages":2,"totalCount":15,"previousPage":"/blog/tags/segmentation","blogDescription":"Blog","blogTitle":"Blog"}')}}]);

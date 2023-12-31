@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkml_notebook=self.webpackChunkml_notebook||[]).push([[5813],{41579:s=>{s.exports=JSON.parse('{"label":"tricks","permalink":"/blog/tags/tricks","allTagsPath":"/blog/tags","count":1}')}}]);
